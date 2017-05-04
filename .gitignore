@@ -14,5 +14,3 @@ build
 .env
 npm-debug.log
 .idea
-/src/style/font-awesome/
-/src/containers/Frontpage/assets/images/ideas/
