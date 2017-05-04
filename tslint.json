@@ -36,6 +36,13 @@
     "arrow-return-shorthand": true,
     "triple-equals": true,
     "switch-default": true,
-    "no-var-keyword": true
+    "no-var-keyword": true,
+    "adjacent-overload-signatures": true,
+    "member-access": true,
+    "only-arrow-functions": true,
+    "prefer-for-of": true,
+    "typedef": true,
+    "no-duplicate-super": true,
+    "no-duplicate-variable": true
   }
 }
