@@ -1,0 +1,41 @@
+{
+  "extends": "tslint-config-standard",
+  "rules": {
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "instance-field",
+          "static-field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "no-unused-expression": false,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-operator",
+      "check-typecast"
+    ],
+    "no-require-imports": true,
+    "prefer-const": true,
+    "semicolon": true,
+    "newline-before-return": true,
+    "interface-name": true,
+    "arrow-return-shorthand": true,
+    "triple-equals": true,
+    "switch-default": true,
+    "no-var-keyword": true
+  }
+}
