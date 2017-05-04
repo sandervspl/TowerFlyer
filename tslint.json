@@ -1,5 +1,8 @@
 {
-  "extends": "tslint-config-standard",
+  "extends": [
+    "tslint-config-standard",
+    "tslint-eslint-rules"
+  ],
   "rules": {
     "member-ordering": [
       true,
