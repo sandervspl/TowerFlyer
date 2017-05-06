@@ -13,7 +13,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.js']
   },
 
   plugins: [
@@ -34,10 +34,6 @@ module.exports = {
       {
         test: /\.ts?$/,
         loader: 'ts-loader'
-      },
-      {
-        test: /\.(styl|css)?$/,
-        loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.(gif|png|jpe?g|ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
