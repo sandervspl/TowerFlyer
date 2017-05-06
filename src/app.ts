@@ -5,7 +5,10 @@ import * as PIXI from 'pixi.js';
 const kanyeFace = require('./assets/images/kanye.png');
 
 // create new application
-const app = new PIXI.Application();
+const app = new PIXI.Application(
+  window.innerWidth,
+  window.innerHeight,
+);
 
 // create canvas element
 document.body.appendChild(app.view);
