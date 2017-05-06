@@ -1,30 +1,26 @@
 // dependencies
 import * as PIXI from 'pixi.js';
+import Kanye from './kanye';
 
-// assets
-const kanyeFace = require('./assets/images/kanye.png');
+class App {
+  public static pixiApp: PIXI.Application;
 
-// create new application
-const app = new PIXI.Application(
-  window.innerWidth,
-  window.innerHeight,
-);
+  constructor() {
+    // create new application with canvas and ticker
+    App.pixiApp = new PIXI.Application(
+      window.innerWidth,
+      window.innerHeight,
+    );
 
-// create canvas element
-document.body.appendChild(app.view);
+    // add canvas element to DOM
+    document.body.appendChild(App.pixiApp.view);
 
-PIXI.loader.add('kanye', kanyeFace).load((loader, resources) => {
-  const kanye = new PIXI.Sprite(resources.kanye.texture);
+    // create kanye face
+    new Kanye();
+  }
+}
 
-  kanye.x = app.renderer.width / 2;
-  kanye.y = app.renderer.height / 2;
+// start app
+new App();
 
-  kanye.anchor.x = .5;
-  kanye.anchor.y = .5;
-
-  app.stage.addChild(kanye);
-
-  app.ticker.add(() => {
-    kanye.rotation += .01;
-  });
-});
+export default App;
