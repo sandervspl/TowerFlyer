@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 import Kanye from './kanye';
 
 class App {
-  public static pixiApp: PIXI.Application;
+  private static pixiApp: PIXI.Application;
 
   constructor() {
     // create new application with canvas and ticker
@@ -18,6 +18,8 @@ class App {
     // create kanye face
     new Kanye();
   }
+
+  public static getView = () => App.pixiApp;
 }
 
 // start app

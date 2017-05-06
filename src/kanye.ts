@@ -18,7 +18,7 @@ class Kanye {
 
   private handleLoad = (loader, resources) => {
     // grab canvas reference
-    const view = App.pixiApp;
+    const view = App.getView();
 
     // create new sprite and save to instance
     this.face = new PIXI.Sprite(resources.kanye.texture);
