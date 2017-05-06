@@ -1,19 +1,27 @@
-const isACar = (target) => {
-  target.isACar = true;
-};
+// dependencies
+import * as PIXI from 'pixi.js';
 
-@isACar
-class Car {
-  private brand: string;
-  public static isACar: boolean;
+// assets
+const kanyeFace = require('./assets/images/kanye.png');
 
-  constructor (brand: string) {
-    this.brand = brand;
-  }
+// create new application
+const app = new PIXI.Application();
 
-  public getBrand = (): string => this.brand;
-}
+// create canvas element
+document.body.appendChild(app.view);
 
-const car = new Car('Ferrari');
+PIXI.loader.add('kanye', kanyeFace).load((loader, resources) => {
+  const kanye = new PIXI.Sprite(resources.kanye.texture);
 
-console.log(`${car.getBrand()} is a car: ${Car.isACar}`);
+  kanye.x = app.renderer.width / 2;
+  kanye.y = app.renderer.height / 2;
+
+  kanye.anchor.x = .5;
+  kanye.anchor.y = .5;
+
+  app.stage.addChild(kanye);
+
+  app.ticker.add(() => {
+    kanye.rotation += .01;
+  });
+});

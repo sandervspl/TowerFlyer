@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "tslint-config-standard",
-    "tslint-eslint-rules"
-  ],
+  "extends": ["tslint:recommended"],
   "rules": {
     "member-ordering": [
       true,
@@ -31,8 +28,7 @@
       "check-operator",
       "check-typecast"
     ],
-    "no-require-imports": true,
-    "prefer-const": true,
+    "prefer-const": [true, { "destructuring": "all" }],
     "semicolon": true,
     "newline-before-return": true,
     "interface-name": true,
@@ -46,6 +42,9 @@
     "prefer-for-of": true,
     "typedef": true,
     "no-duplicate-super": true,
-    "no-duplicate-variable": true
+    "no-duplicate-variable": true,
+    "quotemark": [true, "single"],
+    "no-console": false,
+    "no-var-requires": false
   }
 }

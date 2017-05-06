@@ -40,25 +40,7 @@ module.exports = {
         loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.(gif|png|jpe?g)$/i,
-        loaders: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            query: {
-              progressive: true,
-              optimizationLevel: 7,
-              interlaced: false,
-              pngquant: {
-                quality: '65-90',
-                speed: 4
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.(gif|png|jpe?g|ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader'
       }
     ]
