@@ -16,7 +16,7 @@ class Kanye {
     spriteLoader.load(this.handleLoad);
   }
 
-  private handleLoad = (loader, resources) => {
+  private handleLoad = (loader, resources):void => {
     // grab canvas reference
     const view = App.getView();
 

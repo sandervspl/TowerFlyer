@@ -19,7 +19,7 @@ class App {
     new Kanye();
   }
 
-  public static getView = () => App.pixiApp;
+  public static getView = ():PIXI.Application => App.pixiApp;
 }
 
 // start app
