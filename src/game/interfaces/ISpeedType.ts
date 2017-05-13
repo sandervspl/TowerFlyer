@@ -1,7 +1,7 @@
-import ISpeed from './ISpeed2D';
+import ISpeed2D from './ISpeed2D';
 
 interface ISpeedType {
-  speed: ISpeed;
+  speed: ISpeed2D;
 
   update(speedX: number, speedY?: number): void;
 }
