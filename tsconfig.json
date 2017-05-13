@@ -2,7 +2,17 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {},
+    "paths": {
+      "interfaces": [
+        ".src/game/interfaces"
+      ],
+      "speed": [
+        ".src/game/speed"
+      ],
+      "moves": [
+        ".src/game/moves"
+      ]
+    },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

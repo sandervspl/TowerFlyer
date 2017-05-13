@@ -1,13 +1,13 @@
 // dependencies
-import * as PIXI from 'pixi.js';
-import Kanye from './kanye';
+import { Application } from 'pixi.js';
+import Game from './game/Game';
 
 class App {
-  private static pixiApp: PIXI.Application;
+  private static pixiApp: Application;
 
   constructor() {
     // create new application with canvas and ticker
-    App.pixiApp = new PIXI.Application(
+    App.pixiApp = new Application(
       window.innerWidth,
       window.innerHeight,
     );
@@ -15,11 +15,11 @@ class App {
     // add canvas element to DOM
     document.body.appendChild(App.pixiApp.view);
 
-    // create kanye face
-    new Kanye();
+    // init game
+    new Game();
   }
 
-  public static getView = ():PIXI.Application => App.pixiApp;
+  public static getView = ():Application => App.pixiApp;
 }
 
 // start app
