@@ -3,10 +3,10 @@ class Speed2D {
   public y: number;
 
   constructor(x: number, y: number) {
-    this.setSpeed(x, y);
+    this.set(x, y);
   }
 
-  public setSpeed(x: number, y: number): void {
+  public set(x: number, y: number): void {
     this.x = x;
     this.y = y;
   }

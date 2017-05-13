@@ -13,7 +13,7 @@ class SpeedX implements ISpeedType {
     console.log('Updating speed X');
     console.log(`Current speed: ${this.speed.x}, ${this.speed.y}`);
 
-    this.speed.setSpeed(x, 0);
+    this.speed.set(x, 0);
 
     console.log(`Updated speed: ${this.speed.x}, ${this.speed.y}`);
   }
