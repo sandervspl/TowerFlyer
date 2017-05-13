@@ -11,7 +11,7 @@ abstract class GameObject {
     this.speed = speedType;
   }
 
-  protected updateSpeed(speed: number, speed2?: number): void {
+  protected updateSpeed = (speed: number, speed2?: number): void => {
     this.speed.update(speed, speed2);
   }
 }
