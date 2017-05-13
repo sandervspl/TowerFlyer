@@ -3,10 +3,10 @@ class Location2D {
   public y: number;
 
   constructor(x: number, y: number) {
-    this.setLocation(x, y);
+    this.set(x, y);
   }
 
-  public setLocation(x: number, y: number) {
+  public set(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
