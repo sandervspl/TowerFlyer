@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
@@ -24,6 +24,15 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: {
+          emitErrors: true,
+          typeCheck: true,
+        }
+      },
+      {
         test: /\.js?$/,
         loader: 'babel-loader',
         options: {
@@ -41,4 +50,4 @@ module.exports = {
       }
     ]
   }
-}
+};
