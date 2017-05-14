@@ -1,19 +1,12 @@
-class Speed2D {
-  private x: number;
-  private y: number;
+// dependencies
+import Coords2D from './Coords2D';
 
-  constructor(x: number, y: number) {
-    this.set(x, y);
-  }
+class Speed2D extends Coords2D {
+  private static gameSpeed: number = 5;
 
-  public set = (x: number, y: number): void => {
-    this.x = x;
-    this.y = y;
-  }
+  public static getGameSpeed = (): number => Speed2D.gameSpeed;
 
-  public getX = (): number => this.x;
-
-  public getY = (): number => this.y;
+  public static setGameSpeed = (speed: number) => Speed2D.gameSpeed = speed;
 }
 
 export default Speed2D;

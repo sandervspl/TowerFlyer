@@ -1,15 +1,6 @@
-class Location2D {
-  private x: number;
-  private y: number;
+// dependencies
+import Coords2D from './Coords2D';
 
-  constructor(x: number, y: number) {
-    this.set(x, y);
-  }
-
-  public set = (x: number, y: number) => {
-    this.x = x;
-    this.y = y;
-  }
-}
+class Location2D extends Coords2D {}
 
 export default Location2D;

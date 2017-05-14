@@ -10,13 +10,15 @@ class SpeedY implements ISpeedType {
   }
 
   public set = (y: number): void => {
-    console.log('Updating speed Y');
     console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
 
+    console.log('Updating speed Y');
     this.speed.set(0, y);
 
     console.log(`Updated speed: ${this.speed.getX()}, ${this.speed.getY()}`);
   }
+
+  public get = (): number => this.speed.getY();
 }
 
 export default SpeedY;

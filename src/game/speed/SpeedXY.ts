@@ -1,4 +1,5 @@
 // dependencies
+import IShape2D from '../interfaces/IShape2D';
 import ISpeedType from '../interfaces/ISpeedType';
 import Speed2D from '../Speed2D';
 
@@ -10,13 +11,18 @@ class SpeedXY implements ISpeedType {
   }
 
   public set = (x: number, y: number): void => {
-    console.log('Updating speed X & Y');
     console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
 
+    console.log('Updating speed X & Y');
     this.speed.set(x, y);
 
     console.log(`Updated speed: ${this.speed.getX()}, ${this.speed.getY()}`);
   }
+
+  public get = (): IShape2D => ({
+    x: this.speed.getX(),
+    y: this.speed.getY(),
+  })
 }
 
 export default SpeedXY;
