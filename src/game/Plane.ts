@@ -9,7 +9,7 @@ class Plane extends GameObject {
     super(0, 0, new SpeedX(5));
 
     // update speed to something as a test
-    this.updateSpeed(322);
+    this.setSpeed(322);
   }
 }
 

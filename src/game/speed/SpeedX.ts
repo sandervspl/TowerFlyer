@@ -9,7 +9,7 @@ class SpeedX implements ISpeedType {
     this.speed = new Speed2D(x, 0);
   }
 
-  public update = (x: number): void => {
+  public set = (x: number): void => {
     console.log('Updating speed X');
     console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
 
