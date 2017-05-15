@@ -1,14 +1,14 @@
 // dependencies
-import { Application } from 'pixi.js';
+import * as PIXI from 'pixi.js';
 import Game from './game/Game';
 import _ from 'lodash';
 
 class App {
-  private static pixiApp: Application;
+  private static pixiApp: PIXI.Application;
 
   constructor() {
     // create new application with canvas and ticker
-    App.pixiApp = new Application(
+    App.pixiApp = new PIXI.Application(
       window.innerWidth,
       window.innerHeight,
     );
@@ -32,7 +32,7 @@ class App {
     }, 500));
   }
 
-  public static getView = ():Application => App.pixiApp;
+  public static getView = ():PIXI.Application => App.pixiApp;
 }
 
 // start app

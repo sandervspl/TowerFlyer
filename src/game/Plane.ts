@@ -1,6 +1,5 @@
 // dependencies
 import GameObject from './GameObject';
-import * as PIXI from 'pixi.js';
 
 // animation sprite sheet
 const planeSpriteSheet = 'plane.json';
@@ -20,11 +19,8 @@ class Plane extends GameObject {
       1,
     );
 
-    PIXI.loader
-      .add(planeSpriteSheet)
-      .load(() => this.loadSpriteFromSpriteSheet('planeAngle'));
-
-    setInterval(this.updateLocation, 250);
+    // load spritesheet
+    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 5);
   }
 }
 

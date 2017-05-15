@@ -6,7 +6,6 @@ import MovesY from './movement/MovesY';
 import MovesXY from './movement/MovesXY';
 import IShape2D from './interfaces/IShape2D';
 import App from '../app';
-// import * as PIXI from 'pixi.js';
 
 // defines
 import { MOVEMENT_TYPE } from './defines';
@@ -58,12 +57,17 @@ abstract class GameObject {
     this.sprite.y = this.movementController.location.getY();
   }
 
-  protected loadSpriteFromSpriteSheet = (frameName: string): void => {
-    const spritesAmount: number = 5;
+  protected loadSpriteFromSpriteSheet = (spriteSheet: string, frameName: string, framesNum: number): void => {
+    PIXI.loader
+      .add(spriteSheet)
+      .load(() => this.spriteSheetLoaded(frameName, framesNum));
+  }
+
+  private spriteSheetLoaded = (frameName: string, framesNum: number): void => {
     const frames: PIXI.Texture[] = [];
 
     // load sprites from sheet into frames array
-    for (let i = 0; i < spritesAmount; i += 1) {
+    for (let i = 0; i < framesNum; i += 1) {
       frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
     }
 
@@ -96,7 +100,7 @@ abstract class GameObject {
     });
   }
 
-  protected update = (): void => {
+  private update = (): void => {
     this.updateLocation();
   }
 }
