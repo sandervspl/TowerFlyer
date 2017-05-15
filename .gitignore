@@ -18,3 +18,7 @@ npm-debug.log
 *.asta.lock
 
 *.uml
+
+*.js
+
+*.map

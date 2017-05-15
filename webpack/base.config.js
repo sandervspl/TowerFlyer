@@ -13,8 +13,9 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.json'],
     alias: {
+      assets: path.resolve(__dirname, '../src/assets/'),
       interfaces: path.resolve(__dirname, '../src/game/interfaces'),
       speed: path.resolve(__dirname, '../src/game/speed'),
       movement: path.resolve(__dirname, '../src/game/movement'),
@@ -48,6 +49,10 @@ module.exports = {
       {
         test: /\.ts?$/,
         loader: 'ts-loader'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
         test: /\.(gif|png|jpe?g|ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
