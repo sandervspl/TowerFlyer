@@ -1,11 +1,11 @@
 import IMotionType from '../interfaces/IMovementType';
 import IShape2D from '../interfaces/IShape2D';
-import ISpeedType from '../interfaces/ISpeedType';
 import Movement from './Movement';
+import SpeedXY from '../speed/SpeedXY';
 
 class MovesXY extends Movement implements IMotionType {
-  constructor(posX: number, posY: number, speed: ISpeedType) {
-    super(posX, posY, speed);
+  constructor(posX: number, posY: number, speedX: number, speedY: number) {
+    super(posX, posY, new SpeedXY(speedX, speedY));
   }
 
   public updateLocation = (): void => {
