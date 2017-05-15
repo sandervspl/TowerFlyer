@@ -19,6 +19,5 @@ npm-debug.log
 
 *.uml
 
-*.js
-
-*.map
+public/*.js
+public/*.map
