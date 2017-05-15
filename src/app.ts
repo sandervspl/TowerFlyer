@@ -20,7 +20,7 @@ class App {
     this.addEventListeners();
 
     // init game
-    new Game();
+    Game.getInstance();
   }
 
   private addEventListeners = () => {
