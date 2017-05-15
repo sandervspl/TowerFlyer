@@ -5,12 +5,15 @@ import MovesX from './movement/MovesX';
 import MovesY from './movement/MovesY';
 import MovesXY from './movement/MovesXY';
 import IShape2D from './interfaces/IShape2D';
+import App from '../app';
+// import * as PIXI from 'pixi.js';
 
 // defines
 import { MOVEMENT_TYPE } from './defines';
 
 abstract class GameObject {
   private movementController: IMovementType;
+  protected sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite;
 
   constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
     switch (movementType) {
@@ -49,13 +52,52 @@ abstract class GameObject {
   protected getLocation = (): Location2D => this.movementController.location;
 
   protected updateLocation = (): void => {
-    console.log('Updating location from:');
-    console.log(this.getLocation().get());
-
     this.movementController.updateLocation();
 
-    console.log('New location:');
-    console.log(this.getLocation().get());
+    this.sprite.x = this.movementController.location.getX();
+    this.sprite.y = this.movementController.location.getY();
+  }
+
+  protected loadSpriteFromSpriteSheet = (frameName: string): void => {
+    const spritesAmount: number = 5;
+    const frames: PIXI.Texture[] = [];
+
+    // load sprites from sheet into frames array
+    for (let i = 0; i < spritesAmount; i += 1) {
+      frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
+    }
+
+    // create animated sprite from frames
+    this.sprite = new PIXI.extras.AnimatedSprite(frames);
+    const sprite = this.sprite as PIXI.extras.AnimatedSprite;
+
+    // set position of sprite
+    sprite.x = this.getLocation().getX();
+    sprite.y = this.getLocation().getY();
+
+    // set anchor point to middle of sprite
+    sprite.anchor.set(.5);
+
+    // time between frames
+    sprite.animationSpeed = .05;
+
+    // scale up for test
+    sprite.scale = new PIXI.Point(3, 3);
+
+    // start animation
+    sprite.play();
+
+    // add sprite to view
+    App.getView().stage.addChild(sprite);
+
+    // add new updater
+    App.getView().ticker.add(() => {
+      this.update();
+    });
+  }
+
+  protected update = (): void => {
+    this.updateLocation();
   }
 }
 
