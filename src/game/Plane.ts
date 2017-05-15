@@ -2,7 +2,7 @@
 import GameObject from './GameObject';
 
 // animation sprite sheet
-const planeSpriteSheet = 'plane.json';
+const planeSpriteSheet = 'assets/spriteSheets/plane/plane.json';
 console.log(planeSpriteSheet);
 
 // defines

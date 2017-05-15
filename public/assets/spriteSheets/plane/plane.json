@@ -1,0 +1,107 @@
+{
+  "frames": {
+    "planeAngle0.png": {
+      "frame": {
+        "x": 0,
+        "y": 2,
+        "w": 15,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 16
+      }
+    },
+    "planeAngle1.png": {
+      "frame": {
+        "x": 20,
+        "y": 0,
+        "w": 15,
+        "h": 18
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 18
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 18
+      }
+    },
+    "planeAngle2.png": {
+      "frame": {
+        "x": 38,
+        "y": 1,
+        "w": 18,
+        "h": 17
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 18,
+        "h": 17
+      },
+      "sourceSize": {
+        "w": 18,
+        "h": 17
+      }
+    },
+    "planeAngle3.png": {
+      "frame": {
+        "x": 59,
+        "y": 3,
+        "w": 23,
+        "h": 15
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 23,
+        "h": 15
+      },
+      "sourceSize": {
+        "w": 23,
+        "h": 15
+      }
+    },
+    "planeAngle4.png": {
+      "frame": {
+        "x": 85,
+        "y": 5,
+        "w": 24,
+        "h": 13
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 13
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 13
+      }
+    }
+  },
+  "meta": {
+    "image": "plane.png"
+  }
+}
