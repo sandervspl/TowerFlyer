@@ -45,6 +45,7 @@
     "no-duplicate-variable": true,
     "quotemark": [true, "single"],
     "no-console": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "ordered-imports": false
   }
 }

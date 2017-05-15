@@ -17,7 +17,7 @@ module.exports = {
     alias: {
       interfaces: path.resolve(__dirname, '../src/game/interfaces'),
       speed: path.resolve(__dirname, '../src/game/speed'),
-      moves: path.resolve(__dirname, '../src/game/moves'),
+      movement: path.resolve(__dirname, '../src/game/movement'),
     }
   },
 

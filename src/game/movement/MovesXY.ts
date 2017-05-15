@@ -1,9 +1,9 @@
-import IMoveType from '../interfaces/IMoveType';
-import ISpeedType from '../interfaces/ISpeedType';
-import Moves from './Moves';
+import IMotionType from '../interfaces/IMovementType';
 import IShape2D from '../interfaces/IShape2D';
+import ISpeedType from '../interfaces/ISpeedType';
+import Movement from './Movement';
 
-class MovesXY extends Moves implements IMoveType {
+class MovesXY extends Movement implements IMotionType {
   constructor(posX: number, posY: number, speed: ISpeedType) {
     super(posX, posY, speed);
   }

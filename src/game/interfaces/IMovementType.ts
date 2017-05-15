@@ -1,7 +1,7 @@
 import Location2D from '../Location2D';
 import ISpeedType from './ISpeedType';
 
-interface IMoveType {
+interface IMovementType {
   location: Location2D;
   speed: ISpeedType;
 
@@ -9,4 +9,4 @@ interface IMoveType {
   updateLocation(): void;
 }
 
-export default IMoveType;
+export default IMovementType;

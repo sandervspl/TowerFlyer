@@ -1,7 +1,7 @@
 import ISpeedType from '../interfaces/ISpeedType';
 import Location2D from '../Location2D';
 
-class Moves {
+class Movement {
   public location: Location2D;
   public speed: ISpeedType;
 
@@ -15,4 +15,4 @@ class Moves {
   }
 }
 
-export default Moves;
+export default Movement;

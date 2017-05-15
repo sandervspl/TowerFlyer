@@ -1,6 +1,6 @@
 // dependencies
 import GameObject from './GameObject';
-import MovesX from './move/MovesX';
+import MovesX from './movement/MovesX';
 import SpeedX from './speed/SpeedX';
 
 class Plane extends GameObject {
