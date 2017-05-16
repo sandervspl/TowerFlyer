@@ -9,6 +9,7 @@ const planeSpriteSheet = 'assets/spriteSheets/plane/plane.json';
 import { MOVEMENT_TYPE } from './defines';
 
 class Plane extends GameObject {
+
   constructor() {
     // init game object with position middle of view renderer
     // and make it move only on X-axis with a speed of 1
@@ -35,11 +36,13 @@ class Plane extends GameObject {
       case 65:
       case 37:
         this.setSpeed(-3);
+        this.changeSpriteFrame(-1);
         break;
 
       case 68:
       case 39:
         this.setSpeed(3);
+        this.changeSpriteFrame(1);
         break;
 
       default: return null;

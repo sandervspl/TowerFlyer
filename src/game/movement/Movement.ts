@@ -1,5 +1,6 @@
 import ISpeedType from '../interfaces/ISpeedType';
 import Location2D from '../Location2D';
+import App from '../../app';
 
 class Movement {
   public location: Location2D;
@@ -11,7 +12,18 @@ class Movement {
   }
 
   public setLocation = (x: number, y: number): void => {
-    this.location.set(x, y);
+    const hasSpeed = this.speed.get() < 0 || this.speed.get() > 0;
+
+    if (this.isInBounds(x, y) && hasSpeed) {
+      this.location.set(x, y);
+    }
+  }
+
+  private isInBounds = (x: number, y: number): boolean => {
+    return x > 0 &&
+      x < App.getView().renderer.width &&
+      y > 0 &&
+      y < App.getView().renderer.height;
   }
 }
 

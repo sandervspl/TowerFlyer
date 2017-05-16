@@ -12,6 +12,10 @@ import { MOVEMENT_TYPE } from './defines';
 
 abstract class GameObject {
   private movementController: IMovementType;
+  private spriteFrameName: string;
+  private spriteFrames: number;
+  private curSpriteFrame: number;
+
   protected sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite;
 
   constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
@@ -57,8 +61,13 @@ abstract class GameObject {
     this.sprite.y = this.movementController.location.getY();
   }
 
-  protected loadSpriteFromSpriteSheet = (spriteSheet: string, frameName: string,
-                                         framesNum: number, startFrame?: number): void => {
+  protected loadSpriteFromSpriteSheet = (
+    spriteSheet: string, frameName: string,
+    framesNum: number, startFrame?: number,
+  ): void => {
+    this.curSpriteFrame = startFrame;
+    this.spriteFrames = framesNum;
+    this.spriteFrameName = frameName;
 
     const loader = startFrame
       ? () => this.spriteSheetSingleLoaded(frameName, framesNum, startFrame)
@@ -67,6 +76,22 @@ abstract class GameObject {
     PIXI.loader
       .add(spriteSheet)
       .load(loader);
+  }
+
+  // protected setSpriteFrame = (frame: number): void => {
+  //   this.spriteFrames = frame;
+  // }
+
+  protected changeSpriteFrame = (amount: number): void => {
+    this.curSpriteFrame += amount;
+
+    if (this.curSpriteFrame < 0) {
+      this.curSpriteFrame = 0;
+    } else if (this.curSpriteFrame >= this.spriteFrames - 1) {
+      this.curSpriteFrame = this.spriteFrames - 1;
+    }
+
+    this.draw();
   }
 
   private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
@@ -134,6 +159,11 @@ abstract class GameObject {
     App.getView().ticker.add(() => {
       this.update();
     });
+  }
+
+  private draw = (): void => {
+    this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
+    console.log(this.spriteFrameName, this.curSpriteFrame);
   }
 
   private update = (): void => {
