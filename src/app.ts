@@ -7,20 +7,32 @@ class App {
   private static pixiApp: PIXI.Application;
 
   constructor() {
+    this.init();
+  }
+
+  private init = async (): Promise<boolean> => {
     // create new application with canvas and ticker
-    App.pixiApp = new PIXI.Application(
-      window.innerWidth,
-      window.innerHeight,
-    );
+    try {
+      App.pixiApp = await new PIXI.Application(
+        window.innerWidth,
+        window.innerHeight,
+      );
 
-    // add canvas element to DOM
-    document.body.appendChild(App.pixiApp.view);
+      // add canvas element to DOM
+      await document.body.appendChild(App.pixiApp.view);
 
-    // add event listeners
-    this.addEventListeners();
+      // add event listeners
+      this.addEventListeners();
 
-    // init game
-    Game.getInstance();
+      // init game
+      Game.getInstance();
+    } catch (err) {
+      console.log(err);
+
+      return false;
+    }
+
+    return true;
   }
 
   private addEventListeners = () => {

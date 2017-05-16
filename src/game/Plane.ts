@@ -1,9 +1,9 @@
 // dependencies
 import GameObject from './GameObject';
+import App from '../app';
 
 // animation sprite sheet
 const planeSpriteSheet = 'assets/spriteSheets/plane/plane.json';
-console.log(planeSpriteSheet);
 
 // defines
 import { MOVEMENT_TYPE } from './defines';
@@ -13,8 +13,8 @@ class Plane extends GameObject {
     // init game object with position x:0, y:0
     // and make it move only on X-axis with a speed of 5
     super(
-      150,
-      150,
+      App.getView().renderer.width / 2,
+      App.getView().renderer.height / 2,
       MOVEMENT_TYPE.MOVE_X,
       1,
     );
