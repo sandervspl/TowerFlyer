@@ -20,7 +20,7 @@ class Plane extends GameObject {
     );
 
     // load spritesheet
-    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 5);
+    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 9);
   }
 }
 
