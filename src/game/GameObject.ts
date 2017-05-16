@@ -54,6 +54,7 @@ abstract class GameObject {
 
   protected getLocation = (): Location2D => this.movementController.location;
 
+  // update location of gameobject and its sprite
   protected updateLocation = (): void => {
     this.movementController.updateLocation();
 
@@ -61,6 +62,7 @@ abstract class GameObject {
     this.sprite.y = this.movementController.location.getY();
   }
 
+  // init for loading spritesheets
   protected loadSpriteFromSpriteSheet = (
     spriteSheet: string, frameName: string,
     framesNum: number, startFrame?: number,
@@ -69,31 +71,41 @@ abstract class GameObject {
     this.spriteFrames = framesNum;
     this.spriteFrameName = frameName;
 
+    // determine if we are loading an animated sprite
     const loader = startFrame
       ? () => this.spriteSheetSingleLoaded(frameName, framesNum, startFrame)
       : () => this.spriteSheetLoaded(frameName, framesNum);
 
+    // load spritesheet to PIXI environment
     PIXI.loader
       .add(spriteSheet)
       .load(loader);
   }
 
-  // protected setSpriteFrame = (frame: number): void => {
-  //   this.spriteFrames = frame;
-  // }
-
-  protected changeSpriteFrame = (amount: number): void => {
+  // change sprite frame by a certain amount (i.e. -1 or +1)
+  protected changeSpriteFrame = (amount: number): number => {
+    const minFrame = 0;
+    const maxFrame = this.spriteFrames - 1;
+    const prevSpriteFrame = this.curSpriteFrame;
     this.curSpriteFrame += amount;
 
-    if (this.curSpriteFrame < 0) {
-      this.curSpriteFrame = 0;
-    } else if (this.curSpriteFrame >= this.spriteFrames - 1) {
-      this.curSpriteFrame = this.spriteFrames - 1;
+    // boundaries check
+    if (this.curSpriteFrame < minFrame) {
+      this.curSpriteFrame = minFrame;
+    } else if (this.curSpriteFrame >= maxFrame) {
+      this.curSpriteFrame = maxFrame;
     }
 
-    this.draw();
+    // draw to updated frame
+    if (prevSpriteFrame !== this.curSpriteFrame) {
+      this.draw();
+    }
+
+    return this.curSpriteFrame;
   }
 
+  // load a spritesheet
+  // WITHOUT animation
   private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
     const frames: PIXI.Texture[] = [];
 
@@ -124,6 +136,8 @@ abstract class GameObject {
     });
   }
 
+  // load a spritesheet
+  // WITH animation
   private spriteSheetLoaded = (frameName: string, framesNum: number): void => {
     const frames: PIXI.Texture[] = [];
 
@@ -161,11 +175,13 @@ abstract class GameObject {
     });
   }
 
+  // draw new sprite
   private draw = (): void => {
     this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
     console.log(this.spriteFrameName, this.curSpriteFrame);
   }
 
+  // update method for PIXI ticker
   private update = (): void => {
     this.updateLocation();
   }

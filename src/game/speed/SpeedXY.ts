@@ -11,6 +11,10 @@ class SpeedXY implements ISpeedType {
   }
 
   public set = (x: number, y: number): void => {
+    if (x === this.speed.getX() && y === this.speed.getY()) {
+      return;
+    }
+
     console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
 
     console.log('Updating speed X & Y');

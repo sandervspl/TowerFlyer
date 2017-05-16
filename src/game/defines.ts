@@ -3,3 +3,8 @@ export enum MOVEMENT_TYPE {
   MOVE_Y,
   MOVE_XY,
 }
+
+export enum DIRECTION {
+  LEFT = 0,
+  RIGHT,
+}
