@@ -57,10 +57,46 @@ abstract class GameObject {
     this.sprite.y = this.movementController.location.getY();
   }
 
-  protected loadSpriteFromSpriteSheet = (spriteSheet: string, frameName: string, framesNum: number): void => {
+  protected loadSpriteFromSpriteSheet = (spriteSheet: string, frameName: string,
+                                         framesNum: number, startFrame?: number): void => {
+
+    const loader = startFrame
+      ? () => this.spriteSheetSingleLoaded(frameName, framesNum, startFrame)
+      : () => this.spriteSheetLoaded(frameName, framesNum);
+
     PIXI.loader
       .add(spriteSheet)
-      .load(() => this.spriteSheetLoaded(frameName, framesNum));
+      .load(loader);
+  }
+
+  private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
+    const frames: PIXI.Texture[] = [];
+
+    // load sprites from sheet into frames array
+    for (let i = 0; i < framesNum; i += 1) {
+      frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
+    }
+
+    this.sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(`${frameName}${startFrame}.png`));
+    const sprite = this.sprite;
+
+    // set position of sprite
+    sprite.x = this.getLocation().getX();
+    sprite.y = this.getLocation().getY();
+
+    // set anchor point to middle of sprite
+    sprite.anchor.set(.5);
+
+    // scale up for test
+    sprite.scale = new PIXI.Point(3, 3);
+
+    // add sprite to view
+    App.getView().stage.addChild(sprite);
+
+    // add new updater
+    App.getView().ticker.add(() => {
+      this.update();
+    });
   }
 
   private spriteSheetLoaded = (frameName: string, framesNum: number): void => {
@@ -82,13 +118,13 @@ abstract class GameObject {
     // set anchor point to middle of sprite
     sprite.anchor.set(.5);
 
-    // time between frames
-    sprite.animationSpeed = .05;
-
     // scale up for test
     sprite.scale = new PIXI.Point(3, 3);
 
-    // start animation
+    // time between frames
+    sprite.animationSpeed = .05;
+
+    // play sprite
     sprite.play();
 
     // add sprite to view

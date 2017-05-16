@@ -16,11 +16,34 @@ class Plane extends GameObject {
       App.getMiddleOfView().x,
       App.getMiddleOfView().y,
       MOVEMENT_TYPE.MOVE_X,
-      1,
+      0,
     );
 
     // load spritesheet
-    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 9);
+    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 9, 4);
+
+    // add key input listeners
+    this.addEventListeners();
+  }
+
+  private addEventListeners = (): void => {
+    window.addEventListener('keydown', (e) => this.keyboardInput(e));
+  }
+
+  private keyboardInput = (e): void => {
+    switch (e.keyCode) {
+      case 65:
+      case 37:
+        this.setSpeed(-3);
+        break;
+
+      case 68:
+      case 39:
+        this.setSpeed(3);
+        break;
+
+      default: return null;
+    }
   }
 }
 
