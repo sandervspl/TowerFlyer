@@ -1,6 +1,7 @@
 // dependencies
 import GameObject from './GameObject';
 import App from '../app';
+import Game from './Game';
 
 // animation sprite sheet
 const planeSpriteSheet = 'assets/spriteSheets/plane/plane.json';
@@ -56,16 +57,16 @@ class Plane extends GameObject {
 
     // change speed according to plane angle/sprite
     switch (frame) {
-      case 0: speed = -5; break;
-      case 1: speed = -4; break;
-      case 2: speed = -2; break;
-      case 3: speed = -1; break;
-      case 4: speed = 0;  break;
-      case 5: speed = 1;  break;
-      case 6: speed = 2;  break;
-      case 7: speed = 4;  break;
-      case 8: speed = 5;  break;
-      default: speed = 0; break;
+      case 0: speed = -5; Game.setGameSpeed(-1); break;
+      case 1: speed = -4; Game.setGameSpeed(-2); break;
+      case 2: speed = -2; Game.setGameSpeed(-3); break;
+      case 3: speed = -1; Game.setGameSpeed(-4); break;
+      case 4: speed = 0;  Game.setGameSpeed(-5); break;
+      case 5: speed = 1;  Game.setGameSpeed(-4); break;
+      case 6: speed = 2;  Game.setGameSpeed(-3); break;
+      case 7: speed = 4;  Game.setGameSpeed(-2); break;
+      case 8: speed = 5;  Game.setGameSpeed(-1); break;
+      default: speed = 0; Game.setGameSpeed(-5); break;
     }
 
     // update speed

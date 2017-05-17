@@ -9,6 +9,7 @@ const backgroundSprite = 'assets/images/background.png';
 
 class Background extends GameObject {
   private id: number;
+
   private static height: number = 320;
 
   constructor(id: number) {
