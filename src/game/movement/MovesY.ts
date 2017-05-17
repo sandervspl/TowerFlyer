@@ -9,8 +9,8 @@ class MovesY extends Movement implements IMotionType {
 
   public updateLocation = (): void => {
     const speed = this.speed.get() as number;
-    const x = this.location.getX();
-    const newY = this.location.getY() + speed;
+    const x = this.location.x;
+    const newY = this.location.y + speed;
 
     this.setLocation(x, newY);
   }

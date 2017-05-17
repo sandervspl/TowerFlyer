@@ -10,8 +10,8 @@ class MovesXY extends Movement implements IMotionType {
 
   public updateLocation = (): void => {
     const speed = this.speed.get() as IShape2D;
-    const newX = this.location.getX() + speed.x;
-    const newY = this.location.getY() + speed.y;
+    const newX = this.location.x + speed.x;
+    const newY = this.location.y + speed.y;
 
     this.setLocation(newX, newY);
   }

@@ -4,7 +4,7 @@ import Location2D from './Location2D';
 import MovesX from './movement/MovesX';
 import MovesY from './movement/MovesY';
 import MovesXY from './movement/MovesXY';
-import IShape2D from './interfaces/IShape2D';
+// import IShape2D from './interfaces/IShape2D';
 import App from '../app';
 
 // defines
@@ -42,24 +42,28 @@ abstract class GameObject {
     speed.set(speed1, speed2);
   }
 
-  protected setSpeedX = (speed: number): void => {
-    const curSpeedY = (this.movementController.speed.get() as IShape2D).y;
-    this.setSpeed(speed, curSpeedY);
-  }
-
-  protected setSpeedY = (speed: number): void => {
-    const curSpeedX = (this.movementController.speed.get() as IShape2D).x;
-    this.setSpeed(curSpeedX, speed);
-  }
+  // protected setSpeedX = (speed: number): void => {
+  //   const curSpeedY = (this.movementController.speed.get() as IShape2D).y;
+  //   this.setSpeed(speed, curSpeedY);
+  // }
+  //
+  // protected setSpeedY = (speed: number): void => {
+  //   const curSpeedX = (this.movementController.speed.get() as IShape2D).x;
+  //   this.setSpeed(curSpeedX, speed);
+  // }
 
   protected getLocation = (): Location2D => this.movementController.location;
 
   // update location of gameobject and its sprite
-  protected updateLocation = (): void => {
+  protected updateLocation(): void {
     this.movementController.updateLocation();
 
-    this.sprite.x = this.movementController.location.getX();
-    this.sprite.y = this.movementController.location.getY();
+    this.sprite.x = this.movementController.location.x;
+    this.sprite.y = this.movementController.location.y;
+  }
+
+  protected setLocation = (x: number, y: number): void => {
+    this.movementController.setLocation(x, y);
   }
 
   // init for loading spritesheets
@@ -82,11 +86,31 @@ abstract class GameObject {
       .load(loader);
   }
 
+  protected loadSprite = async (spriteURL: string): Promise<any> => {
+    this.sprite = PIXI.Sprite.fromImage(spriteURL);
+    const sprite = this.sprite;
+
+    // set anchor point to middle
+    sprite.anchor.set(.5);
+
+    // position to middle of view
+    sprite.x = App.getMiddleOfView().x;
+    sprite.y = App.getMiddleOfView().y;
+
+    // add to view
+    await App.getView().stage.addChild(sprite);
+
+    // add updater
+    this.spriteLoaded();
+  }
+
   // change sprite frame by a certain amount (i.e. -1 or +1)
   protected changeSpriteFrame = (amount: number): number => {
     const minFrame = 0;
     const maxFrame = this.spriteFrames - 1;
     const prevSpriteFrame = this.curSpriteFrame;
+
+    // update sprite frame
     this.curSpriteFrame += amount;
 
     // boundaries check
@@ -96,7 +120,7 @@ abstract class GameObject {
       this.curSpriteFrame = maxFrame;
     }
 
-    // draw to updated frame
+    // draw to updated sprite frame
     if (prevSpriteFrame !== this.curSpriteFrame) {
       this.draw();
     }
@@ -107,19 +131,19 @@ abstract class GameObject {
   // load a spritesheet
   // WITHOUT animation
   private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
-    const frames: PIXI.Texture[] = [];
-
-    // load sprites from sheet into frames array
-    for (let i = 0; i < framesNum; i += 1) {
-      frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
-    }
+    // const frames: PIXI.Texture[] = [];
+    //
+    // // load sprites from sheet into frames array
+    // for (let i = 0; i < framesNum; i += 1) {
+    //   frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
+    // }
 
     this.sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(`${frameName}${startFrame}.png`));
     const sprite = this.sprite;
 
     // set position of sprite
-    sprite.x = this.getLocation().getX();
-    sprite.y = this.getLocation().getY();
+    sprite.x = this.getLocation().x;
+    sprite.y = this.getLocation().y;
 
     // set anchor point to middle of sprite
     sprite.anchor.set(.5);
@@ -131,9 +155,7 @@ abstract class GameObject {
     App.getView().stage.addChild(sprite);
 
     // add new updater
-    App.getView().ticker.add(() => {
-      this.update();
-    });
+    this.spriteLoaded();
   }
 
   // load a spritesheet
@@ -151,8 +173,8 @@ abstract class GameObject {
     const sprite = this.sprite as PIXI.extras.AnimatedSprite;
 
     // set position of sprite
-    sprite.x = this.getLocation().getX();
-    sprite.y = this.getLocation().getY();
+    sprite.x = this.getLocation().x;
+    sprite.y = this.getLocation().y;
 
     // set anchor point to middle of sprite
     sprite.anchor.set(.5);
@@ -170,15 +192,16 @@ abstract class GameObject {
     App.getView().stage.addChild(sprite);
 
     // add new updater
-    App.getView().ticker.add(() => {
-      this.update();
-    });
+    this.spriteLoaded();
+  }
+
+  private spriteLoaded = (): void => {
+    App.getView().ticker.add(this.update);
   }
 
   // draw new sprite
   private draw = (): void => {
     this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
-    console.log(this.spriteFrameName, this.curSpriteFrame);
   }
 
   // update method for PIXI ticker

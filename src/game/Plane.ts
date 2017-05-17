@@ -33,13 +33,13 @@ class Plane extends GameObject {
 
   private keyboardInput = (e): void => {
     switch (e.keyCode) {
-      case 65:
-      case 37:
+      case 65: // a
+      case 37: // left arrow
         this.turn(DIRECTION.LEFT);
         break;
 
-      case 68:
-      case 39:
+      case 68: // d
+      case 39: // right arrow
         this.turn(DIRECTION.RIGHT);
         break;
 

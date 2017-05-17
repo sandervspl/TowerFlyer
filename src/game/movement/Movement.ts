@@ -20,10 +20,7 @@ class Movement {
   }
 
   private isInBounds = (x: number, y: number): boolean => {
-    return x > 0 &&
-      x < App.getView().renderer.width &&
-      y > 0 &&
-      y < App.getView().renderer.height;
+    return x > 0 && x < App.getView().renderer.width;
   }
 }
 

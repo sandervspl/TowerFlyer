@@ -10,19 +10,14 @@ class SpeedX implements ISpeedType {
   }
 
   public set = (x: number): void => {
-    if (x === this.speed.getX()) {
+    if (x === this.speed.x) {
       return;
     }
 
-    console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
-
-    console.log('Updating speed X');
     this.speed.set(x, 0);
-
-    console.log(`Updated speed: ${this.speed.getX()}, ${this.speed.getY()}`);
   }
 
-  public get = (): number => this.speed.getX();
+  public get = (): number => this.speed.x;
 }
 
 export default SpeedX;

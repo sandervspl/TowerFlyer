@@ -11,21 +11,16 @@ class SpeedXY implements ISpeedType {
   }
 
   public set = (x: number, y: number): void => {
-    if (x === this.speed.getX() && y === this.speed.getY()) {
+    if (x === this.speed.x && y === this.speed.y) {
       return;
     }
 
-    console.log(`Current speed: ${this.speed.getX()}, ${this.speed.getY()}`);
-
-    console.log('Updating speed X & Y');
     this.speed.set(x, y);
-
-    console.log(`Updated speed: ${this.speed.getX()}, ${this.speed.getY()}`);
   }
 
   public get = (): IShape2D => ({
-    x: this.speed.getX(),
-    y: this.speed.getY(),
+    x: this.speed.x,
+    y: this.speed.y,
   })
 }
 
