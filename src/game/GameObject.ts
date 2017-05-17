@@ -130,13 +130,6 @@ abstract class GameObject {
   // load a spritesheet
   // WITHOUT animation
   private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
-    // const frames: PIXI.Texture[] = [];
-    //
-    // // load sprites from sheet into frames array
-    // for (let i = 0; i < framesNum; i += 1) {
-    //   frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
-    // }
-
     this.sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(`${frameName}${startFrame}.png`));
     const sprite = this.sprite;
 
