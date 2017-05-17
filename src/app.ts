@@ -1,7 +1,7 @@
 // dependencies
 import * as PIXI from 'pixi.js';
 import Game from './game/Game';
-import IShape2D from './game/interfaces/IShape2D';
+import IPoint2D from './game/interfaces/IPoint2D';
 import _ from 'lodash';
 
 class App {
@@ -47,7 +47,7 @@ class App {
 
   public static getView = ():PIXI.Application => App.pixiApp;
 
-  public static getMiddleOfView = (): IShape2D => ({
+  public static getMiddleOfView = (): IPoint2D => ({
     x: App.getView().renderer.width / 2,
     y: App.getView().renderer.height / 2,
   })

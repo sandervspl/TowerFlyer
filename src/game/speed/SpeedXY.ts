@@ -1,5 +1,5 @@
 // dependencies
-import IShape2D from '../interfaces/IShape2D';
+import IPoint2D from '../interfaces/IPoint2D';
 import ISpeedType from '../interfaces/ISpeedType';
 import Speed2D from '../Speed2D';
 
@@ -18,7 +18,7 @@ class SpeedXY implements ISpeedType {
     this.speed.set(x, y);
   }
 
-  public get = (): IShape2D => ({
+  public get = (): IPoint2D => ({
     x: this.speed.x,
     y: this.speed.y,
   })

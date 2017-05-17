@@ -4,7 +4,6 @@ import Location2D from './Location2D';
 import MovesX from './movement/MovesX';
 import MovesY from './movement/MovesY';
 import MovesXY from './movement/MovesXY';
-// import IShape2D from './interfaces/IShape2D';
 import App from '../app';
 
 // defines
@@ -43,12 +42,12 @@ abstract class GameObject {
   }
 
   // protected setSpeedX = (speed: number): void => {
-  //   const curSpeedY = (this.movementController.speed.get() as IShape2D).y;
+  //   const curSpeedY = (this.movementController.speed.get() as IPoint2D).y;
   //   this.setSpeed(speed, curSpeedY);
   // }
   //
   // protected setSpeedY = (speed: number): void => {
-  //   const curSpeedX = (this.movementController.speed.get() as IShape2D).x;
+  //   const curSpeedX = (this.movementController.speed.get() as IPoint2D).x;
   //   this.setSpeed(curSpeedX, speed);
   // }
 

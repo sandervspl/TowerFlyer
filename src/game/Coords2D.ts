@@ -1,5 +1,5 @@
 // dependencies
-import IShape2D from './interfaces/IShape2D';
+import IPoint2D from './interfaces/IPoint2D';
 
 class Coords2D {
   public x: number = 0;
@@ -14,7 +14,7 @@ class Coords2D {
     this.y = y;
   }
 
-  public get = (): IShape2D => ({
+  public get = (): IPoint2D => ({
     x: this.x,
     y: this.y,
   })

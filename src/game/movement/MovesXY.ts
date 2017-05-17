@@ -1,5 +1,5 @@
 import IMotionType from '../interfaces/IMovementType';
-import IShape2D from '../interfaces/IShape2D';
+import IPoint2D from '../interfaces/IPoint2D';
 import Movement from './Movement';
 import SpeedXY from '../speed/SpeedXY';
 
@@ -9,7 +9,7 @@ class MovesXY extends Movement implements IMotionType {
   }
 
   public updateLocation = (): void => {
-    const speed = this.speed.get() as IShape2D;
+    const speed = this.speed.get() as IPoint2D;
     const newX = this.location.x + speed.x;
     const newY = this.location.y + speed.y;
 
