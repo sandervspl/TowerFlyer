@@ -61,7 +61,7 @@ abstract class GameObject {
 
   // init for loading spritesheets
   protected loadSpriteFromSpriteSheet = (
-    spriteSheet: string, frameName: string,
+    spriteSheetURL: string, frameName: string,
     framesNum: number, startFrame?: number,
   ): void => {
     this.curSpriteFrame = startFrame;
@@ -69,32 +69,41 @@ abstract class GameObject {
     this.spriteFrameName = frameName;
 
     // determine if we are loading an animated sprite
-    const loader = startFrame
-      ? () => this.spriteSheetSingleLoaded(frameName, framesNum, startFrame)
-      : () => this.spriteSheetLoaded(frameName, framesNum);
-
-    // load spritesheet to PIXI environment
-    PIXI.loader
-      .add(spriteSheet)
-      .load(loader);
-  }
-
-  protected loadSprite = async (spriteURL: string): Promise<any> => {
-    this.sprite = PIXI.Sprite.fromImage(spriteURL);
+    this.sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(`${frameName}${startFrame}.png`));
     const sprite = this.sprite;
 
-    // set anchor point to middle
+    // set position of sprite
+    sprite.x = this.getLocation().x;
+    sprite.y = this.getLocation().y;
+
+    // set anchor point to middle of sprite
     sprite.anchor.set(.5);
 
-    // position to middle of view
-    sprite.x = App.getMiddleOfView().x;
-    sprite.y = App.getMiddleOfView().y;
+    // scale up for test
+    sprite.scale = new PIXI.Point(3, 3);
 
-    // add to view
-    await App.getView().stage.addChild(sprite);
+    // add sprite to view
+    App.getView().stage.addChild(sprite);
 
-    // add updater
+    // add new updater
     this.spriteLoaded();
+  }
+
+  protected loadSprite = (spriteURL: string): void => {
+      this.sprite = PIXI.Sprite.fromImage(spriteURL);
+
+      // set anchor point to middle
+      this.sprite.anchor.set(.5);
+
+      // position to middle of view
+      this.sprite.x = App.getMiddleOfView().x;
+      this.sprite.y = App.getMiddleOfView().y;
+
+      // add to view
+      App.getView().stage.addChild(this.sprite);
+
+      // add updater
+      this.spriteLoaded();
   }
 
   // change sprite frame by a certain amount (i.e. -1 or +1)
@@ -119,66 +128,6 @@ abstract class GameObject {
     }
 
     return this.curSpriteFrame;
-  }
-
-  // load a spritesheet
-  // WITHOUT animation
-  private spriteSheetSingleLoaded = (frameName: string, framesNum: number, startFrame: number): void => {
-    this.sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(`${frameName}${startFrame}.png`));
-    const sprite = this.sprite;
-
-    // set position of sprite
-    sprite.x = this.getLocation().x;
-    sprite.y = this.getLocation().y;
-
-    // set anchor point to middle of sprite
-    sprite.anchor.set(.5);
-
-    // scale up for test
-    sprite.scale = new PIXI.Point(3, 3);
-
-    // add sprite to view
-    App.getView().stage.addChild(sprite);
-
-    // add new updater
-    this.spriteLoaded();
-  }
-
-  // load a spritesheet
-  // WITH animation
-  private spriteSheetLoaded = (frameName: string, framesNum: number): void => {
-    const frames: PIXI.Texture[] = [];
-
-    // load sprites from sheet into frames array
-    for (let i = 0; i < framesNum; i += 1) {
-      frames.push(PIXI.Texture.fromFrame(`${frameName}${i}.png`));
-    }
-
-    // create animated sprite from frames
-    this.sprite = new PIXI.extras.AnimatedSprite(frames);
-    const sprite = this.sprite as PIXI.extras.AnimatedSprite;
-
-    // set position of sprite
-    sprite.x = this.getLocation().x;
-    sprite.y = this.getLocation().y;
-
-    // set anchor point to middle of sprite
-    sprite.anchor.set(.5);
-
-    // scale up for test
-    sprite.scale = new PIXI.Point(3, 3);
-
-    // time between frames
-    sprite.animationSpeed = .05;
-
-    // play sprite
-    sprite.play();
-
-    // add sprite to view
-    App.getView().stage.addChild(sprite);
-
-    // add new updater
-    this.spriteLoaded();
   }
 
   private spriteLoaded = (): void => {

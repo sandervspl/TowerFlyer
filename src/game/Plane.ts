@@ -2,16 +2,13 @@
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
-
-// animation sprite sheet
-const planeSpriteSheet = 'assets/spriteSheets/plane/plane.json';
+import Movement from './movement/Movement';
 
 // defines
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
 
 class Plane extends GameObject {
-
-  constructor() {
+  constructor(spritesheetURL) {
     // init game object with position middle of view renderer
     // and make it move only on X-axis with a speed of 1
     super(
@@ -22,10 +19,24 @@ class Plane extends GameObject {
     );
 
     // load spritesheet
-    this.loadSpriteFromSpriteSheet(planeSpriteSheet, 'planeAngle', 9, 4);
+    this.loadSpriteFromSpriteSheet(spritesheetURL, 'planeAngle', 9, 4);
 
     // add key input listeners
     this.addEventListeners();
+  }
+
+  protected updateLocation(): void {
+    const prevX = this.getLocation().x;
+
+    super.updateLocation();
+
+    const spriteWidth = this.getSprite().width;
+    const newX = this.getLocation().x;
+    const y = this.getLocation().y;
+
+    if (!Movement.isInBounds(newX, spriteWidth)) {
+      this.setLocation(prevX, y);
+    }
   }
 
   private addEventListeners = (): void => {

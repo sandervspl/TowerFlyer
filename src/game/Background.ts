@@ -1,16 +1,14 @@
 // dependencies
+import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
-import GameObject from './GameObject';
 import { MOVEMENT_TYPE } from './defines';
-
-// sprite
-const backgroundSprite = 'assets/images/background.png';
+import ISize2D from './interfaces/ISize2D';
 
 class Background extends GameObject {
-  private static height: number = 320;
+  public static size: ISize2D = { width: 0, height: 0 };
 
-  constructor(id: number) {
+  constructor(id: number, spriteURL: string) {
     super(
       App.getMiddleOfView().x,
       0,
@@ -18,14 +16,12 @@ class Background extends GameObject {
       Game.getGameSpeed(),
     );
 
-    // load spritesheet
-    this.loadSprite(backgroundSprite);
-
     // properly position background
     this.setInitLocation(id);
-  }
 
-  public static getHeight = (): number => Background.height;
+    // load sprite to view
+    this.loadSprite(spriteURL);
+  }
 
   protected updateLocation(): void {
     super.updateLocation();
@@ -41,7 +37,7 @@ class Background extends GameObject {
     if (bottomSprite <= screenTop) {
       const bgs = game.getBackgrounds();
       const lastBg = bgs[bgs.length - 1];
-      const newY = lastBg.getLocation().y + Background.height + (this.getSpeed() as number);
+      const newY = lastBg.getLocation().y + Background.size.height + (this.getSpeed() as number);
 
       this.setLocation(x, newY);
 
@@ -51,7 +47,7 @@ class Background extends GameObject {
   }
 
   protected setInitLocation = (id: number): void => {
-    const y = this.getLocation().y + Background.height * id;
+    const y = this.getLocation().y + Background.size.height * id;
     this.setLocation(this.getLocation().x, y);
   }
 }

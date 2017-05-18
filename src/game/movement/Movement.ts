@@ -1,4 +1,5 @@
 import ISpeedType from '../interfaces/ISpeedType';
+// import Background from '../Background';
 import Location2D from '../Location2D';
 import App from '../../app';
 
@@ -11,16 +12,17 @@ class Movement {
     this.speed = speedType;
   }
 
-  public setLocation = (x: number, y: number): void => {
-    const hasSpeed = this.speed.get() < 0 || this.speed.get() > 0;
+  public static isInBounds = (x: number, spriteWidth: number): boolean => {
+    // const bgWidth = Background.size.width;
+    const bgWidth = 677;
+    const leftBound = Math.ceil((App.getMiddleOfView().x - (bgWidth / 2)) + (spriteWidth / 2));
+    const rightBound = Math.ceil((App.getMiddleOfView().x + (bgWidth / 2)) - (spriteWidth / 2));
 
-    if (this.isInBounds(x, y) && hasSpeed) {
-      this.location.set(x, y);
-    }
+    return x > leftBound && x < rightBound;
   }
 
-  private isInBounds = (x: number, y: number): boolean => {
-    return x > 0 && x < App.getView().renderer.width;
+  public setLocation = (x: number, y: number): void => {
+    this.location.set(x, y);
   }
 }
 
