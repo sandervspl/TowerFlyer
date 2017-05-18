@@ -2,6 +2,7 @@
 import Plane from './Plane';
 import Background from './Background';
 import App from '../app';
+import Preloader from './Preloader';
 
 // game sprites
 const gameSprites = [
@@ -18,11 +19,13 @@ const gameSprites = [
 class Game {
   private plane: Plane;
   private backgrounds: Background[] = [];
+  private loader: Preloader;
 
   private static firstInstance: Game = null;
   private static gameSpeed: number = -5;
 
   constructor() {
+    this.loader = new Preloader();
     this.init();
   }
 
@@ -49,6 +52,7 @@ class Game {
   private loadProgressHandler = (loader, resource): void => {
     console.log(`Loading: ${resource.url}`);
     console.log(`Progress: ${loader.progress}%`);
+    this.loader.update(loader.progress);
   }
 
   private onSpritesLoaded = (loader, resources): void => {
@@ -65,6 +69,8 @@ class Game {
     // init objects
     this.initBackgrounds(background.url);
     this.plane = new Plane(plane_sheet.url);
+
+    this.loader.end();
   }
 
   private initBackgrounds = (backgroundSpriteURL): void => {
