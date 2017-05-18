@@ -37,7 +37,7 @@ class Background extends GameObject {
     const game = Game.getInstance();
     const x = this.getLocation().x;
     const y = this.getLocation().y;
-    const spriteHeight = this.sprite.height;
+    const spriteHeight = this.getSprite().height;
     const bottomSprite = y + spriteHeight / 2;
     const screenTop = 0;
 

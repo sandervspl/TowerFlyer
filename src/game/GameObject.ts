@@ -8,15 +8,14 @@ import MovesXY from './movement/MovesXY';
 import App from '../app';
 
 // defines
-import { MOVEMENT_TYPE } from './defines';
+import { GameSprite, MOVEMENT_TYPE } from './defines';
 
 abstract class GameObject {
   private movementController: IMovementType;
   private spriteFrameName: string;
   private spriteFrames: number;
   private curSpriteFrame: number;
-
-  protected sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite;
+  private sprite: GameSprite;
 
   constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
     switch (movementType) {
@@ -44,16 +43,6 @@ abstract class GameObject {
 
   protected getSpeed = (): number | IPoint2D => this.movementController.speed.get();
 
-  // protected setSpeedX = (speed: number): void => {
-  //   const curSpeedY = (this.movementController.speed.get() as IPoint2D).y;
-  //   this.setSpeed(speed, curSpeedY);
-  // }
-  //
-  // protected setSpeedY = (speed: number): void => {
-  //   const curSpeedX = (this.movementController.speed.get() as IPoint2D).x;
-  //   this.setSpeed(curSpeedX, speed);
-  // }
-
   protected getLocation = (): Location2D => this.movementController.location;
 
   // update location of gameobject and its sprite
@@ -67,6 +56,8 @@ abstract class GameObject {
   protected setLocation = (x: number, y: number): void => {
     this.movementController.setLocation(x, y);
   }
+
+  protected getSprite = (): GameSprite => this.sprite;
 
   // init for loading spritesheets
   protected loadSpriteFromSpriteSheet = (
