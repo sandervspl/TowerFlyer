@@ -45,9 +45,9 @@ class Background extends GameObject {
     if (bottomSprite <= screenTop) {
       const bgs = game.getBackgrounds();
       const lastBg = bgs[bgs.length - 1];
-      const newPos = lastBg.getLocation().y + Background.height;
+      const newY = lastBg.getLocation().y + Background.height + (this.getSpeed() as number);
 
-      this.setLocation(x, newPos);
+      this.setLocation(x, newY);
 
       // push first index to last index
       bgs.push(bgs.shift());

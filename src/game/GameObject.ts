@@ -1,5 +1,6 @@
 // dependencies
 import IMovementType from './interfaces/IMovementType';
+import IPoint2D from './interfaces/IPoint2D';
 import Location2D from './Location2D';
 import MovesX from './movement/MovesX';
 import MovesY from './movement/MovesY';
@@ -40,6 +41,8 @@ abstract class GameObject {
     const speed = this.movementController.speed;
     speed.set(speed1, speed2);
   }
+
+  protected getSpeed = (): number | IPoint2D => this.movementController.speed.get();
 
   // protected setSpeedX = (speed: number): void => {
   //   const curSpeedY = (this.movementController.speed.get() as IPoint2D).y;
