@@ -8,8 +8,6 @@ import { MOVEMENT_TYPE } from './defines';
 const backgroundSprite = 'assets/images/background.png';
 
 class Background extends GameObject {
-  private id: number;
-
   private static height: number = 320;
 
   constructor(id: number) {
@@ -20,13 +18,11 @@ class Background extends GameObject {
       Game.getGameSpeed(),
     );
 
-    this.id = id;
-
     // load spritesheet
     this.loadSprite(backgroundSprite);
 
     // properly position background
-    this.setInitLocation();
+    this.setInitLocation(id);
   }
 
   public static getHeight = (): number => Background.height;
@@ -54,8 +50,8 @@ class Background extends GameObject {
     }
   }
 
-  protected setInitLocation = (): void => {
-    const y = this.getLocation().y + Background.height * this.id;
+  protected setInitLocation = (id: number): void => {
+    const y = this.getLocation().y + Background.height * id;
     this.setLocation(this.getLocation().x, y);
   }
 }

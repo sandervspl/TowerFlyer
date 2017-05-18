@@ -1,7 +1,7 @@
 // dependencies
 import IPoint2D from './interfaces/IPoint2D';
 
-class Coords2D {
+class Point2D {
   public x: number = 0;
   public y: number = 0;
 
@@ -27,4 +27,4 @@ class Coords2D {
   }
 }
 
-export default Coords2D;
+export default Point2D;
