@@ -18,10 +18,7 @@ class SpeedXY implements ISpeedType {
     this.speed.set(x, y);
   }
 
-  public get = (): IPoint2D => ({
-    x: this.speed.x,
-    y: this.speed.y,
-  })
+  public get = (): IPoint2D => this.speed.get();
 }
 
 export default SpeedXY;
