@@ -2,7 +2,7 @@
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
-import Movement from './movement/Movement';
+import Background from './Background';
 
 // defines
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
@@ -34,7 +34,7 @@ class Plane extends GameObject {
     const newX = this.getLocation().x;
     const y = this.getLocation().y;
 
-    if (!Movement.isInBounds(newX, spriteWidth)) {
+    if (!Background.isInBounds(newX, spriteWidth)) {
       this.setLocation(prevX, y);
     }
   }

@@ -1,4 +1,5 @@
 // dependencies
+import * as PIXI from 'pixi.js';
 import Plane from './Plane';
 import Background from './Background';
 import App from '../app';
@@ -16,7 +17,7 @@ const gameSprites = [
   },
 ];
 
-class Game {
+export class Game {
   private plane: Plane;
   private backgrounds: Background[] = [];
   private loader: Preloader;
@@ -50,8 +51,9 @@ class Game {
   }
 
   private loadProgressHandler = (loader, resource): void => {
-    console.log(`Loading: ${resource.url}`);
+    console.log(`Loading: ${resource.name} (${resource.url})`);
     console.log(`Progress: ${loader.progress}%`);
+
     this.loader.update(loader.progress);
   }
 
@@ -62,22 +64,22 @@ class Game {
     // deconstruct resources
     const { background, plane_sheet } = resources;
 
-    // set background static size
-    Background.size.height = background.texture.baseTexture.height;
-    Background.size.width = background.texture.baseTexture.width;
-
     // init objects
-    this.initBackgrounds(background.url);
+    this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
 
     this.loader.end();
   }
 
-  private initBackgrounds = (backgroundSpriteURL): void => {
+  private initBackgrounds = (backgroundResource): void => {
+    // set background static size
+    Background.setSize(backgroundResource);
+
+    // calculate the amount of backgrounds we need for it to properly loop
     const backgroundsAmt = Math.ceil(App.getView().renderer.height / Background.size.height + 1);
 
     for (let i = 0; i < backgroundsAmt; i += 1) {
-      this.backgrounds.push(new Background(i, backgroundSpriteURL));
+      this.backgrounds.push(new Background(i, backgroundResource.url));
     }
   }
 

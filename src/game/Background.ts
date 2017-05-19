@@ -1,9 +1,11 @@
 // dependencies
+import ISize2D from './interfaces/ISize2D';
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
+
+// defines
 import { MOVEMENT_TYPE } from './defines';
-import ISize2D from './interfaces/ISize2D';
 
 class Background extends GameObject {
   public static size: ISize2D = { width: 0, height: 0 };
@@ -21,6 +23,19 @@ class Background extends GameObject {
 
     // load sprite to view
     this.loadSprite(spriteURL);
+  }
+
+  public static setSize = (spriteResource) => {
+    Background.size.height = spriteResource.texture.baseTexture.height;
+    Background.size.width = spriteResource.texture.baseTexture.width;
+  }
+
+  public static isInBounds = (x: number, spriteWidth: number): boolean => {
+    const bgWidth = Background.size.width;
+    const leftBound = Math.ceil((App.getMiddleOfView().x - (bgWidth / 2)) + (spriteWidth / 2));
+    const rightBound = Math.ceil((App.getMiddleOfView().x + (bgWidth / 2)) - (spriteWidth / 2));
+
+    return x > leftBound && x < rightBound;
   }
 
   protected updateLocation(): void {

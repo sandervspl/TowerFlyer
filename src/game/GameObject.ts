@@ -1,6 +1,7 @@
 // dependencies
 import IMovementType from './interfaces/IMovementType';
 import IPoint2D from './interfaces/IPoint2D';
+import * as PIXI from 'pixi.js';
 import Location2D from './Location2D';
 import MovesX from './movement/MovesX';
 import MovesY from './movement/MovesY';
@@ -61,8 +62,7 @@ abstract class GameObject {
 
   // init for loading spritesheets
   protected loadSpriteFromSpriteSheet = (
-    spriteSheetURL: string, frameName: string,
-    framesNum: number, startFrame?: number,
+    spriteSheetURL: string, frameName: string, framesNum: number, startFrame?: number,
   ): void => {
     this.curSpriteFrame = startFrame;
     this.spriteFrames = framesNum;
