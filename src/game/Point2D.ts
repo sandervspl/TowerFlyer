@@ -9,21 +9,21 @@ class Point2D {
     this.set(x, y);
   }
 
-  public set = (x: number, y: number): void => {
-    this.x = x;
-    this.y = y;
-  }
-
   public get = (): IPoint2D => ({
     x: this.x,
     y: this.y,
   })
 
-  public setX = (speed: number): void => {
-    this.x = speed;
+  public set = (x: number, y: number): void => {
+    this.x = x;
+    this.y = y;
   }
-  public setY = (speed: number): void => {
-    this.y = speed;
+
+  public setX = (x: number): void => {
+    this.x = x;
+  }
+  public setY = (y: number): void => {
+    this.y = y;
   }
 }
 
