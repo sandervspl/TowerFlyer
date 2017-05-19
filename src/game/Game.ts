@@ -68,6 +68,7 @@ export class Game {
     this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
 
+    // remove preloader overlay
     this.loader.end();
   }
 
@@ -79,7 +80,7 @@ export class Game {
     const backgroundsAmt = Math.ceil(App.getView().renderer.height / Background.size.height + 1);
 
     for (let i = 0; i < backgroundsAmt; i += 1) {
-      this.backgrounds.push(new Background(i, backgroundResource.url));
+      this.backgrounds.push(new Background(i, backgroundResource));
     }
   }
 

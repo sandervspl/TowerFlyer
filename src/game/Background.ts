@@ -3,14 +3,19 @@ import ISize2D from './interfaces/ISize2D';
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
+import _ from 'lodash';
 
 // defines
 import { MOVEMENT_TYPE } from './defines';
 
 class Background extends GameObject {
   public static size: ISize2D = { width: 0, height: 0 };
+  public static setSize = _.once((spriteResource) => {
+    Background.size.height = spriteResource.texture.baseTexture.height;
+    Background.size.width = spriteResource.texture.baseTexture.width;
+  });
 
-  constructor(id: number, spriteURL: string) {
+  constructor(id: number, sprite) {
     super(
       App.getMiddleOfView().x,
       0,
@@ -22,12 +27,7 @@ class Background extends GameObject {
     this.setInitLocation(id);
 
     // load sprite to view
-    this.loadSprite(spriteURL);
-  }
-
-  public static setSize = (spriteResource) => {
-    Background.size.height = spriteResource.texture.baseTexture.height;
-    Background.size.width = spriteResource.texture.baseTexture.width;
+    this.loadSprite(sprite.url);
   }
 
   public static isInBounds = (x: number, spriteWidth: number): boolean => {
