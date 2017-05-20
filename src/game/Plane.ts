@@ -26,14 +26,17 @@ class Plane extends GameObject {
   }
 
   protected updateLocation(): void {
+    // save current x location
     const prevX = this.getLocation().x;
 
+    // update location
     super.updateLocation();
 
     const spriteWidth = this.getSprite().width;
     const newX = this.getLocation().x;
     const y = this.getLocation().y;
 
+    // if we are out of bounds on the X-axis then we reset to previous location
     if (!Background.isInBounds(newX, spriteWidth)) {
       this.setLocation(prevX, y);
     }
@@ -66,7 +69,7 @@ class Plane extends GameObject {
     // change plane sprite
     const frame: number = this.changeSpriteFrame(directionChange);
 
-    // change speed according to plane angle/sprite
+    // change speed according to new plane angle/sprite
     switch (frame) {
       case 0: speed = -5; Game.setGameSpeed(-1); break;
       case 1: speed = -4; Game.setGameSpeed(-2); break;

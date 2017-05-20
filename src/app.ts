@@ -22,6 +22,9 @@ class App {
       // add canvas element to DOM
       await document.body.appendChild(App.pixiApp.view);
 
+      // retain pixelation on scaling
+      PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
       // add event listeners
       this.addEventListeners();
 

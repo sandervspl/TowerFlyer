@@ -49,13 +49,15 @@ abstract class GameObject {
   // update location of gameobject and its sprite
   protected updateLocation(): void {
     this.movementController.updateLocation();
-
-    this.sprite.x = this.movementController.location.x;
-    this.sprite.y = this.movementController.location.y;
+    this.syncSpriteLocation();
   }
 
   protected setLocation = (x: number, y: number): void => {
     this.movementController.setLocation(x, y);
+
+    if (this.sprite) {
+      this.syncSpriteLocation();
+    }
   }
 
   protected getSprite = (): GameSprite => this.sprite;
@@ -128,6 +130,11 @@ abstract class GameObject {
     }
 
     return this.curSpriteFrame;
+  }
+
+  private syncSpriteLocation = (): void => {
+    this.sprite.x = this.movementController.location.x;
+    this.sprite.y = this.movementController.location.y;
   }
 
   private spriteLoaded = (): void => {
