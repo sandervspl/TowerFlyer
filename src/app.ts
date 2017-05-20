@@ -1,7 +1,7 @@
 // dependencies
+import IPoint2D from './game/interfaces/IPoint2D';
 import * as PIXI from 'pixi.js';
 import Game from './game/Game';
-import IPoint2D from './game/interfaces/IPoint2D';
 import _ from 'lodash';
 
 class App {
@@ -11,7 +11,7 @@ class App {
     this.init();
   }
 
-  private init = async (): Promise<boolean> => {
+  private init = async (): Promise<any> => {
     // create new application with canvas and ticker
     try {
       App.pixiApp = await new PIXI.Application(
@@ -32,11 +32,7 @@ class App {
       Game.getInstance();
     } catch (err) {
       console.log(err);
-
-      return false;
     }
-
-    return true;
   }
 
   private addEventListeners = () => {

@@ -17,8 +17,11 @@ abstract class GameObject {
   private spriteFrames: number;
   private curSpriteFrame: number;
   private sprite: GameSprite;
+  private debug: boolean;
 
-  constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
+  constructor(
+    posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number, debug: boolean = false,
+  ) {
     switch (movementType) {
       case MOVEMENT_TYPE.MOVE_X:
         this.movementController = new MovesX(posX, posY, speed1);
@@ -35,6 +38,8 @@ abstract class GameObject {
       default:
         this.movementController = new MovesY(posX, posY, speed1);
     }
+
+    this.debug = debug;
   }
 
   protected setSpeed = (speed1: number, speed2?: number): void => {
@@ -49,7 +54,14 @@ abstract class GameObject {
   // update location of gameobject and its sprite
   protected updateLocation(): void {
     this.movementController.updateLocation();
-    this.syncSpriteLocation();
+
+    if (this.sprite) {
+      this.syncSpriteLocation();
+    }
+
+    if (this.debug) {
+      console.log(this.movementController.location.get());
+    }
   }
 
   protected setLocation = (x: number, y: number): void => {
@@ -108,6 +120,10 @@ abstract class GameObject {
       this.spriteLoaded();
   }
 
+  protected loadWithoutSprite(): void {
+    this.spriteLoaded();
+  }
+
   // change sprite frame by a certain amount (i.e. -1 or +1)
   protected changeSpriteFrame = (amount: number): number => {
     const minFrame = 0;
@@ -132,23 +148,23 @@ abstract class GameObject {
     return this.curSpriteFrame;
   }
 
+  // draw new sprite
+  protected draw = (): void => {
+    this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
+  }
+
+  // update method for PIXI ticker
+  protected update(): void {
+    this.updateLocation();
+  }
+
   private syncSpriteLocation = (): void => {
     this.sprite.x = this.movementController.location.x;
     this.sprite.y = this.movementController.location.y;
   }
 
   private spriteLoaded = (): void => {
-    App.getView().ticker.add(this.update);
-  }
-
-  // draw new sprite
-  private draw = (): void => {
-    this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
-  }
-
-  // update method for PIXI ticker
-  private update = (): void => {
-    this.updateLocation();
+    App.getView().ticker.add(() => this.update());
   }
 }
 

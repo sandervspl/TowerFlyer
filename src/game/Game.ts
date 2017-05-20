@@ -4,6 +4,7 @@ import Plane from './Plane';
 import Background from './Background';
 import App from '../app';
 import Preloader from './Preloader';
+import Wall from './Wall';
 
 // game sprites
 const gameSprites = [
@@ -17,9 +18,10 @@ const gameSprites = [
   },
 ];
 
-export class Game {
+class Game {
   private plane: Plane;
   private backgrounds: Background[] = [];
+  private wall: Wall;
   private loader: Preloader;
 
   private static firstInstance: Game = null;
@@ -67,6 +69,7 @@ export class Game {
     // init objects
     this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
+    this.wall = new Wall();
 
     // remove preloader overlay
     this.loader.end();

@@ -30,10 +30,17 @@ class Background extends GameObject {
     this.loadSprite(sprite.url);
   }
 
+  public static getLeftBound(): number {
+    return Math.ceil(App.getMiddleOfView().x - (Background.size.width / 2));
+  }
+
+  public static getRightBound(): number {
+    return Math.ceil(App.getMiddleOfView().x + (Background.size.width / 2));
+  }
+
   public static isInBounds = (x: number, spriteWidth: number): boolean => {
-    const bgWidth = Background.size.width;
-    const leftBound = Math.ceil((App.getMiddleOfView().x - (bgWidth / 2)) + (spriteWidth / 2));
-    const rightBound = Math.ceil((App.getMiddleOfView().x + (bgWidth / 2)) - (spriteWidth / 2));
+    const leftBound = Math.ceil(Background.getLeftBound() + (spriteWidth / 2));
+    const rightBound = Math.ceil(Background.getRightBound() - (spriteWidth / 2));
 
     return x > leftBound && x < rightBound;
   }
