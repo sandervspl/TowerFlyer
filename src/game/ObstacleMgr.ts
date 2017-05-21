@@ -19,7 +19,7 @@ class ObstacleMgr {
   constructor() {
     this.distBetweenObst = 250;
 
-    // init some wall pieces
+    // init some obstacle pieces
     const totalPcs = 10;
     for (let i = 0; i < totalPcs; i += 1) {
       const side = (i % 2 === 0) ? DIRECTION.LEFT : DIRECTION.RIGHT;

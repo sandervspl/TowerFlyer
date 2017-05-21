@@ -1,13 +1,13 @@
 // dependencies
-import IWallShape from '../interfaces/IObstacleShape';
-import WallShape from './ObstacleShape';
+import IObstacleShape from '../interfaces/IObstacleShape';
+import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
 import Background from '../Background';
 
 // defines
 import { DIRECTION } from '../defines';
 
-class Single extends WallShape implements IWallShape {
+class Single extends ObstacleShape implements IObstacleShape {
   constructor(obstacleMgr: ObstacleMgr, side: DIRECTION, y: number) {
     super(
       obstacleMgr,
