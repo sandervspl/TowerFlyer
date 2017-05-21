@@ -8,7 +8,7 @@ import ObstacleMgr from './ObstacleMgr';
 import DistanceIndicator from './DistanceIndicator';
 
 // namespaces
-import { env } from './namespaces/environment';
+import { env } from '../namespaces/environment';
 
 // game sprites
 const gameSprites = [
