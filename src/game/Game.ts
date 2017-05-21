@@ -29,7 +29,7 @@ class Game {
 
   constructor() {
     this.loader = new Preloader();
-    this.init();
+    this.initSprites();
   }
 
   public static getInstance(): Game {
@@ -80,15 +80,11 @@ class Game {
     Background.setSize(backgroundResource);
 
     // calculate the amount of backgrounds we need for it to properly loop
-    const backgroundsAmt = Math.ceil(App.getView().renderer.height / Background.size.height + 1);
+    const backgroundsAmt = Math.abs(Math.ceil(App.getView().renderer.height / Background.size.height + 1));
 
     for (let i = 0; i < backgroundsAmt; i += 1) {
       this.backgrounds.push(new Background(i, backgroundResource));
     }
-  }
-
-  private init = (): void => {
-    this.initSprites();
   }
 }
 

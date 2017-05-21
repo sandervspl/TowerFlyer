@@ -42,14 +42,24 @@ abstract class GameObject {
     this.debug = debug;
   }
 
+  public getLocation = (): Location2D => this.movementController.location;
+
+  // draw new sprite
+  public draw(): void {
+    this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
+  }
+
+  // update method for PIXI ticker
+  public update(): void {
+    this.updateLocation();
+  }
+
   protected setSpeed = (speed1: number, speed2?: number): void => {
     const speed = this.movementController.speed;
     speed.set(speed1, speed2);
   }
 
   protected getSpeed = (): number | IPoint2D => this.movementController.speed.get();
-
-  protected getLocation = (): Location2D => this.movementController.location;
 
   // update location of gameobject and its sprite
   protected updateLocation(): void {
@@ -146,16 +156,6 @@ abstract class GameObject {
     }
 
     return this.curSpriteFrame;
-  }
-
-  // draw new sprite
-  protected draw = (): void => {
-    this.sprite.texture = PIXI.Texture.fromFrame(`${this.spriteFrameName}${this.curSpriteFrame}.png`);
-  }
-
-  // update method for PIXI ticker
-  protected update(): void {
-    this.updateLocation();
   }
 
   private syncSpriteLocation = (): void => {

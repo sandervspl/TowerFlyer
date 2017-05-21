@@ -1,102 +1,62 @@
 // dependencies
-import * as PIXI from 'pixi.js';
+import IPoint2D from './interfaces/IPoint2D';
+import IWallShape from './interfaces/IWallShape';
 import App from '../app';
-import GameObject from './GameObject';
 import Game from './Game';
 import Background from './Background';
+import GameObject from './GameObject';
 import { MOVEMENT_TYPE } from './defines';
 
+// wall shapes
+import Straight from './walls/Straight';
+
 class Wall extends GameObject {
-  private graphics: PIXI.Graphics;
+  private lastDrawLocation: IPoint2D;
+  private wallPieces: IWallShape[] = [];
 
   constructor() {
     super(
       Background.getLeftBound(),
-      App.getView().renderer.height,
+      App.getView().renderer.height / 2,
       MOVEMENT_TYPE.MOVE_Y,
-      0,
       Game.getGameSpeed(),
-      false,
     );
 
-    this.graphics = new PIXI.Graphics();
-    App.getView().stage.addChild(this.graphics);
+    // set starting point for new wall shapes
+    this.lastDrawLocation = {
+      x: this.getLocation().x,
+      y: this.getLocation().y,
+    };
+
+    // init some wall pieces
+    const totalPcs = 3;
+    for (let i = 0; i < totalPcs; i += 1) {
+      this.addShapeToArray();
+    }
+
     this.loadWithoutSprite();
   }
 
-  // draw shapes with rounded corners
-  // more info: https://www.toptal.com/c-plus-plus/rounded-corners-bezier-curves-qpainter
-  protected draw = (): void => {
-    const { graphics } = this;
-    const { x, y } = this.getLocation();
+  public getLastDrawLocation = (): IPoint2D => this.lastDrawLocation;
 
-    // remove current shape before redrawing
-    graphics.clear();
-
-    // 50% alpha white fill
-    graphics.beginFill(0xFFFFFF, .5);
-
-    // 5px line width 75% alpha white
-    graphics.lineStyle(5, 0xFFFFFF, .75);
-
-    const width = 200;
-    const height = 300;
-    const cornerXDist = 10;
-    const cornerYDist = 15;
-
-    // start pos
-    graphics.moveTo(
-      x,
-      y,
-    );
-
-    // horizontal line
-    graphics.lineTo(
-      x + width,
-      y,
-    );
-
-    // corner top right
-    graphics.bezierCurveTo(
-      x + width,
-      y,
-
-      x + width + cornerXDist,
-      y,
-
-      x + width + cornerXDist,
-      y + cornerYDist,
-    );
-
-    // vertical line
-    graphics.lineTo(
-      x + width + cornerXDist,
-      y + height,
-    );
-
-    // corner bottom right
-    graphics.bezierCurveTo(
-      x + width + cornerXDist,
-      y + height,
-
-      x + width + cornerXDist,
-      y + height + cornerYDist,
-
-      x + width,
-      y + height + cornerYDist,
-    );
-
-    // horizontal line and end pos
-    graphics.lineTo(
-      x,
-      y + height + cornerYDist,
-    );
-    graphics.endFill();
+  public setLastDrawLocation(point2D: IPoint2D): void {
+    this.lastDrawLocation = { x: point2D.x, y: point2D.y };
   }
 
-  protected update(): void {
-    super.update();
-    this.draw();
+  public removeShapeFromArray(): void {
+    console.log('removing shape');
+    this.wallPieces.shift();
+    this.addShapeToArray();
+  }
+
+  public addShapeToArray(): void {
+    this.wallPieces.push(new Straight(this));
+  }
+
+  public update(): void {
+    for (const piece of this.wallPieces) {
+      piece.update();
+    }
   }
 }
 

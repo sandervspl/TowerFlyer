@@ -47,6 +47,7 @@
     "no-console": false,
     "no-var-requires": false,
     "ordered-imports": false,
-    "no-namespace": false
+    "no-namespace": false,
+    "object-literal-sort-keys": false
   }
 }
