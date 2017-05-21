@@ -57,17 +57,6 @@ abstract class ObstacleShape extends GameObject {
     this.startDraw();
     this.draw();    // this is handled by each individual shape class
     this.endDraw();
-
-    // check if we are out of view
-    const bottom = this.getLocation().y + this.size.height;
-    const viewTop = 0;
-
-    // remove if we are out of view
-    if (bottom < viewTop) {
-      this.graphics.clear();
-      this.removeUpdater();
-      this.obstacleMgr.removeObstacleFromArray();
-    }
   }
 }
 

@@ -1,5 +1,5 @@
 // dependencies
-import IWallShape from './interfaces/IObstacleShape';
+import IObstacleShape from './interfaces/IObstacleShape';
 import App from '../app';
 
 // namespaces
@@ -12,7 +12,7 @@ import Single from './obstacles/Single';
 import { DIRECTION } from './defines';
 
 class ObstacleMgr {
-  private obstacles: IWallShape[] = [];
+  private obstacles: IObstacleShape[] = [];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
 
@@ -34,9 +34,17 @@ class ObstacleMgr {
     this.addToTicker();
   }
 
-  public removeObstacleFromArray(): void {
+  public removeObstacleFromArray(obst: IObstacleShape): void {
+    // clear draw and updater from gameloop
+    obst.graphics.clear();
+    obst.removeUpdater();
+
+    // remove from array
     this.obstacles.shift();
+
+    // add new obstacle to the game
     this.addObstacleToArray();
+
     env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
   }
 
@@ -59,8 +67,25 @@ class ObstacleMgr {
   }
 
   private update = (): void => {
+    const obstToRemove: IObstacleShape[] = [];
     for (const obst of this.obstacles) {
       obst.update();
+
+      // check if we are out of view
+      const bottom = obst.getLocation().y + obst.size.height;
+      const viewTop = 0;
+
+      // remove obstacle after we are done updating
+      if (bottom < viewTop) {
+        obstToRemove.push(obst);
+      }
+    }
+
+    // remove all obstacles that are out of view
+    if (obstToRemove.length > 0) {
+      for (const obst of obstToRemove) {
+        this.removeObstacleFromArray(obst);
+      }
     }
   }
 }
