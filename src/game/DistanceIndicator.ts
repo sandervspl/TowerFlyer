@@ -56,7 +56,7 @@ class DistanceIndicator extends GameObject {
     // draw backdrop rectangle
     this.container = new PIXI.Graphics();
     this.container.lineStyle(0, 0, 0);
-    this.container.beginFill(0xEEEEEE, .4);
+    this.container.beginFill(0x000000, .5);
     this.container.drawRect(
       0,
       0,

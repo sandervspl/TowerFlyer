@@ -9,7 +9,8 @@ import { DIRECTION } from '../defines';
 
 class Single extends WallShape implements IWallShape {
   constructor(obstacleMgr: ObstacleMgr, side: DIRECTION, y: number) {
-    super(obstacleMgr,
+    super(
+      obstacleMgr,
       side,
       0,
       y,
@@ -28,7 +29,7 @@ class Single extends WallShape implements IWallShape {
       y,
       width,
       height,
-      15,
+      10,
     );
   }
 }

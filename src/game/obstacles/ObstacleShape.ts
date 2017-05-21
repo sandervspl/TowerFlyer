@@ -32,10 +32,6 @@ abstract class ObstacleShape extends GameObject {
     App.getView().stage.addChild(this.graphics);
   }
 
-  // public getLocation(): void {
-  //   this.getLocation();
-  // }
-
   // start of draw shape
   public startDraw(): void {
     // remove current shape before redrawing
@@ -45,7 +41,7 @@ abstract class ObstacleShape extends GameObject {
     this.graphics.lineStyle(3, 0xFFFFFF, .75);
 
     // 50% alpha white fill
-    this.graphics.beginFill(0xFFFFFF, .5);
+    this.graphics.beginFill(0xFFFFFF, .3);
   }
 
   // drawings end with this
