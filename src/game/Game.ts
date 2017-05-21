@@ -4,8 +4,11 @@ import Plane from './Plane';
 import Background from './Background';
 import App from '../app';
 import Preloader from './Preloader';
-import Wall from './Wall';
+import ObstacleMgr from './ObstacleMgr';
 import DistanceIndicator from './DistanceIndicator';
+
+// namespaces
+import { env } from './namespaces/environment';
 
 // game sprites
 const gameSprites = [
@@ -22,7 +25,7 @@ const gameSprites = [
 class Game {
   private plane: Plane;
   private backgrounds: Background[] = [];
-  private wall: Wall;
+  private obstacleMgr: ObstacleMgr;
   private loader: Preloader;
   private distanceIndicator: DistanceIndicator;
 
@@ -55,15 +58,15 @@ class Game {
   }
 
   private loadProgressHandler = (loader, resource): void => {
-    console.log(`Loading: ${resource.name} (${resource.url})`);
-    console.log(`Progress: ${loader.progress}%`);
+    env.log(`Loading: ${resource.name} (${resource.url})`);
+    env.log(`Progress: ${loader.progress}%`);
 
     this.loader.update(loader.progress);
   }
 
   private onSpritesLoaded = (loader, resources): void => {
-    console.log('Done loading!');
-    // console.log(resources);
+    env.log('Done loading!');
+    // env.log(resources);
 
     // deconstruct resources
     const { background, plane_sheet } = resources;
@@ -71,7 +74,7 @@ class Game {
     // init objects
     this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
-    this.wall = new Wall();
+    this.obstacleMgr = new ObstacleMgr();
     this.distanceIndicator = new DistanceIndicator();
 
     // remove preloader overlay

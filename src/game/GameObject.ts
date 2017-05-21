@@ -11,13 +11,16 @@ import App from '../app';
 // defines
 import { GameSprite, MOVEMENT_TYPE } from './defines';
 
+// namespaces
+import { env } from '../namespaces/environment';
+
 abstract class GameObject {
-  private movementController: IMovementType;
   private spriteFrameName: string;
   private spriteFrames: number;
   private curSpriteFrame: number;
   private sprite: GameSprite;
   private debug: boolean;
+  public movementController: IMovementType;
 
   constructor(
     posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1?: number, speed2?: number, debug: boolean = false,
@@ -54,6 +57,11 @@ abstract class GameObject {
     this.updateLocation();
   }
 
+  public removeUpdater(): void {
+    App.getView().ticker.remove(() => this.update());
+    env.log('Removed GameObject updater from gameloop.');
+  }
+
   protected setSpeed = (speed1: number, speed2?: number): void => {
     const speed = this.movementController.speed;
     speed.set(speed1, speed2);
@@ -70,7 +78,7 @@ abstract class GameObject {
     }
 
     if (this.debug) {
-      console.log(this.movementController.location.get());
+      env.log(this.movementController.location.get());
     }
   }
 
@@ -163,6 +171,7 @@ abstract class GameObject {
     this.sprite.y = this.movementController.location.y;
   }
 
+  // GAME LOOP
   private spriteLoaded = (): void => {
     App.getView().ticker.add(() => this.update());
   }

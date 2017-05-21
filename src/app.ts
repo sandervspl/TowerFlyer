@@ -4,6 +4,9 @@ import * as PIXI from 'pixi.js';
 import Game from './game/Game';
 import _ from 'lodash';
 
+// namespaces
+import { env } from './namespaces/environment';
+
 class App {
   private static pixiApp: PIXI.Application;
 
@@ -31,7 +34,7 @@ class App {
       // init game
       Game.getInstance();
     } catch (err) {
-      console.log(err);
+      env.log(err);
     }
   }
 
