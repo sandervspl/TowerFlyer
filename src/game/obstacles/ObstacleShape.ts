@@ -21,8 +21,11 @@ abstract class ObstacleShape extends GameObject {
     fillAlpha: .3,
   };
 
-  constructor(obstacleMgr: ObstacleMgr, side: DIRECTION, x: number, y: number, width: number, height: number) {
-    super(x, y, MOVEMENT_TYPE.MOVE_Y);
+  constructor(
+    obstacleMgr: ObstacleMgr, side: DIRECTION, x: number, y: number,
+    width: number, height: number, movementType: MOVEMENT_TYPE, speed1?: number, speed2?: number,
+  ) {
+    super(x, y, movementType, speed1, speed2);
 
     this.size = { width, height };
 
