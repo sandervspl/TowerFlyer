@@ -64,27 +64,23 @@ class Plane extends GameObject {
 
   private turn = (direction: DIRECTION): void => {
     const directionChange: number = direction === DIRECTION.LEFT ? -1 : 1;
-    let speed: number = 0;
 
     // change plane sprite
     const frame: number = this.changeSpriteFrame(directionChange);
 
     // change speed according to new plane angle/sprite
     switch (frame) {
-      case 0: speed = -5; Game.setGameSpeed(-1); break;
-      case 1: speed = -4; Game.setGameSpeed(-2); break;
-      case 2: speed = -2; Game.setGameSpeed(-3); break;
-      case 3: speed = -1; Game.setGameSpeed(-4); break;
-      case 4: speed = 0;  Game.setGameSpeed(-5); break;
-      case 5: speed = 1;  Game.setGameSpeed(-4); break;
-      case 6: speed = 2;  Game.setGameSpeed(-3); break;
-      case 7: speed = 4;  Game.setGameSpeed(-2); break;
-      case 8: speed = 5;  Game.setGameSpeed(-1); break;
-      default: speed = 0; Game.setGameSpeed(-5); break;
+      case 0: this.setSpeed(-5); Game.setGameSpeed(-1); break;
+      case 1: this.setSpeed(-4); Game.setGameSpeed(-2); break;
+      case 2: this.setSpeed(-2); Game.setGameSpeed(-3); break;
+      case 3: this.setSpeed(-1); Game.setGameSpeed(-4); break;
+      case 4: this.setSpeed(0);  Game.setGameSpeed(-5); break;
+      case 5: this.setSpeed(1);  Game.setGameSpeed(-4); break;
+      case 6: this.setSpeed(2);  Game.setGameSpeed(-3); break;
+      case 7: this.setSpeed(4);  Game.setGameSpeed(-2); break;
+      case 8: this.setSpeed(5);  Game.setGameSpeed(-1); break;
+      default: this.setSpeed(0); Game.setGameSpeed(-5); break;
     }
-
-    // update speed
-    this.setSpeed(speed);
   }
 }
 
