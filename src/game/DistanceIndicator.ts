@@ -82,7 +82,7 @@ class DistanceIndicator extends GameObject {
 
     // draw text
     this.text = new PIXI.Text(`${this.distance} m`, style);
-    this.text.x = App.getMiddleOfView().x - this.text.width;
+    this.text.x = size.width / 2;
     this.text.y = size.height / 2;
     this.text.anchor.set(.5);
 
