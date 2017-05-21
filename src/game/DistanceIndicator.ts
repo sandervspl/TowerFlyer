@@ -51,7 +51,7 @@ class DistanceIndicator extends GameObject {
     const { size } = this;
 
     // update distance counter
-    this.distance += 100;
+    this.distance += 50;
 
     // draw backdrop rectangle
     this.container = new PIXI.Graphics();
