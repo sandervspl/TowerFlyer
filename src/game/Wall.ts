@@ -44,7 +44,6 @@ class Wall extends GameObject {
   }
 
   public removeShapeFromArray(): void {
-    console.log('removing shape');
     this.wallPieces.shift();
     this.addShapeToArray();
   }

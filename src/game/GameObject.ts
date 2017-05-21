@@ -20,7 +20,7 @@ abstract class GameObject {
   private debug: boolean;
 
   constructor(
-    posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number, debug: boolean = false,
+    posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1?: number, speed2?: number, debug: boolean = false,
   ) {
     switch (movementType) {
       case MOVEMENT_TYPE.MOVE_X:

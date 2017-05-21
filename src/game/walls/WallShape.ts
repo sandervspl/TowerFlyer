@@ -1,6 +1,5 @@
 // dependencies
 import ISize2D from '../interfaces/ISize2D';
-import Game from '../Game';
 import Wall from '../Wall';
 import GameObject from '../GameObject';
 import { MOVEMENT_TYPE } from '../defines';
@@ -16,7 +15,6 @@ abstract class WallShape extends GameObject {
       wall.getLastDrawLocation().x,
       wall.getLastDrawLocation().y,
       MOVEMENT_TYPE.MOVE_Y,
-      Game.getGameSpeed(),
     );
 
     this.wall = wall;

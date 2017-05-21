@@ -5,6 +5,7 @@ import Background from './Background';
 import App from '../app';
 import Preloader from './Preloader';
 import Wall from './Wall';
+import DistanceIndicator from './DistanceIndicator';
 
 // game sprites
 const gameSprites = [
@@ -23,6 +24,7 @@ class Game {
   private backgrounds: Background[] = [];
   private wall: Wall;
   private loader: Preloader;
+  private distanceIndicator: DistanceIndicator;
 
   private static firstInstance: Game = null;
   private static gameSpeed: number = -5;
@@ -70,6 +72,7 @@ class Game {
     this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
     this.wall = new Wall();
+    this.distanceIndicator = new DistanceIndicator();
 
     // remove preloader overlay
     this.loader.end();
