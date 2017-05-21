@@ -13,7 +13,7 @@ class DistanceIndicator extends GameObject {
 
   constructor() {
     super(
-      Background.getLeftBound(),
+      Background.getLeftBound() - 1,
       1000,
       MOVEMENT_TYPE.MOVE_Y,
     );
@@ -55,7 +55,6 @@ class DistanceIndicator extends GameObject {
 
     // draw backdrop rectangle
     this.container = new PIXI.Graphics();
-    this.container.lineStyle(0, 0, 0);
     this.container.beginFill(0x000000, .5);
     this.container.drawRect(
       0,
@@ -70,6 +69,8 @@ class DistanceIndicator extends GameObject {
       this.getLocation().x,
       1000,
     );
+
+    // set sprite location
     this.container.x = this.getLocation().x;
     this.container.y = this.getLocation().y;
 

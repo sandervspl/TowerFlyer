@@ -13,6 +13,14 @@ abstract class ObstacleShape extends GameObject {
   public size: ISize2D;
   public graphics: PIXI.Graphics;
 
+  private style = {
+    lineWidth: 3,
+    lineColor: 0xFFFFFF,
+    lineAlpha: .75,
+    fillColor: 0xFFFFFF,
+    fillAlpha: .3,
+  };
+
   constructor(obstacleMgr: ObstacleMgr, side: DIRECTION, x: number, y: number, width: number, height: number) {
     super(x, y, MOVEMENT_TYPE.MOVE_Y);
 
@@ -21,7 +29,7 @@ abstract class ObstacleShape extends GameObject {
     // set x depending on which side we are on
     const newX = side === DIRECTION.LEFT
       ? Background.getLeftBound()
-      : Background.getRightBound() - this.size.width;
+      : Background.getRightBound() - this.size.width - this.style.lineWidth;
 
     this.setLocation(newX, y);
 
@@ -37,11 +45,14 @@ abstract class ObstacleShape extends GameObject {
     // remove current shape before redrawing
     this.graphics.clear();
 
+    // base shape styling
+    const { lineWidth, lineColor, lineAlpha, fillColor, fillAlpha } = this.style;
+
     // 3px line width 75% alpha white
-    this.graphics.lineStyle(3, 0xFFFFFF, .75);
+    this.graphics.lineStyle(lineWidth, lineColor, lineAlpha);
 
     // 50% alpha white fill
-    this.graphics.beginFill(0xFFFFFF, .3);
+    this.graphics.beginFill(fillColor, fillAlpha);
   }
 
   // drawings end with this
