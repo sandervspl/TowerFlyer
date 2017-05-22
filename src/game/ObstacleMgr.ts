@@ -17,17 +17,15 @@ class ObstacleMgr {
   private distBetweenObst: number;
 
   constructor() {
-    this.distBetweenObst = 250;
+    this.distBetweenObst = 200;
 
     // init some obstacle pieces
     const totalPcs = 10;
     for (let i = 0; i < totalPcs; i += 1) {
-      const side = (i % 2 === 0) ? DIRECTION.LEFT : DIRECTION.RIGHT;
+      this.prevSide = (i % 2 === 0) ? DIRECTION.LEFT : DIRECTION.RIGHT;
       const y = 1000 + (this.distBetweenObst * i);
 
-      this.addObstacleToArray(side, y);
-
-      this.prevSide = side;
+      this.addObstacleToArray(y);
     }
 
     // add to gameloop
@@ -48,17 +46,16 @@ class ObstacleMgr {
     env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
   }
 
-  public addObstacleToArray(side?: DIRECTION, y?: number): void {
-    const newSide = side
-      ? side
-      : (this.prevSide === DIRECTION.LEFT ? DIRECTION.RIGHT : DIRECTION.LEFT);
-    const newY = y
-      ? y
-      : this.obstacles[this.obstacles.length - 1].getLocation().y + this.distBetweenObst;
+  public addObstacleToArray(y?: number): void {
+    const obsts = this.obstacles;
+    const lastObst = obsts[obsts.length - 1];
+    const newY = y ? y : lastObst.getLocation().y + lastObst.size.height + this.distBetweenObst;
 
-    this.obstacles.push(new Single(this, newSide, newY));
+    // switch side
+    this.prevSide = (this.prevSide === DIRECTION.LEFT) ? DIRECTION.RIGHT : DIRECTION.LEFT;
 
-    this.prevSide = newSide;
+    // add new obstacle to our array
+    this.obstacles.push(new Single(this, this.prevSide, newY));
   }
 
   // add our updater game loop
