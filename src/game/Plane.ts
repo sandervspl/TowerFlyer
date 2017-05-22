@@ -54,6 +54,9 @@ class Plane extends GameObject {
 
   private addEventListeners = (): void => {
     window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('touchstart', this.handleTouchStart);
+    window.addEventListener('touchend', this.handleKeyUp);
+    window.addEventListener('touchcancel', this.handleKeyUp);
     window.addEventListener('keyup', this.handleKeyUp);
     window.addEventListener('onblur', this.handleKeyUp);
   }
@@ -85,6 +88,20 @@ class Plane extends GameObject {
   private handleKeyUp = (): void => {
     clearInterval(this.keyDownInterval);
     this.keyDownInterval = null;
+  }
+
+  private handleTouchStart = (e): void => {
+    const touchX = e.changedTouches[0].pageX;
+
+    if (!this.keyDownInterval) {
+      if (touchX < App.getMiddleOfView().x) {
+        this.turn(DIRECTION.LEFT);
+        this.keyDownInterval = Number(setInterval(() => this.turn(DIRECTION.LEFT), 100));
+      } else {
+        this.turn(DIRECTION.RIGHT);
+        this.keyDownInterval = Number(setInterval(() => this.turn(DIRECTION.RIGHT), 100));
+      }
+    }
   }
 
   private turn = (direction: DIRECTION): void => {

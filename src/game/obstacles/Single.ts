@@ -15,6 +15,7 @@ class Single extends ObstacleShape implements IObstacleShape {
       side,
       0,
       y,
+      // TODO: set to window width if its smaller than bg width
       (Math.random() * (Background.size.width * .55)) + Background.size.width * .2,
       50,
       MOVEMENT_TYPE.MOVE_Y,
