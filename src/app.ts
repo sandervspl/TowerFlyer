@@ -13,6 +13,7 @@ class App {
   private fpsLow: number = 1000;
   private fpsHigh: number = 0;
   private fpsAvg: number[] = [];
+  private maxHeight: number = 1000;
   private static pixiApp: PIXI.Application;
 
   constructor() {
@@ -29,10 +30,12 @@ class App {
   private init = async (): Promise<any> => {
     // create new application with canvas and ticker
     try {
-      App.pixiApp = await new PIXI.Application(
-        window.innerWidth,
-        window.innerHeight,
-      );
+      const appWidth = window.innerWidth;
+      const appHeight = (window.innerHeight <= this.maxHeight) ? window.innerHeight : this.maxHeight;
+
+      App.pixiApp = await new PIXI.Application(appWidth, appHeight);
+
+      App.pixiApp.stage.y = (window.innerHeight - appHeight) / 2;
 
       // add canvas element to DOM
       await document.body.appendChild(App.pixiApp.view);
@@ -60,7 +63,7 @@ class App {
       e.preventDefault();
 
       App.pixiApp.renderer.view.width = window.innerWidth;
-      App.pixiApp.renderer.view.height = window.innerHeight;
+      App.pixiApp.renderer.view.height = (window.innerHeight <= this.maxHeight) ? window.innerHeight : this.maxHeight;
     }, 500));
   }
 
@@ -71,17 +74,18 @@ class App {
     }
 
     // math thingies
-    const avg = tfMath.getAverageOfArray(this.fpsAvg).toFixed(2);
+    const avg = tfMath.getAverageOfArray(this.fpsAvg).toFixed(3);
     const median = tfMath.getMedianOfArray(this.fpsAvg);
 
     // grab FPS and set/style its text
-    const fps = Number(App.pixiApp.ticker.FPS.toFixed(2));
+    const fps = Number(App.pixiApp.ticker.FPS.toFixed(3));
     this.fpsText = new PIXI.Text(`fps: ${fps}\nlow: ${this.fpsLow}\nhigh: ${this.fpsHigh}\navg: ${avg}\nmed: ${median}`,
       {
-      fontFamily: 'Arial',
-      fontSize: 24,
-      fill: 0xFFFFFF,
-    });
+        fontFamily: 'Arial',
+        fontSize: 24,
+        fill: 0xFFFFFF,
+      },
+    );
 
     this.fpsText.x = 20;
     this.fpsText.y = 20;
