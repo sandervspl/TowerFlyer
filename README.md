@@ -30,6 +30,5 @@
 <li><b>singleton:</b> zie src/game/Game voor een singleton class.</li>
 <li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController. Ook src/game/ObstacleMgr maakt gebruik van strategy pattern met obstacles (zie src/game/obstacles folder).</li>
 <li><b>encapsulation:</b> waar niet?</li>
-<li><b>composition/Inheritance: zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</b></li>
-<li><b></b></li>
+<li><b>composition/Inheritance:</b> zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
 </ol>
