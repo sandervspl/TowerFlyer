@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 // namespaces
 import { env } from './namespaces/environment';
-import { tfMath } from './namespaces/tfMath';
+import TfMath from './utils/TfMath';
 
 class App {
   private fpsText: PIXI.Text;
@@ -74,8 +74,8 @@ class App {
     }
 
     // math thingies
-    const avg = tfMath.getAverageOfArray(this.fpsAvg).toFixed(3);
-    const median = tfMath.getMedianOfArray(this.fpsAvg);
+    const avg = TfMath.getAverageOfArray(this.fpsAvg).toFixed(3);
+    const median = TfMath.getMedianOfArray(this.fpsAvg);
 
     // grab FPS and set/style its text
     const fps = Number(App.pixiApp.ticker.FPS.toFixed(3));
