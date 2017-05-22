@@ -14,7 +14,7 @@ class DistanceIndicator extends GameObject {
   constructor() {
     super(
       Background.getLeftBound() - 1,
-      1000,
+      1500 - 40,
       MOVEMENT_TYPE.MOVE_Y,
     );
 
@@ -48,6 +48,10 @@ class DistanceIndicator extends GameObject {
   }
 
   private init(): void {
+    if (this.container) {
+      this.container.destroy();
+    }
+
     const { size } = this;
 
     // update distance counter
@@ -67,7 +71,7 @@ class DistanceIndicator extends GameObject {
     // set initial location
     this.setLocation(
       this.getLocation().x,
-      1000,
+      1500 - this.size.height,
     );
 
     // set sprite location
