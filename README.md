@@ -22,3 +22,14 @@
 <li>Zoek hier naar de <b>tslint.json</b> file in de root folder van dit project</li>
 <li>Klik op Apply en OK.</li>
 </ol>
+
+# Onderdelen
+<ol>
+<li><b>interface:</b> zie src/game/interfaces voor alle interfaces. Zie src/game/movement/MovesY voor een implementatie.</li>
+<li><b>static utility method:</b> Zie src/game/Preloader voor een static class.</li>
+<li><b>singleton:</b> zie src/game/Game voor een singleton class.</li>
+<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController. Ook src/game/ObstacleMgr maakt gebruik van strategy pattern met obstacles (zie src/game/obstacles folder).</li>
+<li><b>encapsulation:</b> waar niet?</li>
+<li><b>composition/Inheritance: zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</b></li>
+<li><b></b></li>
+</ol>
