@@ -59,7 +59,7 @@ abstract class GameObject {
 
   public removeUpdater(): void {
     App.getView().ticker.remove(() => this.update());
-    env.log('Removed GameObject updater from gameloop.');
+    // env.log('Removed GameObject updater from gameloop.');
   }
 
   protected setSpeed = (speed1: number, speed2?: number): void => {

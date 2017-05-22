@@ -15,7 +15,7 @@ class Background extends GameObject {
     Background.size.width = spriteResource.texture.baseTexture.width;
   });
 
-  constructor(id: number, sprite) {
+  constructor(id: number, spriteResource) {
     super(
       App.getMiddleOfView().x,
       0,
@@ -27,7 +27,7 @@ class Background extends GameObject {
     this.setInitLocation(id);
 
     // load sprite to view
-    this.loadSprite(sprite.url);
+    this.loadSprite(spriteResource.url);
   }
 
   public static getLeftBound(): number {

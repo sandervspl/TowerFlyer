@@ -3,7 +3,7 @@ import IObstacleShape from './interfaces/IObstacleShape';
 import App from '../app';
 
 // namespaces
-import { env } from '../namespaces/environment';
+// import { env } from '../namespaces/environment';
 
 // obstacle shapes
 import Single from './obstacles/Single';
@@ -43,7 +43,7 @@ class ObstacleMgr {
     // add new obstacle to the game
     this.addObstacleToArray();
 
-    env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
+    // env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
   }
 
   public addObstacleToArray(y?: number): void {

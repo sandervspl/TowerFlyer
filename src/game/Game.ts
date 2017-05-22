@@ -45,10 +45,10 @@ class Game {
     return this.firstInstance;
   }
 
-  public getBackgrounds = (): Background[] => this.backgrounds;
-
   public static getGameSpeed = (): number => Game.gameSpeed;
   public static setGameSpeed = (speed: number) => Game.gameSpeed = speed;
+
+  public getBackgrounds = (): Background[] => this.backgrounds;
 
   private initSprites = (): void => {
     PIXI.loader

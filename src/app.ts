@@ -94,7 +94,7 @@ class App {
     if (fps > this.fpsHigh) { this.fpsHigh = fps; }
 
     // limit fpsAvg array size to 100 indexes
-    if (this.fpsAvg.length > 100) { this.fpsAvg.shift(); }
+    if (this.fpsAvg.length > 10) { this.fpsAvg.shift(); }
     this.fpsAvg.push(fps);
   }
 }

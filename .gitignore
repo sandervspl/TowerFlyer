@@ -23,3 +23,5 @@ public/*.js
 public/*.map
 
 *.psd
+*ai
+*.asta
