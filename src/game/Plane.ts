@@ -4,10 +4,17 @@ import App from '../app';
 import Game from './Game';
 import Background from './Background';
 
+// namespaces
+// import { env } from '../namespaces/environment';
+
 // defines
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
 
 class Plane extends GameObject {
+  private lives: number;
+  private isInvincible: boolean;
+  private keyDownInterval: number;
+
   constructor(spritesheetURL) {
     // init game object with position middle of view renderer
     // and make it move only on X-axis with a speed of 1
@@ -17,6 +24,9 @@ class Plane extends GameObject {
       MOVEMENT_TYPE.MOVE_X,
       0,
     );
+
+    this.lives = 2;
+    this.isInvincible = false;
 
     // load spritesheet
     this.loadSpriteFromSpriteSheet(spritesheetURL, 'planeAngle', 9, 4);
@@ -43,26 +53,42 @@ class Plane extends GameObject {
   }
 
   private addEventListeners = (): void => {
-    window.addEventListener('keydown', (e) => this.keyboardInput(e));
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener('onblur', this.handleKeyUp);
   }
 
-  private keyboardInput = (e): void => {
-    switch (e.keyCode) {
+  private handleKeyDown = (e): void => {
+    const key = (e || window.event).keyCode;
+
+    switch (key) {
       case 65: // a
       case 37: // left arrow
-        this.turn(DIRECTION.LEFT);
+        if (!this.keyDownInterval) {
+          this.turn(DIRECTION.LEFT); // if this is not here then a press shorter than 100ms will not register a turn
+          this.keyDownInterval = Number(setInterval(() => this.turn(DIRECTION.LEFT), 100));
+        }
         break;
 
       case 68: // d
       case 39: // right arrow
-        this.turn(DIRECTION.RIGHT);
+        if (!this.keyDownInterval) {
+          this.turn(DIRECTION.RIGHT); // if this is not here then a press shorter than 100ms will not register a turn
+          this.keyDownInterval = Number(setInterval(() => this.turn(DIRECTION.RIGHT), 100));
+        }
         break;
 
-      default: return null;
+      default: break;
     }
   }
 
+  private handleKeyUp = (): void => {
+    clearInterval(this.keyDownInterval);
+    this.keyDownInterval = null;
+  }
+
   private turn = (direction: DIRECTION): void => {
+    // env.log(`Turning ${direction === 0 ? 'left' : 'right'}.`);
     const directionChange: number = direction === DIRECTION.LEFT ? -1 : 1;
 
     // change plane sprite

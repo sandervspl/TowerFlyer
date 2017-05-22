@@ -25,3 +25,5 @@ public/*.map
 *.psd
 *ai
 *.asta
+
+*.bak
