@@ -26,14 +26,12 @@ class Game {
   private plane: Plane;
   private backgrounds: Background[] = [];
   private obstacleMgr: ObstacleMgr;
-  private loader: Preloader;
   private distanceIndicator: DistanceIndicator;
 
   private static firstInstance: Game = null;
   private static gameSpeed: number = -5;
 
   constructor() {
-    this.loader = new Preloader();
     this.initSprites();
   }
 
@@ -61,7 +59,7 @@ class Game {
     env.log(`Loading: ${resource.name} (${resource.url})`);
     env.log(`Progress: ${loader.progress}%`);
 
-    this.loader.update(loader.progress);
+    Preloader.update(loader.progress);
   }
 
   private onSpritesLoaded = (loader, resources): void => {
@@ -78,7 +76,7 @@ class Game {
     this.distanceIndicator = new DistanceIndicator();
 
     // remove preloader overlay
-    this.loader.end();
+    Preloader.end();
   }
 
   private initBackgrounds = (backgroundResource): void => {
