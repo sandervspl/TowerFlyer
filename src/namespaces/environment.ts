@@ -6,4 +6,6 @@ export namespace env {
       console.log(msg);
     }
   };
+
+  export const isDebug = (): boolean => debugging;
 }
