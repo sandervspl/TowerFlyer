@@ -32,3 +32,6 @@
 <li><b>encapsulation:</b> waar niet?</li>
 <li><b>composition/Inheritance:</b> zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
 </ol>
+
+# De game
+http://sandervispoel.nl/projects/towerFlyer/
