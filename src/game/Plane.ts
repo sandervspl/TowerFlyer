@@ -12,8 +12,6 @@ import { env } from '../namespaces/environment';
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
 
 class Plane extends GameObject {
-  private lives: number;
-  private isInvincible: boolean;
   private keyDownInterval: number;
 
   constructor(spritesheetURL) {
@@ -26,14 +24,13 @@ class Plane extends GameObject {
       0,
     );
 
-    this.lives = 2;
-    this.isInvincible = false;
-
     // load spritesheet
     this.loadSpriteFromSpriteSheet(spritesheetURL, 'planeAngle', 9, 4);
 
     // add key input listeners
     this.addEventListeners();
+
+    this.setHitboxShape(20);
 
     if (env.shouldDrawHitbox()) {
       new Hitbox(this);

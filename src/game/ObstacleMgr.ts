@@ -37,9 +37,8 @@ class ObstacleMgr {
   }
 
   public removeObstacleFromArray(obst: IObstacleShape): void {
-    // clear draw and updater from gameloop
-    obst.graphics.clear();
-    obst.removeUpdater();
+    // properly remove obstacle from game
+    obst.deconstruct();
 
     // remove from array
     this.obstacles.shift();

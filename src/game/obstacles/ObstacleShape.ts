@@ -16,6 +16,7 @@ abstract class ObstacleShape extends GameObject {
   public obstacleMgr: ObstacleMgr;
   public size: ISize2D;
   public graphics: PIXI.Graphics;
+  private hitboxShape: Hitbox;
 
   private style = {
     lineWidth: 3,
@@ -47,8 +48,17 @@ abstract class ObstacleShape extends GameObject {
     App.getView().stage.addChild(this.graphics);
 
     if (env.shouldDrawHitbox()) {
-      new Hitbox(this, speed1, speed2);
+      this.hitboxShape = new Hitbox(this, speed1, speed2);
     }
+  }
+
+  public deconstruct(): void {
+    if (this.hitboxShape) {
+      this.hitboxShape.deconstruct();
+    }
+
+    this.removeUpdater();
+    this.graphics.destroy();
   }
 
   // start of draw shape

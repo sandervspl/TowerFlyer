@@ -32,6 +32,11 @@ class Hitbox extends GameObject {
     this.loadWithoutSprite();
   }
 
+  public deconstruct(): void {
+    this.removeUpdater();
+    // this.graphics.destroy();
+  }
+
   public draw(): void {
     // remove current shape before redrawing
     this.graphics.clear();
@@ -52,18 +57,35 @@ class Hitbox extends GameObject {
 
     // check if we are working with a sprite or pixi graphic
     const sprite = this.parentObject.getSprite();
+
+    // get custom shape if it's available
+    const customShape = this.parentObject.getHitboxShape();
+
     if (sprite) {
-      width = sprite.width;
-      height = sprite.height;
+      if (customShape) {
+        width = customShape.width;
+        height = customShape.height;
+      } else {
+        width = sprite.width;
+        height = sprite.height;
+      }
+
       realX = x - width / 2;
       realY = y - height / 2;
     } else {
       const shape = (this.parentObject as ObstacleShape);
 
-      width = shape.size.width;
-      height = shape.size.height;
-      realX = shape.getLocation().x;
-      realY = shape.getLocation().y;
+      if (customShape) {
+        width = customShape.width;
+        height = customShape.height;
+        realX = shape.getLocation().x + (shape.size.width / 2 - width / 2);
+        realY = shape.getLocation().y + (shape.size.height / 2 - height / 2);
+      } else {
+        width = shape.size.width;
+        height = shape.size.height;
+        realX = shape.getLocation().x;
+        realY = shape.getLocation().y;
+      }
     }
 
     // draw rectangle as rectangular shape

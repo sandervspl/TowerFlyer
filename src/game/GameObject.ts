@@ -1,6 +1,7 @@
 // dependencies
 import IMovementType from './interfaces/IMovementType';
 import IPoint2D from './interfaces/IPoint2D';
+import ISize2D from './interfaces/ISize2D';
 import * as PIXI from 'pixi.js';
 import Location2D from './Location2D';
 import MovesX from './movement/MovesX';
@@ -11,11 +12,15 @@ import App from '../app';
 // defines
 import { GameSprite, MOVEMENT_TYPE } from './defines';
 
+// namespaces
+// import { env } from '../namespaces/environment';
+
 abstract class GameObject {
   private spriteFrameName: string;
   private spriteFrames: number;
   private curSpriteFrame: number;
   private sprite: GameSprite;
+  private hitBoxShape: ISize2D;
   public movementController: IMovementType;
 
   constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
@@ -64,6 +69,12 @@ abstract class GameObject {
   public getSpeed = (): number | IPoint2D => this.movementController.speed.get();
 
   public getMovementType = (): MOVEMENT_TYPE => this.movementController.getMovementType();
+
+  public getHitboxShape = (): ISize2D => this.hitBoxShape;
+
+  protected setHitboxShape = (width: number, height?: number): void => {
+    this.hitBoxShape = { width, height: height || width };
+  }
 
   // update location of gameobject and its sprite
   protected updateLocation(): void {

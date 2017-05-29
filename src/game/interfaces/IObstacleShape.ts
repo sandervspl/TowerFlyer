@@ -10,12 +10,14 @@ interface IObstacleShape {
   movementController: IMovementType;
   graphics: PIXI.Graphics;
 
+  deconstruct(): void;
   update(): void;
   draw(): void;
   startDraw(): void;
   endDraw(): void;
   getLocation(): Location2D;
   removeUpdater(): void;
+  getHitboxShape(): ISize2D;
 }
 
 export default IObstacleShape;
