@@ -6,6 +6,8 @@ import App from '../app';
 import Preloader from './Preloader';
 import ObstacleMgr from './ObstacleMgr';
 import DistanceIndicator from './DistanceIndicator';
+import Score from './Score';
+import EndScreen from './views/EndScreen';
 
 // namespaces
 import { env } from '../namespaces/environment';
@@ -48,6 +50,13 @@ class Game {
 
   public getBackgrounds = (): Background[] => this.backgrounds;
 
+  public gameOver = (): void => {
+    App.getView().ticker.stop();
+
+    const score = Score.calculateDistanceInMeters();
+    EndScreen.show(score);
+  }
+
   private initSprites = (): void => {
     PIXI.loader
       .add(gameSprites)
@@ -74,6 +83,7 @@ class Game {
     this.plane = new Plane(plane_sheet.url);
     this.obstacleMgr = new ObstacleMgr(this.plane);
     this.distanceIndicator = new DistanceIndicator();
+    Score.getInstance();
 
     // remove preloader overlay
     Preloader.end();

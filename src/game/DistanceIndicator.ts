@@ -4,7 +4,9 @@ import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
 import Background from './Background';
-import { MOVEMENT_TYPE } from './defines';
+import { MOVEMENT_TYPE, metersPerPixels } from './defines';
+
+const displayMeterInterval = 50;
 
 class DistanceIndicator extends GameObject {
   private distance: number = 0;
@@ -15,7 +17,7 @@ class DistanceIndicator extends GameObject {
   constructor() {
     super(
       Background.getLeftBound() - 1,
-      1500 - 40,
+      0,
       MOVEMENT_TYPE.MOVE_Y,
       Game.getGameSpeed(),
     );
@@ -45,11 +47,11 @@ class DistanceIndicator extends GameObject {
     const viewTop = 0;
 
     if (bottom < viewTop) {
-      this.init();
+      this.init(false);
     }
   }
 
-  private init(): void {
+  private init(firstInit: boolean = true): void {
     if (this.container) {
       this.container.destroy();
     }
@@ -57,7 +59,7 @@ class DistanceIndicator extends GameObject {
     const { size } = this;
 
     // update distance counter
-    this.distance += 50;
+    this.distance += displayMeterInterval;
 
     // draw backdrop rectangle
     this.container = new PIXI.Graphics();
@@ -66,10 +68,18 @@ class DistanceIndicator extends GameObject {
     this.container.endFill();
 
     // set initial location
-    this.setLocation(
-      this.getLocation().x,
-      1500 - this.size.height,
-    );
+    if (firstInit) {
+      this.setLocation(
+        this.getLocation().x,
+        (App.getMiddleOfView().y + this.size.height) + metersPerPixels * displayMeterInterval,
+      );
+    } else {
+      // 1500 - half screen ?
+      this.setLocation(
+        this.getLocation().x,
+        (metersPerPixels * displayMeterInterval) - this.size.height,
+      );
+    }
 
     // set sprite location
     this.container.x = this.getLocation().x;
