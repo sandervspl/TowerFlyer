@@ -22,7 +22,7 @@ class Collision {
     };
 
     const osPoints = {
-      x1: os.getHitboxShape()                    // left
+      x1: os.getHitboxShape()
         ? os.getLocation().x + (os.size.width / 2 - osSize.width / 2)
         : os.getLocation().x,
       x2: os.getHitboxShape()

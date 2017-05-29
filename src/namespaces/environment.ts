@@ -1,3 +1,5 @@
+// console is only allowed from this namespace
+// tslint:disable:no-console
 export namespace env {
   // turn debugging on/off
   const debugging: boolean = false;
