@@ -11,20 +11,14 @@ import App from '../app';
 // defines
 import { GameSprite, MOVEMENT_TYPE } from './defines';
 
-// namespaces
-import { env } from '../namespaces/environment';
-
 abstract class GameObject {
   private spriteFrameName: string;
   private spriteFrames: number;
   private curSpriteFrame: number;
   private sprite: GameSprite;
-  private debug: boolean;
   public movementController: IMovementType;
 
-  constructor(
-    posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1?: number, speed2?: number, debug: boolean = false,
-  ) {
+  constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
     switch (movementType) {
       case MOVEMENT_TYPE.MOVE_X:
         this.movementController = new MovesX(posX, posY, speed1);
@@ -41,8 +35,6 @@ abstract class GameObject {
       default:
         this.movementController = new MovesY(posX, posY, speed1);
     }
-
-    this.debug = debug;
   }
 
   public getLocation = (): Location2D => this.movementController.location;
@@ -62,12 +54,16 @@ abstract class GameObject {
     // env.log('Removed GameObject updater from gameloop.');
   }
 
-  protected setSpeed = (speed1: number, speed2?: number): void => {
+  public getSprite = (): GameSprite => this.sprite;
+
+  public setSpeed = (speed1: number, speed2?: number): void => {
     const speed = this.movementController.speed;
     speed.set(speed1, speed2);
   }
 
-  protected getSpeed = (): number | IPoint2D => this.movementController.speed.get();
+  public getSpeed = (): number | IPoint2D => this.movementController.speed.get();
+
+  public getMovementType = (): MOVEMENT_TYPE => this.movementController.getMovementType();
 
   // update location of gameobject and its sprite
   protected updateLocation(): void {
@@ -75,10 +71,6 @@ abstract class GameObject {
 
     if (this.sprite) {
       this.syncSpriteLocation();
-    }
-
-    if (this.debug) {
-      env.log(this.movementController.location.get());
     }
   }
 
@@ -89,8 +81,6 @@ abstract class GameObject {
       this.syncSpriteLocation();
     }
   }
-
-  protected getSprite = (): GameSprite => this.sprite;
 
   // init for loading spritesheets
   protected loadSpriteFromSpriteSheet = (

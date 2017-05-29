@@ -4,9 +4,13 @@ import ObstacleMgr from '../ObstacleMgr';
 import GameObject from '../GameObject';
 import App from '../../app';
 import Background from '../Background';
+import Hitbox from '../Hitbox';
 
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
+
+// namespaces
+import { env } from '../../namespaces/environment';
 
 abstract class ObstacleShape extends GameObject {
   public obstacleMgr: ObstacleMgr;
@@ -23,7 +27,7 @@ abstract class ObstacleShape extends GameObject {
 
   constructor(
     obstacleMgr: ObstacleMgr, side: DIRECTION, x: number, y: number,
-    width: number, height: number, movementType: MOVEMENT_TYPE, speed1?: number, speed2?: number,
+    width: number, height: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number,
   ) {
     super(x, y, movementType, speed1, speed2);
 
@@ -41,6 +45,10 @@ abstract class ObstacleShape extends GameObject {
     // init graphics drawing
     this.graphics = new PIXI.Graphics();
     App.getView().stage.addChild(this.graphics);
+
+    if (env.shouldDrawHitbox()) {
+      new Hitbox(this, speed1, speed2);
+    }
   }
 
   // start of draw shape

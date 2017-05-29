@@ -72,7 +72,7 @@ class Game {
     // init objects
     this.initBackgrounds(background);
     this.plane = new Plane(plane_sheet.url);
-    this.obstacleMgr = new ObstacleMgr();
+    this.obstacleMgr = new ObstacleMgr(this.plane);
     this.distanceIndicator = new DistanceIndicator();
 
     // remove preloader overlay

@@ -3,9 +3,10 @@ import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
 import Background from './Background';
+import Hitbox from './Hitbox';
 
 // namespaces
-// import { env } from '../namespaces/environment';
+import { env } from '../namespaces/environment';
 
 // defines
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
@@ -17,7 +18,7 @@ class Plane extends GameObject {
 
   constructor(spritesheetURL) {
     // init game object with position middle of view renderer
-    // and make it move only on X-axis with a speed of 1
+    // and make it move only on X-axis
     super(
       App.getMiddleOfView().x,
       App.getMiddleOfView().y,
@@ -33,6 +34,15 @@ class Plane extends GameObject {
 
     // add key input listeners
     this.addEventListeners();
+
+    if (env.shouldDrawHitbox()) {
+      new Hitbox(this);
+    }
+  }
+
+  public die(): void {
+    console.log('We hit something!');
+    App.getView().ticker.stop();
   }
 
   protected updateLocation(): void {

@@ -2,6 +2,7 @@
 import ISize2D from './interfaces/ISize2D';
 import GameObject from './GameObject';
 import App from '../app';
+import Game from './Game';
 import Background from './Background';
 import { MOVEMENT_TYPE } from './defines';
 
@@ -16,6 +17,7 @@ class DistanceIndicator extends GameObject {
       Background.getLeftBound() - 1,
       1500 - 40,
       MOVEMENT_TYPE.MOVE_Y,
+      Game.getGameSpeed(),
     );
 
     this.size = {

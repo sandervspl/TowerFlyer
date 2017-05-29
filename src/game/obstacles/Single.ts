@@ -3,7 +3,7 @@ import IObstacleShape from '../interfaces/IObstacleShape';
 import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
 import Background from '../Background';
-// import Game from '../Game';
+import Game from '../Game';
 
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
@@ -19,6 +19,7 @@ class Single extends ObstacleShape implements IObstacleShape {
       (Math.random() * (Background.size.width * .55)) + Background.size.width * .2,
       50,
       MOVEMENT_TYPE.MOVE_Y,
+      Game.getGameSpeed(),
     );
   }
 

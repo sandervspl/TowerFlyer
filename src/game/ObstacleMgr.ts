@@ -1,6 +1,8 @@
 // dependencies
 import IObstacleShape from './interfaces/IObstacleShape';
 import App from '../app';
+import Plane from './Plane';
+import Collision from '../utils/Collision';
 
 // namespaces
 // import { env } from '../namespaces/environment';
@@ -15,8 +17,10 @@ class ObstacleMgr {
   private obstacles: IObstacleShape[] = [];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
+  private plane: Plane;
 
-  constructor() {
+  constructor(plane: Plane) {
+    this.plane = plane;
     this.distBetweenObst = 200;
 
     // init some obstacle pieces
@@ -65,7 +69,7 @@ class ObstacleMgr {
 
   private update = (): void => {
     const obstToRemove: IObstacleShape[] = [];
-    for (const obst of this.obstacles) {
+    this.obstacles.forEach((obst) => {
       obst.update();
 
       // check if we are out of view
@@ -76,14 +80,21 @@ class ObstacleMgr {
       if (bottom < viewTop) {
         obstToRemove.push(obst);
       }
-    }
+    });
 
     // remove all obstacles that are out of view
-    if (obstToRemove.length > 0) {
-      for (const obst of obstToRemove) {
-        this.removeObstacleFromArray(obst);
+    obstToRemove.forEach((obst) => {
+      this.removeObstacleFromArray(obst);
+    });
+
+    // check for collision
+    this.obstacles.forEach((obst) => {
+      const hasCollided = Collision.hitTestSpriteWithGraphic(this.plane, obst);
+
+      if (hasCollided) {
+        this.plane.die();
       }
-    }
+    });
   }
 }
 
