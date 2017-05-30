@@ -37,7 +37,7 @@ abstract class ObstacleShape extends GameObject {
     // set x depending on which side we are on
     if (side !== null) {
       const newX = side === DIRECTION.LEFT
-        ? Background.getLeftBound()
+        ? Background.getLeftBound() + this.style.lineWidth
         : Background.getRightBound() - this.size.width - this.style.lineWidth;
 
       this.setLocation(newX, y);
