@@ -5,7 +5,7 @@ import Plane from './Plane';
 import Collision from '../utils/Collision';
 
 // namespaces
-import { env } from '../namespaces/environment';
+// import { env } from '../namespaces/environment';
 
 // obstacle shapes
 import Single from './obstacles/Single';
@@ -14,11 +14,19 @@ import MovingSideways from './obstacles/MovingSideways';
 // defines
 import { DIRECTION } from './defines';
 
+// utils
+import TfMath from '../utils/TfMath';
+
 class ObstacleMgr {
   private obstacles: IObstacleShape[] = [];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
   private plane: Plane;
+
+  private obstacleSpawnChance = {
+    moving: 25,
+    // single: 90,
+  };
 
   constructor(plane: Plane) {
     this.plane = plane;
@@ -34,7 +42,7 @@ class ObstacleMgr {
     }
 
     // add to gameloop
-    this.addToTicker();
+    App.getView().ticker.add(this.update);
   }
 
   public removeObstacleFromArray(obst: IObstacleShape): void {
@@ -50,7 +58,7 @@ class ObstacleMgr {
     // env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
   }
 
-  public addObstacleToArray(y?: number): void {
+  public addObstacleToArray(y?: number): number {
     const obsts = this.obstacles;
     const lastObst = obsts[obsts.length - 1];
     const newY = y ? y : lastObst.getLocation().y + lastObst.size.height + this.distBetweenObst;
@@ -58,23 +66,25 @@ class ObstacleMgr {
     // switch side
     this.prevSide = (this.prevSide === DIRECTION.LEFT) ? DIRECTION.RIGHT : DIRECTION.LEFT;
 
-    const randomObstacle = Math.floor(Math.random() * 2);
+    // decide what new obstacle to add to the field
+    const { moving } = this.obstacleSpawnChance;
+    let tmp = 0;
+    let sum = 0;
+    const roll = TfMath.randomBetween(0, 10000) / 100;
 
-    // add new obstacle to our array
-    switch (randomObstacle) {
-      case 0: this.obstacles.push(new Single(this, this.prevSide, newY)); break;
-      case 1: this.obstacles.push(new MovingSideways(this, newY)); break;
-      default: env.log(`Eronous randomObstacle id: ${randomObstacle}`); break;
+    // check if we can spawn a moving obstacle
+    tmp = moving;
+    if (tmp > 0 && roll < (sum += tmp)) {
+      return this.obstacles.push(new MovingSideways(this, newY));
     }
-  }
 
-  // add our updater game loop
-  private addToTicker(): void {
-    App.getView().ticker.add(this.update);
+    // if nothing else is able to spawn then spawn a simple Single obstacle
+    return this.obstacles.push(new Single(this, this.prevSide, newY));
   }
 
   private update = (): void => {
     const obstToRemove: IObstacleShape[] = [];
+
     this.obstacles.forEach((obst) => {
       obst.update();
 
