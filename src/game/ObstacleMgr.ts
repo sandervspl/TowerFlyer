@@ -5,10 +5,11 @@ import Plane from './Plane';
 import Collision from '../utils/Collision';
 
 // namespaces
-// import { env } from '../namespaces/environment';
+import { env } from '../namespaces/environment';
 
 // obstacle shapes
 import Single from './obstacles/Single';
+import MovingSideways from './obstacles/MovingSideways';
 
 // defines
 import { DIRECTION } from './defines';
@@ -57,8 +58,14 @@ class ObstacleMgr {
     // switch side
     this.prevSide = (this.prevSide === DIRECTION.LEFT) ? DIRECTION.RIGHT : DIRECTION.LEFT;
 
+    const randomObstacle = Math.floor(Math.random() * 2);
+
     // add new obstacle to our array
-    this.obstacles.push(new Single(this, this.prevSide, newY));
+    switch (randomObstacle) {
+      case 0: this.obstacles.push(new Single(this, this.prevSide, newY)); break;
+      case 1: this.obstacles.push(new MovingSideways(this, newY)); break;
+      default: env.log(`Eronous randomObstacle id: ${randomObstacle}`); break;
+    }
   }
 
   // add our updater game loop

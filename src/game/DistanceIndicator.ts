@@ -74,7 +74,6 @@ class DistanceIndicator extends GameObject {
         (App.getMiddleOfView().y + this.size.height) + metersPerPixels * displayMeterInterval,
       );
     } else {
-      // 1500 - half screen ?
       this.setLocation(
         this.getLocation().x,
         (metersPerPixels * displayMeterInterval) - this.size.height,
