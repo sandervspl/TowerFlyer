@@ -35,11 +35,13 @@ abstract class ObstacleShape extends GameObject {
     this.size = { width, height };
 
     // set x depending on which side we are on
-    const newX = side === DIRECTION.LEFT
-      ? Background.getLeftBound()
-      : Background.getRightBound() - this.size.width - this.style.lineWidth;
+    if (side !== null) {
+      const newX = side === DIRECTION.LEFT
+        ? Background.getLeftBound()
+        : Background.getRightBound() - this.size.width - this.style.lineWidth;
 
-    this.setLocation(newX, y);
+      this.setLocation(newX, y);
+    }
 
     this.obstacleMgr = obstacleMgr;
 
