@@ -28,13 +28,7 @@ class Single extends ObstacleShape implements IObstacleShape {
     const { width, height } = this.size;
     const { x, y } = this.getLocation();
 
-    graphics.drawRoundedRect(
-      x,
-      y,
-      width,
-      height,
-      10,
-    );
+    graphics.drawRoundedRect(x, y, width, height, 10);
   }
 }
 

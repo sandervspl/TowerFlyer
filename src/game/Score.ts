@@ -24,6 +24,17 @@ class Score {
     return Math.floor(Score.curDistance / metersPerPixels);
   }
 
+  public save(score: number): boolean {
+    const highScore = localStorage.getItem('tf-highscore');
+    if (!highScore || (highScore && score > Number(highScore))) {
+      localStorage.setItem('tf-highscore', score.toString());
+
+      return true;
+    }
+
+    return false;
+  }
+
   // public static end = (): void => {
   //   const score = Score.calculateDistanceInMeters();
   // }

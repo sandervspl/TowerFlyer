@@ -33,13 +33,7 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
     const { width, height } = this.size;
     const { x, y } = this.getLocation();
 
-    graphics.drawRoundedRect(
-      x,
-      y,
-      width,
-      height,
-      10,
-    );
+    graphics.drawRoundedRect(x, y, width, height, 10);
   }
 
   public update(): void {
@@ -49,7 +43,7 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
     const speedX = (this.getSpeed() as IPoint2D).x;
     const speedY = (this.getSpeed() as IPoint2D).y;
 
-    const movingLeft = speedX < 0;
+    const isMovingLeft: boolean = speedX < 0;
 
     const gap = 25;
     const boundaries = {
@@ -57,9 +51,11 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
       right: Background.getRightBound() - gap,
     };
 
-    if (movingLeft && posXLeft <= boundaries.left) {
+    if (isMovingLeft && posXLeft <= boundaries.left) {
+      // set speed to positive value to move right
       this.setSpeed(Math.abs(speedX), speedY);
-    } else if (!movingLeft && posXRight >= boundaries.right) {
+    } else if (!isMovingLeft && posXRight >= boundaries.right) {
+      // set speed to negative value to move left
       this.setSpeed(Math.abs(speedX) * -1, speedY);
     }
 
