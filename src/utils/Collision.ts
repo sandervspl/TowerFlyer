@@ -2,8 +2,15 @@
 import GameObject from '../game/GameObject';
 import IObstacleShape from '../game/interfaces/IObstacleShape';
 
+// namespaces
+import { env } from '../namespaces/environment';
+
 class Collision {
   public static hitTestSpriteWithGraphic(go: GameObject, os: IObstacleShape) {
+    if (env.isInvulnerable()) {
+      return false;
+    }
+
     const goSize = {
       width: go.getHitboxShape() ? go.getHitboxShape().width : go.getSprite().width,
       height: go.getHitboxShape() ? go.getHitboxShape().height : go.getSprite().height,

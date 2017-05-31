@@ -96,7 +96,7 @@ class App {
     );
 
     this.fpsText.x = 20;
-    this.fpsText.y = 20;
+    this.fpsText.y = 50;
 
     // add to view
     App.pixiApp.stage.addChild(this.fpsText);
