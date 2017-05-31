@@ -32,7 +32,7 @@ class App {
   }
 
   public static addToGameLoop(updater: () => void) {
-    App.addToGameLoop(updater);
+    App.getView().ticker.add(updater);
   }
 
   private init = async (): Promise<any> => {
