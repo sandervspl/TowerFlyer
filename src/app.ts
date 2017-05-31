@@ -27,6 +27,14 @@ class App {
     y: App.getView().renderer.height / 2,
   })
 
+  public static addChildToView(child: any) {
+    App.getView().stage.addChild(child);
+  }
+
+  public static addToGameLoop(updater: () => void) {
+    App.addToGameLoop(updater);
+  }
+
   private init = async (): Promise<any> => {
     // create new application with canvas and ticker
     try {
@@ -42,7 +50,7 @@ class App {
 
       if (env.isDebug()) {
         // add FPS display to gameloop
-        App.pixiApp.ticker.add(this.fpsDisplay);
+        App.addToGameLoop(this.fpsDisplay);
       }
 
       // retain pixelation on scaling

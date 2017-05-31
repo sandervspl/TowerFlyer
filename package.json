@@ -7,6 +7,7 @@
   "author": "sandervispoel.com",
   "license": "MIT",
   "dependencies": {
+    "pixi-multistyle-text": "^0.5.2",
     "pixi.js": "^4.5.1",
     "stylus": "^0.54.5"
   },

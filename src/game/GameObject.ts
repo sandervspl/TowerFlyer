@@ -174,7 +174,7 @@ abstract class GameObject {
 
   // GAME LOOP
   private spriteLoaded = (): void => {
-    App.getView().ticker.add(() => this.update());
+    App.addToGameLoop(() => this.update());
   }
 }
 

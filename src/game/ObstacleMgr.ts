@@ -42,7 +42,7 @@ class ObstacleMgr {
     }
 
     // add to gameloop
-    App.getView().ticker.add(this.update);
+    App.addToGameLoop(this.update);
   }
 
   public removeObstacleFromArray(obst: IObstacleShape): void {

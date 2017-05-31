@@ -47,7 +47,7 @@ abstract class ObstacleShape extends GameObject {
 
     // init graphics drawing
     this.graphics = new PIXI.Graphics();
-    App.getView().stage.addChild(this.graphics);
+    App.addChildToView(this.graphics);
 
     if (env.shouldDrawHitbox()) {
       this.hitboxShape = new Hitbox(this, speed1, speed2);

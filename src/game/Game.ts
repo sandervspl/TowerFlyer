@@ -53,7 +53,7 @@ class Game {
   public gameOver = (): void => {
     App.getView().ticker.stop();
 
-    const score = Score.calculateDistanceInMeters();
+    const score = Score.getInstance().calculateDistanceInMeters();
     EndScreen.show(score);
   }
 

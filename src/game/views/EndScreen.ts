@@ -15,7 +15,7 @@ class EndScreen {
     EndScreen.score = score.toString();
 
     const overlay = new PIXI.Graphics();
-    App.getView().stage.addChild(overlay);
+    App.addChildToView(overlay);
     overlay.lineStyle(0, 0x000000, 0);
     overlay.beginFill(0x0C2647, .6);
     overlay.drawRect(
@@ -37,7 +37,7 @@ class EndScreen {
     gameOverText.y = App.getMiddleOfView().y - App.getMiddleOfView().y / 2;
 
     // add to view
-    App.getView().stage.addChild(gameOverText);
+    App.addChildToView(gameOverText);
 
     EndScreen.textGraphics = new PIXI.Text(`${EndScreen.score} m`, {
       fill: 0x257AE3,
@@ -50,7 +50,7 @@ class EndScreen {
     EndScreen.textGraphics.y = gameOverText.y + 100;
 
     // add to view
-    App.getView().stage.addChild(EndScreen.textGraphics);
+    App.addChildToView(EndScreen.textGraphics);
 
     if (isNewHighScore) {
       const newHighScoreText = new PIXI.Text('New high score!', {
@@ -64,11 +64,11 @@ class EndScreen {
       newHighScoreText.y = EndScreen.textGraphics.y + 75;
 
       // add to view
-      App.getView().stage.addChild(newHighScoreText);
+      App.addChildToView(newHighScoreText);
     }
 
     // TODO: animation on update
-    // App.getView().ticker.add(EndScreen.update);
+    // App.addToGameLoop(EndScreen.update);
   }
 
   // private static update = (): void => {
