@@ -8,6 +8,9 @@ import _ from 'lodash';
 import { env } from './namespaces/environment';
 import TfMath from './utils/TfMath';
 
+// styles
+import './game/style/style.styl';
+
 class App {
   private fpsText: PIXI.Text;
   private fpsLow: number = 1000;

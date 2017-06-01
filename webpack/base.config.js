@@ -1,5 +1,7 @@
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const postStylus = require('poststylus');
 
 module.exports = {
   devtool: 'source-map',
@@ -13,7 +15,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', '.json'],
+    extensions: ['.ts', '.js', '.json', 'styl'],
     alias: {
       assets: path.resolve(__dirname, '../src/assets/'),
       interfaces: path.resolve(__dirname, '../src/game/interfaces'),
@@ -21,11 +23,6 @@ module.exports = {
       movement: path.resolve(__dirname, '../src/game/movement'),
     }
   },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ],
 
   module: {
     loaders: [
@@ -51,6 +48,14 @@ module.exports = {
         loader: 'ts-loader'
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?importLoaders=1!postcss'
+      },
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader?importLoaders=1!stylus-loader'
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader'
       },
@@ -59,5 +64,35 @@ module.exports = {
         loader: 'file-loader'
       }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+        postcss: [
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ]
+          })
+        ],
+        postStylus: [
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ]
+          })
+        ]
+      }
+    })
+  ]
 };
