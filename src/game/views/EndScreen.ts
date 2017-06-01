@@ -1,79 +1,31 @@
+// tslint:disable
 // dependencies
-import App from '../../app';
-import Background from '../Background';
+// import App from '../../app';
+// import Background from '../Background';
 import Score from '../Score';
+import Background from "../Background";
 
 class EndScreen {
-  private static score: string = '0';
-  private static textGraphics: PIXI.Text;
-
   public static show = (score: number): void => {
     // save to local storage
     const isNewHighScore: boolean = Score.getInstance().save(score);
 
-    // convert to string to display on screen
-    EndScreen.score = score.toString();
+    const container = document.querySelector('#view__gameover') as HTMLElement;
+    container.style.display = 'flex';
+    container.style.width = `${Background.size.width}px`;
+    container.style.height = `${window.innerHeight}px`;
+    container.style.marginLeft = `${Background.getLeftBound()}px`;
 
-    const overlay = new PIXI.Graphics();
-    App.addChildToView(overlay);
-    overlay.lineStyle(0, 0x000000, 0);
-    overlay.beginFill(0x0C2647, .6);
-    overlay.drawRect(
-      Background.getLeftBound(),
-      0,
-      Background.size.width,
-      App.getView().renderer.height,
-    );
-    overlay.endFill();
+    const scoreTxt = container.querySelector('#endscore');
+    scoreTxt.innerHTML = `${score} m`;
 
-    const gameOverText = new PIXI.Text('Game over!', {
-      fill: 0xFFFFFF,
-      fontSize: '50px',
-      fontWeight: '100',
-      fontFamily: 'Arial',
-    });
-    gameOverText.anchor.set(.5);
-    gameOverText.x = App.getMiddleOfView().x;
-    gameOverText.y = App.getMiddleOfView().y - App.getMiddleOfView().y / 2;
+    const newHS = container.querySelector('#newhighscore') as HTMLElement;
+    if (isNewHighScore) { newHS.style.display = 'block' }
 
-    // add to view
-    App.addChildToView(gameOverText);
-
-    EndScreen.textGraphics = new PIXI.Text(`${EndScreen.score} m`, {
-      fill: 0x257AE3,
-      fontSize: '90px',
-      fontWeight: '700',
-      fontFamily: 'Arial',
-    });
-    EndScreen.textGraphics.anchor.set(.5);
-    EndScreen.textGraphics.x = App.getMiddleOfView().x;
-    EndScreen.textGraphics.y = gameOverText.y + 100;
-
-    // add to view
-    App.addChildToView(EndScreen.textGraphics);
-
-    if (isNewHighScore) {
-      const newHighScoreText = new PIXI.Text('New high score!', {
-        fill: 0xFFFFFF,
-        fontSize: '28px',
-        fontWeight: '100',
-        fontFamily: 'Arial',
-      });
-      newHighScoreText.anchor.set(.5);
-      newHighScoreText.x = App.getMiddleOfView().x;
-      newHighScoreText.y = EndScreen.textGraphics.y + 75;
-
-      // add to view
-      App.addChildToView(newHighScoreText);
-    }
-
-    // TODO: animation on update
-    // App.addToGameLoop(EndScreen.update);
+    setTimeout(() => {
+      container.classList.add('show');
+    }, 100);
   }
-
-  // private static update = (): void => {
-  //   EndScreen.textGraphics.destroy();
-  // }
 }
 
 export default EndScreen;

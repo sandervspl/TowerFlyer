@@ -2,8 +2,10 @@
 import App from '../app';
 import Game from './Game';
 import Background from './Background';
-import MultiStyleText from 'pixi-multistyle-text';
 import { metersPerPixels } from './defines';
+
+// namespace
+// import { env } from '../namespaces/environment';
 
 class Score {
   private curDistance: number = 0;
@@ -53,27 +55,12 @@ class Score {
       highscore = this.highScore;
     }
 
-    const text = new MultiStyleText(`High score: <hs>${highscore} m</hs>`, {
-      default: {
-        fill: 0xFFFFFF,
-        fontSize: '14px',
-        fontFamily: 'Arial',
-        fontWeight: '100',
-      },
-      hs: {
-        fill: 0x257AE3,
-      },
-    });
-    text.x = Background.getLeftBound() + 40;
-    text.y = 20;
+    const el = document.querySelector('#highscore-container') as HTMLElement;
+    el.style.left = `${Background.getLeftBound() + 20}px`;
+    el.style.display = 'block';
 
-    const backdrop = new PIXI.Graphics();
-    backdrop.beginFill(0x000000, .6);
-    backdrop.drawRoundedRect(text.x - 20, text.y - 5, text.width + 40, text.height + 10, 15);
-    backdrop.endFill();
-
-    backdrop.addChild(text);
-    App.addChildToView(backdrop);
+    const hs = el.querySelector('#highscore');
+    hs.innerHTML = `${highscore} m`;
   }
 }
 

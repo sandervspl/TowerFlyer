@@ -5,8 +5,8 @@ export namespace env {
   const debugging = false;
 
   // debug options
-  const drawHitbox = true;
-  const invulnerable =  true;
+  const drawHitbox   = true;
+  const invulnerable = true;
 
   // debug log
   export const log = (msg: any): void => {
