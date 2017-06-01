@@ -2,11 +2,11 @@
 // tslint:disable:no-console
 export namespace env {
   // turn debugging on/off
-  const debugging = false;
+  const debugging = true;
 
   // debug options
   const drawHitbox   = true;
-  const invulnerable = true;
+  const invulnerable = false;
 
   // debug log
   export const log = (msg: any): void => {

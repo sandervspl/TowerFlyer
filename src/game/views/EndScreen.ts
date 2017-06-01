@@ -17,7 +17,7 @@ class EndScreen {
     container.style.marginLeft = `${Background.getLeftBound()}px`;
 
     const scoreTxt = container.querySelector('#endscore');
-    scoreTxt.innerHTML = `${score} m`;
+    scoreTxt.innerHTML = `${score}m`;
 
     const newHS = container.querySelector('#newhighscore') as HTMLElement;
     if (isNewHighScore) { newHS.style.display = 'block' }
