@@ -2,7 +2,7 @@
 // tslint:disable:no-console
 export namespace env {
   // turn debugging on/off
-  const debugging = true;
+  const debugging = false;
 
   // debug options
   const drawHitbox   = true;

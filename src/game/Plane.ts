@@ -30,7 +30,7 @@ class Plane extends GameObject {
     // add key input listeners
     this.addEventListeners();
 
-    this.setHitboxShape(20);
+    this.setHitboxShape(15);
 
     if (env.shouldDrawHitbox()) {
       new Hitbox(this);

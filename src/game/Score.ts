@@ -60,7 +60,7 @@ class Score {
     el.style.display = 'block';
 
     const hs = el.querySelector('#highscore');
-    hs.innerHTML = `${highscore} m`;
+    hs.innerHTML = `${highscore}m`;
   }
 }
 

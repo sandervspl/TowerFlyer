@@ -25,7 +25,7 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
       Game.getGameSpeed(),
     );
 
-    this.setLocation(App.getMiddleOfView().x, y - this.size.height / 2);
+    this.setLocation(App.getMiddleOfView().x, y);
   }
 
   public draw(): void {
