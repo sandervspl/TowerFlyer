@@ -8,6 +8,9 @@ import App from '../../app';
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
 
+// utils
+import TfMath from '../../utils/TfMath';
+
 class Single extends ObstacleShape implements IObstacleShape {
   constructor(obstacleMgr: ObstacleMgr, side: DIRECTION, y: number) {
     super(
@@ -15,7 +18,7 @@ class Single extends ObstacleShape implements IObstacleShape {
       side,
       0,
       y,
-      (Math.random() * (App.getAppSize().width * .55)) + App.getAppSize().width * .2,
+      TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .75),
       50,
       MOVEMENT_TYPE.MOVE_Y,
       Game.getGameSpeed(),

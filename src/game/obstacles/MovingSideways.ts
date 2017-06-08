@@ -20,7 +20,7 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
       null,
       0,
       y,
-      TfMath.randomBetween(App.getAppSize().width * .2, App.getAppSize().width * .5),
+      TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .55),
       100,
       MOVEMENT_TYPE.MOVE_XY,
       TfMath.randomBetween(2, 4),
