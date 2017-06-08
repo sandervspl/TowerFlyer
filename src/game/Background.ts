@@ -10,6 +10,7 @@ import { MOVEMENT_TYPE } from './defines';
 
 class Background extends GameObject {
   public static size: ISize2D = { width: 0, height: 0 };
+
   public static setSize = _.once((spriteResource) => {
     Background.size.height = spriteResource.texture.baseTexture.height;
     Background.size.width = spriteResource.texture.baseTexture.width;
@@ -31,11 +32,11 @@ class Background extends GameObject {
   }
 
   public static getLeftBound(): number {
-    return Math.ceil(App.getMiddleOfView().x - (Background.size.width / 2));
+    return 0;
   }
 
   public static getRightBound(): number {
-    return Math.ceil(App.getMiddleOfView().x + (Background.size.width / 2));
+    return Background.size.width;
   }
 
   public static isInBounds = (x: number, spriteWidth: number): boolean => {

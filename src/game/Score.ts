@@ -1,7 +1,6 @@
 // dependencies
 import App from '../app';
 import Game from './Game';
-import Background from './Background';
 import { metersPerPixels } from './defines';
 
 // namespace
@@ -56,8 +55,10 @@ class Score {
     }
 
     const el = document.querySelector('#highscore-container') as HTMLElement;
-    el.style.left = `${Background.getLeftBound() + 20}px`;
     el.style.display = 'block';
+
+    const positionX = window.innerWidth / 2 - App.getAppSize().width / 2 + 20;
+    el.style.left = `${positionX}px`;
 
     const hs = el.querySelector('#highscore');
     hs.innerHTML = `${highscore}m`;

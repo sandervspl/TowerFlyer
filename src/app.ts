@@ -1,5 +1,6 @@
 // dependencies
 import IPoint2D from './game/interfaces/IPoint2D';
+import ISize2D from './game/interfaces/ISize2D';
 import * as PIXI from 'pixi.js';
 import Game from './game/Game';
 import _ from 'lodash';
@@ -17,7 +18,9 @@ class App {
   private fpsHigh: number = 0;
   private fpsAvg: number[] = [];
   private maxHeight: number = 1000;
+  private maxWidth: number = 677;
   private static pixiApp: PIXI.Application;
+  private static appSize: ISize2D;
 
   constructor() {
     this.init();
@@ -42,35 +45,35 @@ class App {
     App.getView().ticker.remove(updater);
   }
 
-  private init = async (): Promise<any> => {
+  public static getAppSize(): ISize2D {
+    return App.appSize;
+  }
+
+  private init = (): void => {
+    App.appSize = {
+      width: window.innerWidth > this.maxWidth ? this.maxWidth : window.innerWidth,
+      height: window.innerHeight > this.maxHeight ? this.maxHeight : window.innerHeight,
+    };
+
     // create new application with canvas and ticker
-    try {
-      const appWidth = window.innerWidth;
-      const appHeight = (window.innerHeight <= this.maxHeight) ? window.innerHeight : this.maxHeight;
+    App.pixiApp = new PIXI.Application(App.appSize.width, App.appSize.height);
 
-      App.pixiApp = await new PIXI.Application(appWidth, appHeight);
+    // add canvas element to DOM
+    document.body.appendChild(App.pixiApp.view);
 
-      App.pixiApp.stage.y = (window.innerHeight - appHeight) / 2;
-
-      // add canvas element to DOM
-      await document.body.appendChild(App.pixiApp.view);
-
-      if (env.isDebug()) {
-        // add FPS display to gameloop
-        App.addToGameLoop(this.fpsDisplay);
-      }
-
-      // retain pixelation on scaling
-      PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-
-      // add event listeners
-      this.addEventListeners();
-
-      // init game
-      Game.getInstance();
-    } catch (err) {
-      env.log(err);
+    if (env.isDebug()) {
+      // add FPS display to gameloop
+      App.addToGameLoop(this.fpsDisplay);
     }
+
+    // retain pixelation on scaling
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
+    // add event listeners
+    this.addEventListeners();
+
+    // init game
+    Game.getInstance();
   }
 
   private addEventListeners = () => {

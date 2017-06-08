@@ -20,6 +20,10 @@ body
   align-items center
 
 
+canvas
+  margin auto
+
+
 #pre-loader
   position fixed
   display flex
@@ -55,9 +59,11 @@ body
   display none
   position fixed
   top 20px
+  left calc(50% - 100px)
   z-index 2
   padding 7px 15px
-  //border-radius 50px
+  width 200px
+  text-align center
   background rgba(0, 0, 0, .65)
   color #fff
   font-size .5rem
@@ -72,7 +78,10 @@ body
   align-items center
   flex-direction column
   position fixed
-  width 100%
+  left 0
+  right 0
+  margin 0 auto
+  width 677px
   height 100%
   opacity 0
   transition opacity .1s ease-in

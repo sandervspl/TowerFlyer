@@ -1,9 +1,6 @@
-// tslint:disable
 // dependencies
-// import App from '../../app';
-// import Background from '../Background';
+import App from '../../app';
 import Score from '../Score';
-import Background from "../Background";
 
 class EndScreen {
   public static show = (score: number): void => {
@@ -12,15 +9,16 @@ class EndScreen {
 
     const container = document.querySelector('#view__gameover') as HTMLElement;
     container.style.display = 'flex';
-    container.style.width = `${Background.size.width}px`;
-    container.style.height = `${window.innerHeight}px`;
-    container.style.marginLeft = `${Background.getLeftBound()}px`;
+    container.style.width = `${App.getAppSize().width}px`;
+    container.style.height = `${App.getAppSize().height}px`;
 
     const scoreTxt = container.querySelector('#endscore');
     scoreTxt.innerHTML = `${score}m`;
 
     const newHS = container.querySelector('#newhighscore') as HTMLElement;
-    if (isNewHighScore) { newHS.style.display = 'block' }
+    if (isNewHighScore) {
+      newHS.style.display = 'block';
+    }
 
     setTimeout(() => {
       container.classList.add('show');
