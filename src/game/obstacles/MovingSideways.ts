@@ -5,11 +5,13 @@ import App from '../../app';
 import Game from '../Game';
 import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
-import Background from '../Background';
 import TfMath from '../../utils/TfMath';
 
 // defines
 import { MOVEMENT_TYPE } from '../defines';
+
+// utils
+import Collision from '../../utils/Collision';
 
 class MovingSideways extends ObstacleShape implements IObstacleShape {
   constructor(obstacleMgr: ObstacleMgr, y: number) {
@@ -18,7 +20,7 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
       null,
       0,
       y,
-      TfMath.randomBetween(250, 400),
+      TfMath.randomBetween(App.getAppSize().width * .2, App.getAppSize().width * .5),
       100,
       MOVEMENT_TYPE.MOVE_XY,
       TfMath.randomBetween(2, 4),
@@ -47,8 +49,8 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
 
     const gap = 25;
     const boundaries = {
-      left: Background.getLeftBound() + gap,
-      right: Background.getRightBound() - gap,
+      left: Collision.getLeftBound() + gap,
+      right: Collision.getRightBound() - gap,
     };
 
     if (isMovingLeft && posXLeft <= boundaries.left) {

@@ -3,27 +3,30 @@ import ISize2D from './interfaces/ISize2D';
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
-import Background from './Background';
+
+// defines
 import { MOVEMENT_TYPE, metersPerPixels } from './defines';
 
-const displayMeterInterval = 50;
+// utils
+import Collision from '../utils/Collision';
 
 class DistanceIndicator extends GameObject {
   private distance: number = 0;
   private container: PIXI.Graphics;
   private text: PIXI.Text;
   private size: ISize2D;
+  private displayMeterInterval: number = 50;
 
   constructor() {
     super(
-      Background.getLeftBound() - 1,
+      Collision.getLeftBound(),
       0,
       MOVEMENT_TYPE.MOVE_Y,
       Game.getGameSpeed(),
     );
 
     this.size = {
-      width: Background.size.width,
+      width: App.getAppSize().width,
       height: 40,
     };
 
@@ -59,7 +62,7 @@ class DistanceIndicator extends GameObject {
     const { size } = this;
 
     // update distance counter
-    this.distance += displayMeterInterval;
+    this.distance += this.displayMeterInterval;
 
     // draw backdrop rectangle
     this.container = new PIXI.Graphics();
@@ -71,12 +74,12 @@ class DistanceIndicator extends GameObject {
     if (firstInit) {
       this.setLocation(
         this.getLocation().x,
-        (App.getMiddleOfView().y + this.size.height) + metersPerPixels * displayMeterInterval,
+        (App.getMiddleOfView().y + this.size.height) + metersPerPixels * this.displayMeterInterval,
       );
     } else {
       this.setLocation(
         this.getLocation().x,
-        (metersPerPixels * displayMeterInterval) - this.size.height,
+        (metersPerPixels * this.displayMeterInterval) - this.size.height,
       );
     }
 
@@ -99,7 +102,7 @@ class DistanceIndicator extends GameObject {
 
     // add text to container, container to view
     this.container.addChild(this.text);
-    App.getView().stage.addChild(this.container);
+    App.addChildToView(this.container);
   }
 }
 

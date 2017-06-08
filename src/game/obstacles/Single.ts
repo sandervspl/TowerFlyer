@@ -2,8 +2,8 @@
 import IObstacleShape from '../interfaces/IObstacleShape';
 import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
-import Background from '../Background';
 import Game from '../Game';
+import App from '../../app';
 
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
@@ -15,8 +15,7 @@ class Single extends ObstacleShape implements IObstacleShape {
       side,
       0,
       y,
-      // TODO: set to window width if its smaller than bg width
-      (Math.random() * (Background.size.width * .55)) + Background.size.width * .2,
+      (Math.random() * (App.getAppSize().width * .55)) + App.getAppSize().width * .2,
       50,
       MOVEMENT_TYPE.MOVE_Y,
       Game.getGameSpeed(),

@@ -2,7 +2,6 @@
 import GameObject from './GameObject';
 import App from '../app';
 import Game from './Game';
-import Background from './Background';
 import Hitbox from './Hitbox';
 
 // namespaces
@@ -10,6 +9,9 @@ import { env } from '../namespaces/environment';
 
 // defines
 import { MOVEMENT_TYPE, DIRECTION } from './defines';
+
+// utils
+import Collision from '../utils/Collision';
 
 class Plane extends GameObject {
   private keyDownInterval: number;
@@ -56,7 +58,7 @@ class Plane extends GameObject {
     const y = this.getLocation().y;
 
     // if we are out of bounds on the X-axis then we reset to previous location
-    if (!Background.isInBounds(newX, spriteWidth)) {
+    if (!Collision.isInBounds(newX, spriteWidth)) {
       this.setLocation(prevX, y);
     }
   }

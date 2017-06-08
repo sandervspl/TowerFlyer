@@ -1,4 +1,5 @@
 // dependencies
+import App from '../app';
 import GameObject from '../game/GameObject';
 import IObstacleShape from '../game/interfaces/IObstacleShape';
 
@@ -6,6 +7,21 @@ import IObstacleShape from '../game/interfaces/IObstacleShape';
 import { env } from '../namespaces/environment';
 
 class Collision {
+  public static getLeftBound(): number {
+    return 0;
+  }
+
+  public static getRightBound(): number {
+    return App.getAppSize().width;
+  }
+
+  public static isInBounds = (x: number, spriteWidth: number): boolean => {
+    const leftBound = Math.ceil(Collision.getLeftBound() + (spriteWidth / 2));
+    const rightBound = Math.ceil(Collision.getRightBound() - (spriteWidth / 2));
+
+    return x > leftBound && x < rightBound;
+  }
+
   public static hitTestSpriteWithGraphic(go: GameObject, os: IObstacleShape) {
     if (env.isInvulnerable()) {
       return false;
@@ -47,11 +63,6 @@ class Collision {
       goPoints.x2 > osPoints.x1 &&
       goPoints.y1 < osPoints.y2 &&
       goPoints.y2 > osPoints.y1;
-
-    // if (isCollision) {
-    //   console.log(goPoints);
-    //   console.log(osPoints);
-    // }
 
     return isCollision;
   }

@@ -55,7 +55,7 @@ abstract class GameObject {
   }
 
   public removeUpdater(): void {
-    App.getView().ticker.remove(() => this.update());
+    App.removeFromGameLoop(() => this.update());
     // env.log('Removed GameObject updater from gameloop.');
   }
 
@@ -116,7 +116,7 @@ abstract class GameObject {
     sprite.scale = new PIXI.Point(3, 3);
 
     // add sprite to view
-    App.getView().stage.addChild(sprite);
+    App.addChildToView(sprite);
 
     // add new updater
     this.spriteLoaded();
@@ -133,7 +133,7 @@ abstract class GameObject {
       this.sprite.y = App.getMiddleOfView().y;
 
       // add to view
-      App.getView().stage.addChild(this.sprite);
+      App.addChildToView(this.sprite);
 
       // add updater
       this.spriteLoaded();

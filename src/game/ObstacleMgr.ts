@@ -23,6 +23,7 @@ class ObstacleMgr {
   private distBetweenObst: number;
   private plane: Plane;
 
+  // spawn probabilities
   private obstacleSpawnChance = {
     moving: 20,
   };

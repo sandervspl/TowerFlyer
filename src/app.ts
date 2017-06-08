@@ -109,7 +109,7 @@ class App {
     this.fpsText.y = 50;
 
     // add to view
-    App.pixiApp.stage.addChild(this.fpsText);
+    App.addChildToView(this.fpsText);
 
     // set min/max fps
     if (fps < this.fpsLow) { this.fpsLow = fps; }

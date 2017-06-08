@@ -31,21 +31,6 @@ class Background extends GameObject {
     this.loadSprite(spriteResource.url);
   }
 
-  public static getLeftBound(): number {
-    return 0;
-  }
-
-  public static getRightBound(): number {
-    return Background.size.width;
-  }
-
-  public static isInBounds = (x: number, spriteWidth: number): boolean => {
-    const leftBound = Math.ceil(Background.getLeftBound() + (spriteWidth / 2));
-    const rightBound = Math.ceil(Background.getRightBound() - (spriteWidth / 2));
-
-    return x > leftBound && x < rightBound;
-  }
-
   protected updateLocation(): void {
     super.updateLocation();
 

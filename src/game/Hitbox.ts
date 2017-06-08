@@ -27,7 +27,7 @@ class Hitbox extends GameObject {
     this.parentObject = go;
 
     this.graphics = new PIXI.Graphics();
-    App.getView().stage.addChild(this.graphics);
+    App.addChildToView(this.graphics);
 
     this.loadWithoutSprite();
   }

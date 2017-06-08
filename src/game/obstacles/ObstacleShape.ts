@@ -3,8 +3,10 @@ import ISize2D from '../interfaces/ISize2D';
 import ObstacleMgr from '../ObstacleMgr';
 import GameObject from '../GameObject';
 import App from '../../app';
-import Background from '../Background';
 import Hitbox from '../Hitbox';
+
+// utils
+import Collision from '../../utils/Collision';
 
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
@@ -37,8 +39,8 @@ abstract class ObstacleShape extends GameObject {
     // set x depending on which side we are on
     if (side !== null) {
       const newX = side === DIRECTION.LEFT
-        ? Background.getLeftBound() + this.style.lineWidth
-        : Background.getRightBound() - this.size.width - this.style.lineWidth;
+        ? Collision.getLeftBound() + this.style.lineWidth
+        : Collision.getRightBound() - this.size.width - this.style.lineWidth;
 
       this.setLocation(newX, y);
     }
