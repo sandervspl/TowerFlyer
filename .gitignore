@@ -27,3 +27,5 @@ public/*.map
 *.asta
 
 *.bak
+
+public/style.css

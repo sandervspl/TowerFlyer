@@ -21,7 +21,7 @@ class Plane extends GameObject {
     // and make it move only on X-axis
     super(
       App.getMiddleOfView().x,
-      App.getMiddleOfView().y,
+      App.getAppSize().height * .25,
       MOVEMENT_TYPE.MOVE_X,
       0,
     );
