@@ -9,6 +9,7 @@ import { metersPerPixels } from './defines';
 class Score {
   private curDistance: number = 0;
   private highScore: string;
+  private distanceMultiplier: number = 1;
   private static firstInstance: Score = null;
 
   constructor() {
@@ -25,6 +26,12 @@ class Score {
     }
 
     return this.firstInstance;
+  }
+
+  public getMultiplier(): number {
+    this.distanceMultiplier = this.curDistance / 1000;
+
+    return this.distanceMultiplier;
   }
 
   public calculateDistanceInMeters = (): number => {

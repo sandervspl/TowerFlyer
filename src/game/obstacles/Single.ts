@@ -4,6 +4,7 @@ import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
 import Game from '../Game';
 import App from '../../app';
+import Score from '../Score';
 
 // defines
 import { DIRECTION, MOVEMENT_TYPE } from '../defines';
@@ -19,7 +20,7 @@ class Single extends ObstacleShape implements IObstacleShape {
       0,
       y,
       TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .75),
-      50,
+      50 + Score.getInstance().getMultiplier() < 500 ? 50 + Score.getInstance().getMultiplier() : 500,
       MOVEMENT_TYPE.MOVE_Y,
       Game.getGameSpeed(),
     );

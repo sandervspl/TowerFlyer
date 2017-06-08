@@ -3,6 +3,7 @@ import App from '../app';
 import Plane from './Plane';
 import Collision from '../utils/Collision';
 import ObstacleShape from './obstacles/ObstacleShape';
+import Score from './Score';
 
 // namespaces
 // import { env } from '../namespaces/environment';
@@ -62,6 +63,12 @@ class ObstacleMgr {
   public addObstacleToArray(y?: number): number {
     const obsts = this.obstacles;
     const lastObst = obsts[obsts.length - 1];
+
+    this.distBetweenObst = this.distBetweenObst - (Score.getInstance().getMultiplier() * .05);
+    if (this.distBetweenObst < 75) {
+      this.distBetweenObst = 75;
+    }
+
     const newY = y ? y : lastObst.getLocation().y + lastObst.size.height + this.distBetweenObst;
 
     // switch side
