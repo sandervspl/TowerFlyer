@@ -1,8 +1,8 @@
 // dependencies
-import IObstacleShape from './interfaces/IObstacleShape';
 import App from '../app';
 import Plane from './Plane';
 import Collision from '../utils/Collision';
+import ObstacleShape from './obstacles/ObstacleShape';
 
 // namespaces
 // import { env } from '../namespaces/environment';
@@ -18,23 +18,23 @@ import { DIRECTION } from './defines';
 import TfMath from '../utils/TfMath';
 
 class ObstacleMgr {
-  private obstacles: IObstacleShape[] = [];
+  private obstacles: ObstacleShape[] = [];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
   private plane: Plane;
 
   private obstacleSpawnChance = {
-    moving: 25,
-    // single: 90,
+    moving: 20,
   };
+
+  private totalPieces: number = 10;
 
   constructor(plane: Plane) {
     this.plane = plane;
     this.distBetweenObst = 200;
 
     // init some obstacle pieces
-    const totalPcs = 10;
-    for (let i = 0; i < totalPcs; i += 1) {
+    for (let i = 0; i < this.totalPieces; i += 1) {
       this.prevSide = (i % 2 === 0) ? DIRECTION.LEFT : DIRECTION.RIGHT;
       const y = 1000 + (this.distBetweenObst * i);
 
@@ -45,7 +45,7 @@ class ObstacleMgr {
     App.addToGameLoop(this.update);
   }
 
-  public removeObstacleFromArray(obst: IObstacleShape): void {
+  public removeObstacleFromArray(obst: ObstacleShape): void {
     // properly remove obstacle from game
     obst.deconstruct();
 
@@ -83,7 +83,7 @@ class ObstacleMgr {
   }
 
   private update = (): void => {
-    const obstToRemove: IObstacleShape[] = [];
+    const obstToRemove: ObstacleShape[] = [];
 
     this.obstacles.forEach((obst) => {
       obst.update();

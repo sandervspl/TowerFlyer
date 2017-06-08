@@ -38,6 +38,10 @@ class App {
     App.getView().ticker.add(updater);
   }
 
+  public static removeFromGameLoop(updater: () => void) {
+    App.getView().ticker.remove(updater);
+  }
+
   private init = async (): Promise<any> => {
     // create new application with canvas and ticker
     try {
