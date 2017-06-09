@@ -6,7 +6,7 @@ class Device {
   public static isMobile = () => {
     const { md } = Device;
 
-    return md.phone() !== null || md.tablet() !== null || md.isPhoneSized();
+    return md.phone() !== null || md.isPhoneSized();
   }
 }
 
