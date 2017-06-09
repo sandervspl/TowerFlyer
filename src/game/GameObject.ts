@@ -116,9 +116,6 @@ abstract class GameObject {
     // set anchor point to middle of sprite
     sprite.anchor.set(.5);
 
-    // scale up for test
-    sprite.scale = new PIXI.Point(3, 3);
-
     // add sprite to view
     App.addChildToView(sprite);
 

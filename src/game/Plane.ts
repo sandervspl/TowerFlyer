@@ -12,6 +12,7 @@ import { MOVEMENT_TYPE, DIRECTION } from './defines';
 
 // utils
 import Collision from '../utils/Collision';
+import Device from '../utils/Device';
 
 class Plane extends GameObject {
   private keyDownInterval: number;
@@ -28,6 +29,10 @@ class Plane extends GameObject {
 
     // load spritesheet
     this.loadSpriteFromSpriteSheet(spritesheetURL, 'planeAngle', 9, 4);
+
+    // scale up plane
+    const scale = Device.isMobile() ? 2 : 3;
+    this.getSprite().scale = new PIXI.Point(scale, scale);
 
     // add key input listeners
     this.addEventListeners();

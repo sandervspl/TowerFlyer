@@ -17,6 +17,7 @@ import { DIRECTION } from './defines';
 
 // utils
 import TfMath from '../utils/TfMath';
+import Device from '../utils/Device';
 
 class ObstacleMgr {
   private obstacles: ObstacleShape[];
@@ -33,7 +34,7 @@ class ObstacleMgr {
 
   constructor(plane: Plane) {
     this.plane = plane;
-    this.distBetweenObst = 200;
+    this.distBetweenObst = Device.isMobile() ? 150 : 200;
     this.obstacles = [];
 
     // init some obstacle pieces
@@ -65,8 +66,6 @@ class ObstacleMgr {
 
     // add new obstacle to the game
     this.addObstacleToArray();
-
-    // env.log(`Removed obstacle. ${this.obstacles.length} obstacles left.`);
   }
 
   public addObstacleToArray(y?: number): number {
@@ -87,16 +86,31 @@ class ObstacleMgr {
     const { moving } = this.obstacleSpawnChance;
     let tmp = 0;
     let sum = 0;
+    let w = 0;
+    let h = 0;
+    let minHeight = 0;
+    let maxHeight = 0;
     const roll = TfMath.randomBetween(0, 10000) / 100;
 
     // check if we can spawn a moving obstacle
     tmp = moving;
     if (tmp > 0 && roll < (sum += tmp)) {
-      return this.obstacles.push(new MovingSideways(this, newY));
+      w = TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .55);
+      h = Device.isMobile() ? 50 : 100;
+
+      return this.obstacles.push(new MovingSideways(this, w, h, newY));
     }
 
     // if nothing else is able to spawn then spawn a simple Single obstacle
-    return this.obstacles.push(new Single(this, this.prevSide, newY));
+    minHeight = Device.isMobile() ? 25 : 50;
+    maxHeight = Device.isMobile() ? 250 : 500;
+
+    w = TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .75);
+    h = minHeight + Score.getInstance().getMultiplier() < maxHeight
+      ? minHeight + Score.getInstance().getMultiplier()
+      : maxHeight;
+
+    return this.obstacles.push(new Single(this, w, h, this.prevSide, newY));
   }
 
   private update = (): void => {

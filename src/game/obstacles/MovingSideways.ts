@@ -14,14 +14,14 @@ import { MOVEMENT_TYPE } from '../defines';
 import Collision from '../../utils/Collision';
 
 class MovingSideways extends ObstacleShape implements IObstacleShape {
-  constructor(obstacleMgr: ObstacleMgr, y: number) {
+  constructor(obstacleMgr: ObstacleMgr, width: number, height: number, y: number) {
     super(
       obstacleMgr,
       null,
       0,
       y,
-      TfMath.randomBetween(App.getAppSize().width * .3, App.getAppSize().width * .55),
-      100,
+      width,
+      height,
       MOVEMENT_TYPE.MOVE_XY,
       TfMath.randomBetween(2, 4),
       Game.getGameSpeed(),
