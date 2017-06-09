@@ -24,6 +24,12 @@ class App {
 
   constructor() {
     this.init();
+
+    // add event listeners
+    this.addEventListeners();
+
+    const restartBtn = document.querySelector('#restart');
+    restartBtn.addEventListener('click', (e) => this.resetApp(e, true));
   }
 
   public static getView = ():PIXI.Application => App.pixiApp;
@@ -56,12 +62,16 @@ class App {
     };
 
     // create new application with canvas and ticker
+    if (App.pixiApp) {
+      document.body.removeChild(App.pixiApp.view);
+    }
+
     App.pixiApp = new PIXI.Application(App.appSize.width, App.appSize.height);
 
     // add canvas element to DOM
     document.body.appendChild(App.pixiApp.view);
 
-    if (env.isDebug()) {
+    if (env.shouldShowFPS()) {
       // add FPS display to gameloop
       App.addToGameLoop(this.fpsDisplay);
     }
@@ -69,20 +79,25 @@ class App {
     // retain pixelation on scaling
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
-    // add event listeners
-    this.addEventListeners();
-
-    // init game
-    Game.getInstance();
+    // initialize game
+    Game.getInstance().init();
   }
 
   private addEventListeners = () => {
-    window.addEventListener('resize', _.debounce((e) => {
-      e.preventDefault();
+    window.addEventListener('keydown', _.debounce(this.resetApp, 5000, {
+      leading: true,
+      trailing: false,
+    }));
+  }
 
-      App.pixiApp.renderer.view.width = window.innerWidth;
-      App.pixiApp.renderer.view.height = (window.innerHeight <= this.maxHeight) ? window.innerHeight : this.maxHeight;
-    }, 500));
+  private resetApp = (e, forceReset = false): void => {
+    if (forceReset) {
+      this.init();
+    } else {
+      if (e.keyCode === 82) {
+        this.init();
+      }
+    }
   }
 
   private fpsDisplay = () => {

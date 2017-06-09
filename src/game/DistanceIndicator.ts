@@ -34,6 +34,11 @@ class DistanceIndicator extends GameObject {
     this.loadWithoutSprite();
   }
 
+  public deconstruct(): void {
+    super.deconstruct();
+    this.container.destroy();
+  }
+
   public draw(): void {
     const { x, y } = this.getLocation();
     const { container } = this;

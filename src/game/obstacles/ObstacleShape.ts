@@ -61,8 +61,8 @@ abstract class ObstacleShape extends GameObject {
       this.hitboxShape.deconstruct();
     }
 
-    this.removeUpdater();
     this.graphics.destroy();
+    this.removeUpdater();
   }
 
   // start of draw shape

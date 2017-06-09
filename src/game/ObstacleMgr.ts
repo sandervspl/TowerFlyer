@@ -19,7 +19,7 @@ import { DIRECTION } from './defines';
 import TfMath from '../utils/TfMath';
 
 class ObstacleMgr {
-  private obstacles: ObstacleShape[] = [];
+  private obstacles: ObstacleShape[];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
   private plane: Plane;
@@ -34,6 +34,7 @@ class ObstacleMgr {
   constructor(plane: Plane) {
     this.plane = plane;
     this.distBetweenObst = 200;
+    this.obstacles = [];
 
     // init some obstacle pieces
     for (let i = 0; i < this.totalPieces; i += 1) {
@@ -45,6 +46,14 @@ class ObstacleMgr {
 
     // add to gameloop
     App.addToGameLoop(this.update);
+  }
+
+  public deconstruct(): void {
+    this.obstacles.forEach((obst) => {
+      obst.deconstruct();
+    });
+
+    this.obstacles = [];
   }
 
   public removeObstacleFromArray(obst: ObstacleShape): void {

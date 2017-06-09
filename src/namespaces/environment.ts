@@ -7,6 +7,7 @@ export namespace env {
   // debug options
   const drawHitbox   = true;
   const invulnerable = false;
+  const showFPS      = false;
 
   // debug log
   export const log = (msg: any): void => {
@@ -18,4 +19,5 @@ export namespace env {
   export const isDebug = (): boolean => debugging;
   export const shouldDrawHitbox = (): boolean => debugging && drawHitbox;
   export const isInvulnerable = (): boolean => debugging && invulnerable;
+  export const shouldShowFPS = (): boolean => debugging && showFPS;
 }

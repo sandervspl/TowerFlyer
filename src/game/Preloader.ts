@@ -9,7 +9,7 @@ class Preloader {
   }
 
   public static end(): void {
-    this.container.style.display = 'none';
+    setTimeout(() => this.container.style.display = 'none', 250);
   }
 }
 

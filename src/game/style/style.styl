@@ -4,13 +4,13 @@
   margin 0
   padding 0
   box-sizing border-box
+  font-family 'Press Start 2P', Arial, sans-serif
 
 
 html, body
   width 100%
   height 100%
   overflow hidden
-  font-family 'Press Start 2P', Arial, sans-serif
   color #FFFFFF
   background-color #070c15
 
@@ -87,6 +87,24 @@ canvas
   transition opacity .1s ease-in
   color #FFFFFF
 
+  h1
+    font-size 2em
+    text-transform uppercase
+
+  button
+    padding 10px 20px
+    margin-top 4rem
+    border none
+    background-color #257AE3
+    color #fff
+    font-size 1rem
+    cursor pointer
+    transition color .1s ease-in-out, background-color .1s ease-in-out
+
+    &:hover, &:active
+      background-color #fff
+      color #257ae3
+
   &.show
     opacity 1
     background-color rgba(10, 49, 97, 0.6)
@@ -98,9 +116,6 @@ canvas
     align-items center
     flex-direction column
 
-  h1
-    font-size 2em
-    text-transform uppercase
 
   #endscore
     margin-top 1rem

@@ -16,8 +16,6 @@ class Score {
     this.curDistance = 0;
     this.highScore = localStorage.getItem('tf-highscore');
     this.showHighScore();
-
-    App.addToGameLoop(this.update);
   }
 
   public static getInstance(): Score {
@@ -26,6 +24,12 @@ class Score {
     }
 
     return this.firstInstance;
+  }
+
+  public init(): void {
+    this.distanceMultiplier = 1;
+    this.curDistance = 0;
+    App.addToGameLoop(this.update);
   }
 
   public getMultiplier(): number {

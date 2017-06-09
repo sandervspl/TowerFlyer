@@ -34,7 +34,6 @@ class Hitbox extends GameObject {
 
   public deconstruct(): void {
     this.removeUpdater();
-    // this.graphics.destroy();
   }
 
   public draw(): void {
@@ -103,7 +102,9 @@ class Hitbox extends GameObject {
       this.updateLocation();
     }
 
-    this.draw();
+    if (this.parentObject) {
+      this.draw();
+    }
   }
 }
 

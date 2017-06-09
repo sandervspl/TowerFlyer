@@ -42,6 +42,10 @@ abstract class GameObject {
     }
   }
 
+  public deconstruct(): void {
+    this.removeUpdater();
+  }
+
   public getLocation = (): Location2D => this.movementController.location;
 
   // draw new sprite

@@ -24,6 +24,11 @@ class EndScreen {
       container.classList.add('show');
     }, 100);
   }
+
+  public static hide(): void {
+    const container = document.querySelector('#view__gameover') as HTMLElement;
+    container.style.display = 'none';
+  }
 }
 
 export default EndScreen;
