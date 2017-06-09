@@ -88,7 +88,7 @@ canvas
   color #FFFFFF
 
   h1
-    font-size 2em
+    font-size 2rem
     text-transform uppercase
 
   button
@@ -116,9 +116,8 @@ canvas
     align-items center
     flex-direction column
 
-
   #endscore
-    margin-top 1rem
+    margin-top 2rem
     color #257AE3
     font-size 5rem
     font-weight 900
@@ -126,3 +125,14 @@ canvas
   #newhighscore
     display none
     margin-top 2rem
+
+@media only screen and (max-width: 768px)
+  h1
+    font-size 1.5rem
+
+  #view__gameover
+    #endscore
+      font-size 3rem
+
+    h1
+      font-size 1.5rem

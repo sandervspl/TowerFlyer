@@ -9,6 +9,7 @@ import { MOVEMENT_TYPE, metersPerPixels } from './defines';
 
 // utils
 import Collision from '../utils/Collision';
+import Device from '../utils/Device';
 
 class DistanceIndicator extends GameObject {
   private distance: number = 0;
@@ -27,7 +28,7 @@ class DistanceIndicator extends GameObject {
 
     this.size = {
       width: App.getAppSize().width,
-      height: 40,
+      height: Device.isMobile() ? 30 : 40,
     };
 
     this.init();
@@ -95,7 +96,7 @@ class DistanceIndicator extends GameObject {
     // set text style
     const style = new PIXI.TextStyle({
       fontFamily: 'Arial',
-      fontSize: 18,
+      fontSize: Device.isMobile() ? 14 : 18,
       fill: 0xFFFFFF,
     });
 
