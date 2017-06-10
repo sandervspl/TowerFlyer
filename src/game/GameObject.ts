@@ -22,15 +22,19 @@ abstract class GameObject {
   private sprite: GameSprite;
   private hitBoxShape: ISize2D;
   public movementController: IMovementType;
+  public name: string;
 
-  constructor(posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number) {
+  constructor(
+    posX: number, posY: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number,
+    usesGameSpeed: boolean = true,
+  ) {
     switch (movementType) {
       case MOVEMENT_TYPE.MOVE_X:
         this.movementController = new MovesX(posX, posY, speed1);
         break;
 
       case MOVEMENT_TYPE.MOVE_Y:
-        this.movementController = new MovesY(posX, posY, speed1);
+        this.movementController = new MovesY(posX, posY, speed1, usesGameSpeed);
         break;
 
       case MOVEMENT_TYPE.MOVE_XY:
@@ -40,6 +44,8 @@ abstract class GameObject {
       default:
         this.movementController = new MovesY(posX, posY, speed1);
     }
+
+    this.name = 'Unnamed GameObject';
   }
 
   public deconstruct(): void {

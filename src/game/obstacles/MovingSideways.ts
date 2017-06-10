@@ -5,13 +5,13 @@ import App from '../../app';
 import Game from '../Game';
 import ObstacleShape from './ObstacleShape';
 import ObstacleMgr from '../ObstacleMgr';
-import TfMath from '../../utils/TfMath';
 
 // defines
 import { MOVEMENT_TYPE } from '../defines';
 
 // utils
 import Collision from '../../utils/Collision';
+import TfMath from '../../utils/TfMath';
 
 class MovingSideways extends ObstacleShape implements IObstacleShape {
   constructor(obstacleMgr: ObstacleMgr, width: number, height: number, y: number) {
@@ -27,6 +27,8 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
       Game.getGameSpeed(),
     );
 
+    this.name = 'obstacle_sideways';
+
     this.setLocation(App.getMiddleOfView().x, y);
   }
 
@@ -39,24 +41,22 @@ class MovingSideways extends ObstacleShape implements IObstacleShape {
   }
 
   public update(): void {
-    const posXLeft = this.getLocation().x;
-    const posXRight = this.getLocation().x + this.size.width;
-
     const speedX = (this.getSpeed() as IPoint2D).x;
     const speedY = (this.getSpeed() as IPoint2D).y;
 
     const isMovingLeft: boolean = speedX < 0;
 
+    // determine our movement boundaries
     const gap = 25;
     const boundaries = {
       left: Collision.getLeftBound() + gap,
       right: Collision.getRightBound() - gap,
     };
 
-    if (isMovingLeft && posXLeft <= boundaries.left) {
+    if (isMovingLeft && this.getLeftOfShape() <= boundaries.left) {
       // set speed to positive value to move right
       this.setSpeed(Math.abs(speedX), speedY);
-    } else if (!isMovingLeft && posXRight >= boundaries.right) {
+    } else if (!isMovingLeft && this.getRightOfShape() >= boundaries.right) {
       // set speed to negative value to move left
       this.setSpeed(Math.abs(speedX) * -1, speedY);
     }

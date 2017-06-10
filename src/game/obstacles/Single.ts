@@ -10,6 +10,7 @@ import { DIRECTION, MOVEMENT_TYPE } from '../defines';
 class Single extends ObstacleShape implements IObstacleShape {
   constructor(obstacleMgr: ObstacleMgr, width: number, height: number, side: DIRECTION, y: number) {
     super(obstacleMgr, side, 0, y, width, height, MOVEMENT_TYPE.MOVE_Y, Game.getGameSpeed());
+    this.name = 'obstacle_single';
   }
 
   public draw(): void {

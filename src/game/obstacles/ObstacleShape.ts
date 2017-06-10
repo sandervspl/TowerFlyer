@@ -31,8 +31,9 @@ abstract class ObstacleShape extends GameObject {
   constructor(
     obstacleMgr: ObstacleMgr, side: DIRECTION, x: number, y: number,
     width: number, height: number, movementType: MOVEMENT_TYPE, speed1: number, speed2?: number,
+    usesGameSpeed: boolean = true,
   ) {
-    super(x, y, movementType, speed1, speed2);
+    super(x, y, movementType, speed1, speed2, usesGameSpeed);
 
     this.size = { width, height };
 
@@ -63,6 +64,22 @@ abstract class ObstacleShape extends GameObject {
 
     this.graphics.destroy();
     this.removeUpdater();
+  }
+
+  public getTopOfShape(): number {
+    return this.getLocation().y;
+  }
+
+  public getBottomOfShape(): number {
+    return this.getLocation().y + this.size.height;
+  }
+
+  public getLeftOfShape(): number {
+    return this.getLocation().x;
+  }
+
+  public getRightOfShape(): number {
+    return this.getLocation().x + this.size.width;
   }
 
   // start of draw shape
