@@ -3,7 +3,6 @@ import IPoint2D from './game/interfaces/IPoint2D';
 import ISize2D from './game/interfaces/ISize2D';
 import * as PIXI from 'pixi.js';
 import Game from './game/Game';
-import _ from 'lodash';
 
 // namespaces
 import { env } from './namespaces/environment';
@@ -19,6 +18,7 @@ class App {
   private fpsAvg: number[] = [];
   private maxHeight: number = 1000;
   private maxWidth: number = 677;
+  private gamePaused: boolean = false;
   private static pixiApp: PIXI.Application;
   private static appSize: ISize2D;
 
@@ -27,9 +27,6 @@ class App {
 
     // add event listeners
     this.addEventListeners();
-
-    const restartBtn = document.querySelector('#restart');
-    restartBtn.addEventListener('click', (e) => this.resetApp(e, true));
   }
 
   public static getView = ():PIXI.Application => App.pixiApp;
@@ -84,20 +81,45 @@ class App {
   }
 
   private addEventListeners = () => {
-    window.addEventListener('keydown', _.debounce(this.resetApp, 5000, {
-      leading: true,
-      trailing: false,
-    }));
+    window.addEventListener('keydown', this.keydown);
+    window.addEventListener('blur', this.pauseGame);
+
+    const restartBtn = document.querySelector('#restart');
+    restartBtn.addEventListener('click', this.resetApp);
   }
 
-  private resetApp = (e, forceReset = false): void => {
-    if (forceReset) {
-      this.init();
-    } else {
-      if (e.keyCode === 82) {
-        this.init();
-      }
+  private keydown = (e): void => {
+    switch (e.keyCode) {
+      case 80: this.togglePause(); break;
+      case 82: this.init(); break;
+      default: break;
     }
+  }
+
+  private resetApp = (): void => {
+    this.init();
+  }
+
+  private togglePause = (): void => {
+    if (this.gamePaused) {
+      this.resumeGame();
+    } else {
+      this.pauseGame();
+    }
+  }
+
+  private pauseGame = (): void => {
+    App.getView().ticker.stop();
+    this.gamePaused = true;
+
+    env.log('Game paused.');
+  }
+
+  private resumeGame = (): void => {
+    App.getView().ticker.start();
+    this.gamePaused = false;
+
+    env.log('Resuming game.');
   }
 
   private fpsDisplay = () => {
