@@ -48,6 +48,9 @@ class Score {
     if (!highScore || (highScore && score > Number(highScore))) {
       localStorage.setItem('tf-highscore', score.toString());
 
+      this.highScore = score.toString();
+      this.showHighScore();
+
       return true;
     }
 
