@@ -53,6 +53,18 @@ class App {
     return App.appSize;
   }
 
+  public isPaused = (): boolean => this.gamePaused;
+
+  public togglePause = (): void => {
+    if (Game.getInstance().isGameOver()) { return; }
+
+    if (this.gamePaused) {
+      this.resumeGame();
+    } else {
+      this.pauseGame();
+    }
+  }
+
   private init = (): void => {
     App.appSize = {
       width: window.innerWidth > this.maxWidth ? this.maxWidth : window.innerWidth,
@@ -78,7 +90,7 @@ class App {
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
     // initialize game
-    Game.getInstance().init();
+    Game.getInstance(this).init();
   }
 
   private addEventListeners = () => {
@@ -104,30 +116,24 @@ class App {
     this.init();
   }
 
-  private togglePause = (): void => {
-    if (Game.getInstance().isGameOver()) { return; }
-
-    if (this.gamePaused) {
-      this.resumeGame();
-      Pause.hide();
-    } else {
-      this.pauseGame();
+  private pauseGame = (): void => {
+    if (!Game.getInstance().isGameOver()) {
+      App.getView().ticker.stop();
+      this.gamePaused = true;
       Pause.show();
+
+      env.log('Game paused.');
     }
   }
 
-  private pauseGame = (): void => {
-    App.getView().ticker.stop();
-    this.gamePaused = true;
-
-    env.log('Game paused.');
-  }
-
   private resumeGame = (): void => {
-    App.getView().ticker.start();
-    this.gamePaused = false;
+    if (!Game.getInstance().isGameOver()) {
+      App.getView().ticker.start();
+      this.gamePaused = false;
+      Pause.hide();
 
-    env.log('Resuming game.');
+      env.log('Resuming game.');
+    }
   }
 
   private fpsDisplay = () => {

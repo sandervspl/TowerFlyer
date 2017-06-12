@@ -72,7 +72,7 @@ class Plane extends GameObject {
     window.addEventListener('touchend', this.handleKeyUp);
     window.addEventListener('touchcancel', this.handleKeyUp);
     window.addEventListener('keyup', this.handleKeyUp);
-    window.addEventListener('onblur', this.handleKeyUp);
+    window.addEventListener('blur', this.handleKeyUp);
   }
 
   private handleKeyDown = (e): void => {
@@ -119,7 +119,8 @@ class Plane extends GameObject {
   }
 
   private turn = (direction: DIRECTION): void => {
-    // env.log(`Turning ${direction === 0 ? 'left' : 'right'}.`);
+    if (Game.getInstance().isPaused()) { return; }
+
     const directionChange: number = direction === DIRECTION.LEFT ? -1 : 1;
 
     // change plane sprite

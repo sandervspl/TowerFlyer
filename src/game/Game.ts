@@ -25,6 +25,7 @@ const gameSprites = [
 ];
 
 class Game {
+  private app: App;
   private plane: Plane;
   private backgrounds: Background[] = [];
   private obstacleMgr: ObstacleMgr;
@@ -36,17 +37,13 @@ class Game {
   private static firstInstance: Game = null;
   private static gameSpeed: number = -5;
 
-  constructor() {
-    // this.initSprites();
-
-    // document.addEventListener('keydown', (e) => {
-    //   if (e.keyCode === 82) { this.startGame(null, this.resources); }
-    // });
+  constructor(app: App) {
+    this.app = app;
   }
 
-  public static getInstance(): Game {
+  public static getInstance(app?: App): Game {
     if (this.firstInstance === null) {
-      this.firstInstance = new Game();
+      this.firstInstance = new Game(app);
     }
 
     return this.firstInstance;
@@ -76,6 +73,8 @@ class Game {
     }
   }
 
+  public isPaused = (): boolean => this.app.isPaused();
+
   private initSprites = (): void => {
     PIXI.loader
       .add(gameSprites)
@@ -92,6 +91,10 @@ class Game {
 
   private startGame = (loader, resources): void => {
     env.log('Done loading!');
+
+    if (this.app.isPaused()) {
+      this.app.togglePause();
+    }
 
     this.gameOver = false;
 
