@@ -36,12 +36,10 @@
 # De game
 http://sandervispoel.nl/projects/towerFlyer/
 
-<h3> Veranderingen van Lennart <h3>
+# Review (Lennart -- week 4)
+Geen, code is voor zo ver ik het weet goed en netjes geschreven.
 
-- Geen, code is voor zo ver ik het weet goed en netjes geschreven.
-
-<h3>Eisen deelproduct<h3>
-
+<h4>Eisen deelproduct</h4>
 Deel product maakt gebruik van:
 
 - Interface 
@@ -53,11 +51,9 @@ Deel product maakt gebruik van:
 - Inheritance
 
 Ook is de klassendiagram aanwezig die erg uitgebreidt is, en dan ook ruim voldoende is.
-
 Er is ook een live versie van de game aanwezig.
 
-<h3>Eindoordeel<h3>
-
+<h4>Eindoordeel</h4>
 Alles ziet er netjes en verzorgd uit. Een duidelijk installatie uitleg waardoor je snel aan de gang kan gaan. Alle eisen aan het deelproduct
 zitten er dan ook in. Van A tot Z oogt dan ook erg professioneel. Ik vond het lastig om iets aan de code toe te voegen of te veranderen, omdat 
 ik het gevoel had dat dit niet nodig was. Het enigste kritiekpuntje is dat de colission nog niet toegevoegd is (de class is leeg). Maar ik ga er vanuit dat dit er 
