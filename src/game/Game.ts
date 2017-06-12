@@ -29,6 +29,7 @@ class Game {
   private backgrounds: Background[] = [];
   private obstacleMgr: ObstacleMgr;
   private distanceIndicator: DistanceIndicator;
+  private gameOver: boolean;
 
   private resources = null;
 
@@ -56,7 +57,11 @@ class Game {
 
   public getBackgrounds = (): Background[] => this.backgrounds;
 
-  public gameOver = (): void => {
+  public isGameOver = (): boolean => this.gameOver;
+
+  public setGameOver = (): void => {
+    this.gameOver = true;
+
     App.getView().ticker.stop();
 
     const score = Score.getInstance().calculateDistanceInMeters();
@@ -87,7 +92,8 @@ class Game {
 
   private startGame = (loader, resources): void => {
     env.log('Done loading!');
-    // env.log(resources);
+
+    this.gameOver = false;
 
     if (this.resources === null) {
       this.resources = resources;

@@ -46,9 +46,7 @@ class Plane extends GameObject {
 
   public die(): void {
     env.log('We hit something!');
-
-    const game = Game.getInstance();
-    game.gameOver();
+    Game.getInstance().setGameOver();
   }
 
   protected updateLocation(): void {

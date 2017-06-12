@@ -3,6 +3,7 @@ import IPoint2D from './game/interfaces/IPoint2D';
 import ISize2D from './game/interfaces/ISize2D';
 import * as PIXI from 'pixi.js';
 import Game from './game/Game';
+import Pause from './game/views/Pause';
 
 // namespaces
 import { env } from './namespaces/environment';
@@ -86,6 +87,9 @@ class App {
 
     const restartBtn = document.querySelector('#restart');
     restartBtn.addEventListener('click', this.resetApp);
+
+    const resumeBtn = document.querySelector('#resume');
+    resumeBtn.addEventListener('click', this.togglePause);
   }
 
   private keydown = (e): void => {
@@ -101,10 +105,14 @@ class App {
   }
 
   private togglePause = (): void => {
+    if (Game.getInstance().isGameOver()) { return; }
+
     if (this.gamePaused) {
       this.resumeGame();
+      Pause.hide();
     } else {
       this.pauseGame();
+      Pause.show();
     }
   }
 

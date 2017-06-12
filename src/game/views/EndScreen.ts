@@ -3,11 +3,14 @@ import App from '../../app';
 import Score from '../Score';
 
 class EndScreen {
-  public static show = (score: number): void => {
+  private static container: HTMLElement = document.querySelector('#view__gameover') as HTMLElement;
+
+  public static show(score: number): void {
     // save to local storage
     const isNewHighScore: boolean = Score.getInstance().save(score);
 
-    const container = document.querySelector('#view__gameover') as HTMLElement;
+    const { container } = this;
+
     container.style.display = 'flex';
     container.style.width = `${App.getAppSize().width}px`;
     container.style.height = `${App.getAppSize().height}px`;
@@ -26,8 +29,9 @@ class EndScreen {
   }
 
   public static hide(): void {
-    const container = document.querySelector('#view__gameover') as HTMLElement;
+    const { container } = this;
     container.style.display = 'none';
+    container.classList.remove('show');
   }
 }
 

@@ -72,7 +72,7 @@ canvas
     color #257AE3
 
 
-#view__gameover
+.view
   display none
   justify-content center
   align-items center
@@ -109,30 +109,33 @@ canvas
     opacity 1
     background-color rgba(10, 49, 97, 0.6)
 
-  .inner
-    margin-top -25%
-    display flex
-    align-content center
-    align-items center
-    flex-direction column
+  #view__gameover
+    .inner
+      margin-top -25%
+      display flex
+      align-content center
+      align-items center
+      flex-direction column
 
-  #endscore
-    margin-top 2rem
-    color #257AE3
-    font-size 5rem
-    font-weight 900
+    #endscore
+      margin-top 2rem
+      color #257AE3
+      font-size 5rem
+      font-weight 900
 
-  #newhighscore
-    display none
-    margin-top 2rem
+    #newhighscore
+      display none
+      margin-top 2rem
+
 
 @media only screen and (max-width: 768px)
   h1
     font-size 1.5rem
 
-  #view__gameover
-    #endscore
-      font-size 3rem
-
+  .view
     h1
       font-size 1.5rem
+
+    #view__gameover
+      #endscore
+        font-size 3rem
