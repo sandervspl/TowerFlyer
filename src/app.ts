@@ -173,6 +173,6 @@ class App {
 }
 
 // start app
-new App();
+window.onload = () => new App();
 
 export default App;
