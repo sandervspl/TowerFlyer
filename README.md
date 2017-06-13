@@ -1,7 +1,7 @@
 # Installeren
 
 <ol>
-<li>Download en installeer Yarn (https://yarnpkg.com/en/)</li>
+<li>Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)</li>
 <li>Download of fork deze repo</li>
 <li>Open een terminal en ga naar de project folder root</li>
 <li>Type in terminal: 'yarn install' om alle modules te installeren</li>
