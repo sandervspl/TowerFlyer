@@ -26,17 +26,17 @@
 # Onderdelen
 <ol>
 <li><b>interface:</b> zie src/game/interfaces voor alle interfaces. Zie src/game/movement/MovesY voor een implementatie.</li>
-<li><b>static utility method:</b> Zie src/game/Preloader voor een static class. src/utils heeft static classes. src/game/Game heeft static methods. etc.</li>
-<li><b>singleton:</b> zie src/game/Game voor een singleton class.</li>
-<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController. Ook src/game/ObstacleMgr maakt gebruik van strategy pattern met obstacles (zie src/game/obstacles folder).</li>
+<li><b>static utility method:</b> Er zijn meerdere static (utility) methods. Zie src/utils voor verschillende static classes met utility methods.</li>
+<li><b>singleton:</b> zie src/game/Game en /Score voor een singleton class.</li>
+<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController.</li>
 <li><b>encapsulation:</b> waar niet?</li>
-<li><b>composition/Inheritance:</b> zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
+<li><b>composition/Inheritance:</b> zie src/game/Plane of DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
 </ol>
 
 # De game
 http://sandervispoel.nl/projects/towerFlyer/
 
-# Review (Lennart -- week 4)
+# Review (Lennart — week 4)
 Geen, code is voor zo ver ik het weet goed en netjes geschreven.
 
 <h4>Eisen deelproduct</h4>
