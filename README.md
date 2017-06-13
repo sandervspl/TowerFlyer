@@ -1,3 +1,6 @@
+# De game
+http://sandervispoel.nl/projects/towerFlyer/
+
 # Installeren
 
 <ol>
@@ -32,9 +35,6 @@
 <li><b>encapsulation:</b> waar niet?</li>
 <li><b>composition/Inheritance:</b> zie src/game/Plane of DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
 </ul>
-
-# De game
-http://sandervispoel.nl/projects/towerFlyer/
 
 # Review (Lennart — week 4)
 Geen, code is voor zo ver ik het weet goed en netjes geschreven.
