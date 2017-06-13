@@ -4,10 +4,10 @@
 <li>Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)</li>
 <li>Download of fork deze repo</li>
 <li>Open een terminal en ga naar de project folder root</li>
-<li>Type in terminal: 'yarn install' om alle modules te installeren</li>
-<li>Om het project te starten: 'yarn dev'</li>
+<li>Type in terminal: `yarn install` of `npm run install` om alle modules te installeren</li>
+<li>Om de dev-server te starten: `yarn dev` of `npm run dev`</li>
 <li>ga in je browser naar localhost:8080</li>
-<li>Om het project te builden (alleen voor productie): 'yarn build'</li>
+<li>Om het project te builden (alleen voor productie): `yarn build` of `npm run dev`</li>
 </ol>
 
 # Webstorm configuratie
