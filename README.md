@@ -4,7 +4,7 @@
 <li>Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)</li>
 <li>Download of fork deze repo</li>
 <li>Open een terminal en ga naar de project folder root</li>
-<li>Type in terminal: `yarn install` of `npm run install` om alle modules te installeren</li>
+<li>Type in terminal: `yarn install` of `npm install` om alle modules te installeren</li>
 <li>Om de dev-server te starten: `yarn dev` of `npm run dev`</li>
 <li>ga in je browser naar localhost:8080</li>
 <li>Om het project te builden (alleen voor productie): `yarn build` of `npm run dev`</li>
@@ -24,14 +24,14 @@
 </ol>
 
 # Onderdelen
-<ol>
+<ul>
 <li><b>interface:</b> zie src/game/interfaces voor alle interfaces. Zie src/game/movement/MovesY voor een implementatie.</li>
 <li><b>static utility method:</b> Er zijn meerdere static (utility) methods. Zie src/utils voor verschillende static classes met utility methods.</li>
 <li><b>singleton:</b> zie src/game/Game en /Score voor een singleton class.</li>
 <li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController.</li>
 <li><b>encapsulation:</b> waar niet?</li>
 <li><b>composition/Inheritance:</b> zie src/game/Plane of DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
-</ol>
+</ul>
 
 # De game
 http://sandervispoel.nl/projects/towerFlyer/
