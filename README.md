@@ -58,3 +58,22 @@ Alles ziet er netjes en verzorgd uit. Een duidelijk installatie uitleg waardoor 
 zitten er dan ook in. Van A tot Z oogt dan ook erg professioneel. Ik vond het lastig om iets aan de code toe te voegen of te veranderen, omdat 
 ik het gevoel had dat dit niet nodig was. Het enigste kritiekpuntje is dat de colission nog niet toegevoegd is (de class is leeg). Maar ik ga er vanuit dat dit er 
 nog aankomt.
+
+# Review TowerFlyer door Jason (week 7)
+
+<h4>Eisen deelproduct</h4>
+Je spel maakt gebruik van:
+
+- Encapsulation, Composition, Inheritance
+- Singleton, Observer, Strategy
+- interface, static, abstract
+- namespaces, polymorphism, enumerations
+- Game loop
+
+Je Class Diagram ziet er netjes en overzichtelijk uit. Elke class met inhoud komt voor in het spel. Ook is het erg uitgebreid! 
+
+Je code ziet er gestructureerd en erg netjes uit. Goed dat je overal comments bij zet, hierdoor was je code beter te begrijpen. 
+Ook omdat je aangeeft of er een namespace etc in voor komt. Goed dat je alles gestructureerd hebt in mappen. 
+
+Je hebt een voldoende gezien alle eisen in je spel te vinden is, en een pluspunt omdat je code zo goed gestructureerd is en erg netjes uit ziet.
+Het is niet nodig om iets aan te passen omdat ik totaal geen fouten kan ontdekken!
