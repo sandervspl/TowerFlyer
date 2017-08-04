@@ -12,7 +12,7 @@ class Score {
   private distanceMultiplier: number = 1;
   private static firstInstance: Score = null;
 
-  constructor() {
+  private constructor() {
     this.curDistance = 0;
     this.highScore = localStorage.getItem('tf-highscore');
     this.showHighScore();

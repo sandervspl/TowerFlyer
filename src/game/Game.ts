@@ -37,7 +37,7 @@ class Game {
   private static firstInstance: Game = null;
   private static gameSpeed: number = -5;
 
-  constructor(app: App) {
+  private constructor(app: App) {
     this.app = app;
   }
 
