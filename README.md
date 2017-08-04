@@ -1,13 +1,16 @@
+# De game
+http://sandervispoel.nl/projects/towerFlyer/
+
 # Installeren
 
 <ol>
-<li>Download en installeer Yarn (https://yarnpkg.com/en/)</li>
+<li>Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)</li>
 <li>Download of fork deze repo</li>
 <li>Open een terminal en ga naar de project folder root</li>
-<li>Type in terminal: 'yarn install' om alle modules te installeren</li>
-<li>Om het project te starten: 'yarn dev'</li>
+<li>Type in terminal: `yarn install` of `npm install` om alle modules te installeren</li>
+<li>Om de dev-server te starten: `yarn dev` of `npm run dev`</li>
 <li>ga in je browser naar localhost:8080</li>
-<li>Om het project te builden (alleen voor productie): 'yarn build'</li>
+<li>Om het project te builden (alleen voor productie): `yarn build` of `npm run dev`</li>
 </ol>
 
 # Webstorm configuratie
@@ -24,19 +27,16 @@
 </ol>
 
 # Onderdelen
-<ol>
+<ul>
 <li><b>interface:</b> zie src/game/interfaces voor alle interfaces. Zie src/game/movement/MovesY voor een implementatie.</li>
-<li><b>static utility method:</b> Zie src/game/Preloader voor een static class. src/utils heeft static classes. src/game/Game heeft static methods. etc.</li>
-<li><b>singleton:</b> zie src/game/Game voor een singleton class.</li>
-<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController. Ook src/game/ObstacleMgr maakt gebruik van strategy pattern met obstacles (zie src/game/obstacles folder).</li>
+<li><b>static utility method:</b> Er zijn meerdere static (utility) methods. Zie src/utils voor verschillende static classes met utility methods.</li>
+<li><b>singleton:</b> zie src/game/Game en /Score voor een singleton class.</li>
+<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController.</li>
 <li><b>encapsulation:</b> waar niet?</li>
-<li><b>composition/Inheritance:</b> zie Plane/DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
-</ol>
+<li><b>composition/Inheritance:</b> zie src/game/Plane of DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
+</ul>
 
-# De game
-http://sandervispoel.nl/projects/towerFlyer/
-
-# Review (Lennart -- week 4)
+# Review (Lennart — week 4)
 Geen, code is voor zo ver ik het weet goed en netjes geschreven.
 
 <h4>Eisen deelproduct</h4>
