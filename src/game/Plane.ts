@@ -27,7 +27,7 @@ class Plane extends GameObject {
       0,
     );
 
-    // load spritesheet
+    // create spritesheet
     this.loadSpriteFromSpriteSheet(spritesheetURL, 'planeAngle', 9, 4);
 
     // scale up plane

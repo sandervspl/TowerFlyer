@@ -41,6 +41,10 @@ class App {
     App.getView().stage.addChild(child);
   }
 
+  public static removeChildFromView(child: any) {
+    App.getView().stage.removeChild(child);
+  }
+
   public static addToGameLoop(updater: () => void) {
     App.getView().ticker.add(updater);
   }

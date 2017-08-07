@@ -1,5 +1,6 @@
 // dependencies
 import ISize2D from '../interfaces/ISize2D';
+import IObserver from '../interfaces/IObserver';
 import ObstacleMgr from '../ObstacleMgr';
 import GameObject from '../GameObject';
 import App from '../../app';
@@ -14,11 +15,12 @@ import { DIRECTION, MOVEMENT_TYPE } from '../defines';
 // namespaces
 import { env } from '../../namespaces/environment';
 
-abstract class ObstacleShape extends GameObject {
+abstract class ObstacleShape extends GameObject implements IObserver {
   public obstacleMgr: ObstacleMgr;
   public size: ISize2D;
   public graphics: PIXI.Graphics;
   private hitboxShape: Hitbox;
+  private hittable: boolean;
 
   private style = {
     lineWidth: 3,
@@ -36,6 +38,7 @@ abstract class ObstacleShape extends GameObject {
     super(x, y, movementType, speed1, speed2, usesGameSpeed);
 
     this.size = { width, height };
+    this.hittable = true;
 
     // set x depending on which side we are on
     if (side !== null) {
@@ -55,6 +58,8 @@ abstract class ObstacleShape extends GameObject {
     if (env.shouldDrawHitbox()) {
       this.hitboxShape = new Hitbox(this, speed1, speed2);
     }
+
+    this.obstacleMgr.register(this);
   }
 
   public deconstruct(): void {
@@ -62,8 +67,17 @@ abstract class ObstacleShape extends GameObject {
       this.hitboxShape.deconstruct();
     }
 
+    this.obstacleMgr.unregister(this);
     this.graphics.destroy();
     this.removeUpdater();
+  }
+
+  public isHittable(): boolean {
+    return this.hittable;
+  }
+
+  public setHittable(hittable): void {
+    this.hittable = hittable;
   }
 
   public getTopOfShape(): number {
@@ -90,16 +104,25 @@ abstract class ObstacleShape extends GameObject {
     // base shape styling
     const { lineWidth, lineColor, lineAlpha, fillColor, fillAlpha } = this.style;
 
+    const alpha = {
+      line: this.hittable ? lineAlpha : .5,
+      fill: this.hittable ? fillAlpha : .2,
+    };
+
     // 3px line width 75% alpha white
-    this.graphics.lineStyle(lineWidth, lineColor, lineAlpha);
+    this.graphics.lineStyle(lineWidth, lineColor, alpha.line);
 
     // 50% alpha white fill
-    this.graphics.beginFill(fillColor, fillAlpha);
+    this.graphics.beginFill(fillColor, alpha.fill);
   }
 
   // drawings end with this
   public endDraw(): void {
     this.graphics.endFill();
+  }
+
+  public updateObserver(hittable) {
+    this.setHittable(hittable);
   }
 
   public update(): void {

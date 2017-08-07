@@ -1,4 +1,6 @@
 // dependencies
+import IObserver from './interfaces/IObserver';
+import ISubject from './interfaces/ISubject';
 import App from '../app';
 import Plane from './Plane';
 import Collision from '../utils/Collision';
@@ -19,11 +21,13 @@ import { DIRECTION } from './defines';
 import TfMath from '../utils/TfMath';
 import Device from '../utils/Device';
 
-class ObstacleMgr {
+class ObstacleMgr implements ISubject {
   private obstacles: ObstacleShape[];
   private prevSide: DIRECTION;
   private distBetweenObst: number;
   private plane: Plane;
+  private observers: IObserver[] = [];
+  private observersTimeout: any;
 
   // spawn probabilities
   private obstacleSpawnChance = {
@@ -36,6 +40,7 @@ class ObstacleMgr {
     this.plane = plane;
     this.distBetweenObst = Device.isMobile() ? 150 : 200;
     this.obstacles = [];
+    this.observersTimeout = null;
 
     // init some obstacle pieces
     for (let i = 0; i < this.totalPieces; i += 1) {
@@ -50,11 +55,30 @@ class ObstacleMgr {
   }
 
   public deconstruct(): void {
-    this.obstacles.forEach((obst) => {
-      obst.deconstruct();
-    });
-
+    this.obstacles.forEach((obst) => obst.deconstruct());
     this.obstacles = [];
+  }
+
+  public register(observer: IObserver) {
+    this.observers.push(observer);
+  }
+
+  public unregister(observer: IObserver) {
+    const obsIndex = this.observers.indexOf(observer);
+    this.observers.splice(obsIndex, 1);
+  }
+
+  public notifyObservers(hittable) {
+    this.observers.forEach((observer) => observer.updateObserver(hittable));
+
+    if (this.observersTimeout) {
+      clearTimeout(this.observersTimeout);
+      this.observersTimeout = null;
+    }
+
+    this.observersTimeout = setTimeout(() => {
+      this.notifyObservers(true);
+    }, 5000);
   }
 
   public removeObstacleFromArray(obst: ObstacleShape): void {
@@ -136,10 +160,25 @@ class ObstacleMgr {
 
     // check for collision
     this.obstacles.forEach((obst) => {
-      const hasCollided = Collision.hitTestSpriteWithGraphic(this.plane, obst);
+      if (obst instanceof Single) {
+        const box = obst.getBox();
 
-      if (hasCollided) {
-        this.plane.die();
+        if (box && box.isActive()) {
+          const hasCollidedWithBox = Collision.hitTestBetweenGameObjects(this.plane, box);
+
+          if (hasCollidedWithBox) {
+            box.hit();
+            this.notifyObservers(false);
+          }
+        }
+      }
+
+      if (obst.isHittable()) {
+        const hasCollidedWithObstacle = Collision.hitTestSpriteWithGraphic(this.plane, obst);
+
+        if (hasCollidedWithObstacle) {
+          this.plane.die();
+        }
       }
     });
   }

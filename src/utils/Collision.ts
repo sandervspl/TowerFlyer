@@ -59,12 +59,31 @@ class Collision {
         : os.getLocation().y + osSize.height,
     };
 
-    const isCollision = goPoints.x1 < osPoints.x2 &&
+    return goPoints.x1 < osPoints.x2 &&
       goPoints.x2 > osPoints.x1 &&
       goPoints.y1 < osPoints.y2 &&
       goPoints.y2 > osPoints.y1;
+  }
 
-    return isCollision;
+  public static hitTestBetweenGameObjects(go1: GameObject, go2: GameObject) {
+    const go1Points = {
+      x1: go1.getLocation().x,
+      x2: go1.getLocation().x + go1.getHitboxShape().width,
+      y1: go1.getLocation().y,
+      y2: go1.getLocation().y + go1.getHitboxShape().height,
+    };
+
+    const go2Points = {
+      x1: go2.getLocation().x,
+      x2: go2.getLocation().x + go2.getHitboxShape().width,
+      y1: go2.getLocation().y,
+      y2: go2.getLocation().y + go2.getHitboxShape().height,
+    };
+
+    return go1Points.x1 < go2Points.x2 &&
+    go1Points.x2 > go2Points.x1 &&
+    go1Points.y1 < go2Points.y2 &&
+    go1Points.y2 > go2Points.y1;
   }
 }
 

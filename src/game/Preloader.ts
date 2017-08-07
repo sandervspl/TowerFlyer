@@ -5,7 +5,7 @@ class Preloader {
 
   public static update(progress: number): void {
     this.loader.style.width = `${progress}%`;
-    this.progress.innerHTML = `${progress}%`;
+    this.progress.innerHTML = `${Math.trunc(progress)}%`;
   }
 
   public static end(): void {

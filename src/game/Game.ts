@@ -22,6 +22,10 @@ const gameSprites = [
     name: 'plane_sheet',
     url: 'assets/spriteSheets/plane/plane.json',
   },
+  {
+    name: 'box',
+    url: 'assets/images/box.png',
+  },
 ];
 
 class Game {
@@ -53,6 +57,8 @@ class Game {
   public static setGameSpeed = (speed: number) => Game.gameSpeed = speed;
 
   public getBackgrounds = (): Background[] => this.backgrounds;
+
+  public getResource = (key) => this.resources[key].url;
 
   public isGameOver = (): boolean => this.gameOver;
 
