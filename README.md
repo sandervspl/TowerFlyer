@@ -30,7 +30,7 @@ http://sandervispoel.nl/projects/towerFlyer/
 * **strategy**: zie `src/game/GameObject`. Hier wordt gebruik gemaakt van *strategy pattern* bij de `movementController`.
 * **encapsulation**: waar niet?
 * **composition/Inheritance**: zie `src/game/Plane` of `src/game/DistanceIndicator` die *inheriten* van `GameObject` en overriden of bekijk `src/game/obstacles/Single` die van `ObstacleShape` inherit en override.
-* **observer pattern**: De interfaces voor observer en subject zijn te vinden onder `src/interfaces`. *Observers* zijn `src/game/obstacles/ObstacleShape`s en de *Subject* is `src/game/ObstacleMgr`.
+* **observer pattern**: De interfaces voor observer en subject zijn te vinden onder `src/game/interfaces`. *Observers* zijn `src/game/obstacles/ObstacleShape`s en de *Subject* is `src/game/ObstacleMgr`.
 
 # Review (Lennart — week 4)
 Geen, code is voor zo ver ik het weet goed en netjes geschreven.
