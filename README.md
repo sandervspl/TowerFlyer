@@ -3,39 +3,34 @@ http://sandervispoel.nl/projects/towerFlyer/
 
 # Installeren
 
-<ol>
-<li>Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)</li>
-<li>Download of fork deze repo</li>
-<li>Open een terminal en ga naar de project folder root</li>
-<li>Type in terminal: `yarn install` of `npm install` om alle modules te installeren</li>
-<li>Om de dev-server te starten: `yarn dev` of `npm run dev`</li>
-<li>ga in je browser naar localhost:8080</li>
-<li>Om het project te builden (alleen voor productie): `yarn build` of `npm run dev`</li>
-</ol>
+
+1. Download en installeer Yarn (https://yarnpkg.com/en/) (optioneel, aanrader)
+2. Download of fork deze repo
+3. Open een terminal en ga naar de project folder root
+4. Type in terminal: `yarn install` of `npm install` om alle modules te installeren
+5. Om de dev-server te starten: `yarn dev` of `npm run dev`
+6. ga in je browser naar `localhost:8080`
+7. Om het project te builden (alleen voor productie): `yarn build` of `npm run dev`
 
 # Webstorm configuratie
 
-<ol>
-<li>Om TSLint te configureren ga je naar <b>Preferences</b> (WebStorm -> Preferences of CMD + ,)</li>
-<li>Dan navigeer je naar <b>Languages & Frameworks</b> -> <b>TypeScript</b> -> TSLint</li>
-<li>Klik op <b>Enable</b></li>
-<li>Check of de <i>Node interpreter</i> goed staat (als je Node global hebt geinstalleerd, zou er <b>/user/local/bin/node</b> moeten staan)</li>
-<li>Check of TSLint package goed staat (zou moeten verwijzen naar tslint in de node_modules map van deze project folder)</li>
-<li>Selecteer vervolgens <b>Configuration File</b> en klik op de <b>...</b> aan de rechterzijde om de file browser te openen</li>
-<li>Zoek hier naar de <b>tslint.json</b> file in de root folder van dit project</li>
-<li>Klik op Apply en OK.</li>
-</ol>
+1. Om TSLint te configureren ga je naar **Preferences** (WebStorm -> Preferences of CMD + ,).
+2. Dan navigeer je naar **Languages & Frameworks** -> **TypeScript** -> TSLint.
+3. Klik op **Enable**.
+4. Check of de *Node interpreter* goed staat (als je Node global hebt geinstalleerd, zou er **/user/local/bin/node** moeten staan).
+5. Check of TSLint package goed staat (zou moeten verwijzen naar tslint in de node_modules map van deze project folder).
+6. Selecteer vervolgens **Configuration File** en klik op de **...** aan de rechterzijde om de file browser te openen.
+7. Zoek hier naar de `tslint.json` file in de root folder van dit project.
+8. Klik op **Apply** en **OK**.
 
 # Onderdelen
-<ul>
-<li><b>interface:</b> zie src/game/interfaces voor alle interfaces. Zie src/game/movement/MovesY voor een implementatie.</li>
-<li><b>static utility method:</b> Er zijn meerdere static (utility) methods. Zie src/utils voor verschillende static classes met utility methods.</li>
-<li><b>singleton:</b> zie src/game/Game en /Score voor een singleton class.</li>
-<li><b>strategy:</b> zie src/game/GameObject. Hier wordt gebruik gemaakt van strategy pattern bij de movementController.</li>
-<li><b>encapsulation:</b> waar niet?</li>
-<li><b>composition/Inheritance:</b> zie src/game/Plane of DistanceIndicator die inheriten van Gameobject en overriden of bekijk src/game/obstacles/Single die van ObstacleShape inherit en override.</li>
-<li><b>observer pattern:</b> De interfaces voor observer en subject zijn te vinden onder `src/interfaces`. Observers zijn `ObstacleShape`s en de Subject is `ObstacleMgr`.</li>
-</ul>
+* **interface**: zie `src/game/interfaces` voor alle *interfaces*. Zie `src/game/movement/MovesY` voor een implementatie.
+* **static utility method**: Er zijn meerdere static (utility) methods. Zie `src/utils` voor verschillende static classes met utility methods.
+* **singleton**: zie `src/game/Game` en `/Score` voor een *singleton class*.
+* **strategy**: zie `src/game/GameObject`. Hier wordt gebruik gemaakt van *strategy pattern* bij de `movementController`.
+* **encapsulation**: waar niet?
+* **composition/Inheritance**: zie `src/game/Plane` of `src/game/DistanceIndicator` die *inheriten* van `GameObject` en overriden of bekijk `src/game/obstacles/Single` die van `ObstacleShape` inherit en override.
+* **observer pattern**: De interfaces voor observer en subject zijn te vinden onder `src/interfaces`. *Observers* zijn `src/game/obstacles/ObstacleShape`s en de *Subject* is `src/game/ObstacleMgr`.
 
 # Review (Lennart — week 4)
 Geen, code is voor zo ver ik het weet goed en netjes geschreven.
